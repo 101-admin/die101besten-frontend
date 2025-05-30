@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -30,19 +34,20 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    /* Edition DE */
-    --color-de-primary-500: #B65033; 
-    --color-de-primary-300: #F49E6E; 
-    
-    
-    /* Edition CH */
-    --color-ch-primary-500: #535353; 
-    --color-ch-primary-300: #C1C1C1; 
-    
-    /* Edition DACH */
-    --color-dach-primary-500: #866a41; 
-    --color-dach-primary-300: #bca679; 
+    /* colors general */
+    --color-light-grey: #f9f8fa;
 
+    /* edition DE */
+    --color-de-primary-500: #b65033;
+    --color-de-primary-300: #f49e6e;
+
+    /* edition CH */
+    --color-ch-primary-500: #535353;
+    --color-ch-primary-300: #c1c1c1;
+
+    /* edition DACH */
+    --color-dach-primary-500: #866a41;
+    --color-dach-primary-300: #bca679;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -82,17 +87,42 @@
 }
 
 @layer components {
-  
-  .btn-primary {   
-    @apply font-montserrat font-bold uppercase text-center text-white bg-black p-5 text-[16px] leading-normal px-3 py-2 md:p-4 lg:p-5;
+  .border-gradient-de {
+    position: relative;
   }
-  
+
+  .border-gradient-de::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* border width */
+    background: linear-gradient(90deg, #b64f32 0.21%, #f49e6e 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    @apply font-montserrat font-bold uppercase text-center text-white bg-black p-5 text-[16px] leading-normal;
+  }
+
+  .btn-primary-s {
+    @apply font-montserrat font-bold uppercase text-center text-white bg-black py-2 px-5 md:p-5 text-[12px] md:text-[16px] leading-normal;
+  }
+
   .btn-primary-hover-de {
-    @apply hover:bg-[linear-gradient(98deg,var(--color-de-primary-300).62%,var(--color-de-primary-500)_110.28%)]
+    @apply hover:bg-[linear-gradient(98deg,var(--color-de-primary-300).62%,var(--color-de-primary-500)_110.28%)];
   }
-  
+
   .btn-secondary {
-    @apply font-montserrat font-bold uppercase text-center bg-transparent border-2 p-5 text-[16px] leading-normal px-3 py-2 md:p-4 lg:p-5;
+    @apply font-montserrat font-bold uppercase text-center bg-transparent border-2 p-5 text-[16px] leading-normal;
+  }
+
+  .btn-secondary-hover {
+    @apply hover:border-white hover:bg-black;
+  }
+  .btn-secondary-hover-de {
+    @apply hover:p-[22px] hover:border-gradient-de hover:border-none hover:gradient-de-text;
   }
 
   .btn-socialmedia {
@@ -100,25 +130,111 @@
   }
 
   .heading-1-lg {
-    @apply font-ogg font-normal leading-none text-[40px] lg:text-[64px];
+    @apply font-ogg font-normal leading-[1.1] lg:leading-none text-[40px] md:text-[40px] lg:text-[64px];
   }
-  
+
   .heading-2-lg {
-    @apply font-ogg font-normal leading-9 text-[32px] lg:text-[48px] leading-10;
+    @apply font-ogg font-normal leading-[1.08] text-[30px] md:text-[40px] lg:text-[48px];
   }
-  
+
   .heading-3-lg {
-    @apply font-ogg font-normal leading-9 text-[28px] lg:text-[28px];
+    @apply font-ogg font-normal leading-[1.15] md:leading-[1.1] text-[26px] md:text-[30px] lg:text-[38px];
   }
 
+  .heading-4-lg {
+    @apply font-ogg font-normal leading-tight text-[24px] lg:text-[32px];
+  }
 
+  .heading-5-lg {
+    @apply font-ogg font-normal leading-[1.33333] text-[20px] lg:text-[26px];
+  }
+
+  .bodycopy-1-lg {
+    @apply font-gte font-light leading-[1.2] lg:leading-[1.33333] text-[20px] lg:text-[24px];
+  }
+
+  .bodycopy-2-lg {
+    @apply font-gte font-light leading-[1.2] text-[18px] lg:text-[20px];
+  }
+
+  .bodycopy-3-lg {
+    @apply font-gte font-light leading-[1.25] text-[16px];
+  }
+
+  .bodycopy-4-lg {
+    @apply font-gte font-light leading-[1.14286] text-[14px];
+  }
+
+  .bodycopy-1-lg-highlighted {
+    @apply font-gte font-medium leading-[1.2] lg:leading-[1.33333] text-[20px] lg:text-[24px];
+  }
+
+  .bodycopy-2-lg-highlighted {
+    @apply font-gte font-medium leading-[1.2] text-[18px] lg:text-[20px];
+  }
+
+  .bodycopy-3-lg-highlighted {
+    @apply font-gte font-medium leading-[1.25] text-[16px];
+  }
+
+  .quote-sm {
+    @apply font-gte italic font-light leading-tight text-[24px] lg:text-[32px];
+  }
+
+  .button-1-lg {
+    @apply font-montserrat font-bold uppercase text-[16px] leading-normal;
+  }
+
+  .button-3-lg {
+    @apply font-montserrat font-bold uppercase text-center text-[12px] leading-normal;
+  }
+
+  .button-4-lg {
+    @apply font-montserrat font-bold text-center text-[12px] leading-normal;
+  }
+
+  .label-lg {
+    @apply font-montserrat font-bold text-[16px] md:text-[18px] leading-[0.8888];
+  }
+
+  .navigation-menu-lg {
+    @apply font-montserrat font-bold uppercase text-[16px] leading-[1.5];
+  }
+
+  .navigation-breadcrumb-lg {
+    @apply font-montserrat font-normal text-[14px] leading-[1.43];
+  }
+
+  .inputfield-label-lg {
+    @apply font-montserrat font-semibold text-[14px] md:text-[18px] leading-[0.889];
+  }
+
+  .tab-label-idle {
+    @apply font-montserrat font-semibold text-[18px] capitalize leading-[1.33333];
+  }
+
+  .tab-label-active {
+    @apply font-montserrat font-bold text-[22px] capitalize leading-[1.09091];
+  }
+
+  .badge-label {
+    @apply font-montserrat font-bold text-[12px] uppercase leading-none;
+  }
 }
 
 @layer utilities {
-
-  /* Apply gradient (defined in tailwind config) to text */
   .gradient-de-text {
     @apply bg-gradient-de bg-clip-text text-transparent;
   }
-}
 
+  .gradient-ch-text {
+    @apply bg-gradient-ch bg-clip-text text-transparent;
+  }
+
+  .gradient-dach-text {
+    @apply bg-gradient-dach bg-clip-text text-transparent;
+  }
+  .container-primary {
+    @apply mx-auto max-w-[1440px];
+  }
+}

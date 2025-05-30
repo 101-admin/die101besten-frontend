@@ -1,73 +1,11 @@
-// "use client";
-// import React, { useState } from "react";
-// import { FaFacebookF } from "react-icons/fa";
-// import { FaInstagram } from "react-icons/fa";
-// import { FaLinkedin } from "react-icons/fa6";
-// const Form = () => {
-//   const [text, settext] = useState("");
-//   return (
-//     <section className="bg-[#F9F8FA] max-w-[1440px] w-full flex flex-col justify-center items-center py-10 lg:py-20 ">
-//       <div className=" w-full flex flex-col justify-start items-baseline px-5 lg:px-16">
-//         <h1 className="font-ogg font-normal text-[20px] sm:text-[26px] md:text-[32px] lg:text-[38px] mb-3">
-//           Erfahren Sie es als erstes!
-//         </h1>
-//         <div className="w-full flex flex-col justify-start items-baseline lg:flex-row lg:justify-center lg:items-end ">
-//           <div className="w-full mb-3">
-//             <label
-//               htmlFor="name"
-//               className="font-semibold text-[15px] md:text-[18px] font-montserrat"
-//             >
-//               E-Mail Adresse
-//             </label>
-//             <div className="w-full flex flex-col lg:flex-row justify-start items-baseline lg:items-center gap-4 mb-5">
-//               <input
-//                 id="name"
-//                 className="border-2 border-black  h-16 w-full max-w-[500px] pl-3 text-[20px] font-bold font-montserrat"
-//                 type="text"
-//               />
-//               <button className="btn-primary btn-primary-hover-de w-[200]">
-//                 Anmelden
-//               </button>
-//             </div>
-//             <div className="flex items-center gap-5">
-//               <input
-//                 onChange={(e) => settext(e.target.value)}
-//                 value={text}
-//                 className="w-8 h-8 border-2 border-black"
-//                 type="checkbox"
-//               />
-//               <p className="text-[16px] font-gte font-normal">
-//                 Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
-//                 ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
-//               </p>
-//             </div>
-//           </div>
-//           <div className="flex items-center gap-2 w-1/2 lg:justify-end">
-//             <button className="btn-socialmedia text-black border-black">
-//               <FaFacebookF className="text-[20px]" />
-//             </button>
-//             <button className="btn-socialmedia text-black border-black">
-//               <FaInstagram className="text-[20px]" />
-//             </button>
-//             <button className="btn-socialmedia text-black border-black">
-//               <FaLinkedin className="text-[20px]" />
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Form;
-
 "use client";
 import Link from "next/link";
 import React, { useState, FormEvent } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
-const Form = () => {
+import type { Newsletter } from "@/lib";
+const Form = ({ id }: Newsletter) => {
   const [email, setEmail] = useState("");
   const [isGdprAccepted, setIsGdprAccepted] = useState(false);
   const [formError, setFormError] = useState("");
@@ -85,7 +23,10 @@ const Form = () => {
   };
 
   return (
-    <section className="bg-[#F9F8FA] max-w-[1920px] mx-auto w-full flex flex-col justify-center items-center">
+    <section
+      id={id}
+      className="bg-[#F9F8FA] max-w-[1920px] mx-auto w-full flex flex-col justify-center items-center"
+    >
       <div className=" w-full max-w-[1440px] flex flex-col lg:flex-row gap-8 lg:gap-4 px-6 pt-20 pb-10 md:p-16">
         <div className="w-full flex flex-col gap-6">
           <h3 className="heading-3-lg">Erfahren Sie es als Erster!</h3>
@@ -157,22 +98,22 @@ const Form = () => {
           <Link
             href="https://www.facebook.com/die101bestenhotelsde"
             target="_blank"
-            className="btn-socialmedia text-black border-black hover:border-none hover:border-gradient-de hover:text-de"
+            className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaFacebookF className="text-[20px]" />
+            <FaFacebookF className="text-[20px] group-hover:text-[#B65033]" />
           </Link>
           <Link
             href="https://www.instagram.com/die101bestenhotels/"
-            className="btn-socialmedia text-black border-black hover:border-none hover:border-gradient-de hover:text-de"
+            className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaInstagram className="text-[20px]" />
+            <FaInstagram className="text-[20px] group-hover:text-[#B65033]" />
           </Link>
           <Link
             href="https://www.linkedin.com/company/86932290/admin/"
             target="_blank"
-            className="btn-socialmedia text-black border-black hover:border-none hover:border-gradient-de hover:text-de"
+            className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaLinkedin className="text-[20px]" />
+            <FaLinkedin className="text-[20px] group-hover:text-[#B65033]" />
           </Link>
         </div>
       </div>

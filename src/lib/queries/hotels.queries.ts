@@ -61,19 +61,23 @@ export function getAllHotelsQuery(filters: {
   hotelType?: string;
   rankingCategory?: string;
   search?: string;
+  variant?: string;
 }) {
   console.log({ filters }, "@step 1: getAllHotelsQuery");
+
+  // Base filter string for the main query
   let filterString = `
     _type == "hotel" &&
     edition == "${filters.edition}" &&
     language == "${filters.language}"
   `;
 
+  // Add other filters
   if (!!filters?.category) {
-    filterString += ` && category == "${filters.category}"`;
+    filterString += ` && category->value.current == "${filters.category}"`;
   }
   if (!!filters?.city) {
-    filterString += ` && city == "${filters.city}"`;
+    filterString += ` && address->city == "${filters.city}"`;
   }
   if (!!filters?.segment) {
     filterString += ` && segment == "${filters.segment}"`;
@@ -84,31 +88,57 @@ export function getAllHotelsQuery(filters: {
   if (!!filters?.rankingCategory) {
     filterString += ` && ranking.category == "${filters.rankingCategory}"`;
   }
+  if (!!filters?.variant) {
+    filterString += ` && variant == "${filters.variant}"`;
+  }
   if (!!filters?.search) {
     filterString += ` && (name match "${filters.search}" || description match "${filters.search}")`;
   }
 
+  // Create a separate filter string for total count that only includes variant
+  const totalCountFilter = `
+    _type == "hotel" &&
+    edition == "${filters.edition}" &&
+    language == "${filters.language}" &&
+    ${filters.variant ? `variant == "${filters.variant}"` : "true"}
+  `;
+
   return `
-    *[${filterString}]
-    | order(ranking.position asc) {
-      _id,
-      _type,
-      language,
-      edition,
-      name,
-      image {${globalImageFragment}},
-      description,
-      achievements,
-      hotelType,
-      ranking {
-        position,
-        category
+    {
+      "hotels": *[${filterString}] | order(ranking.position asc) {
+        _id,
+        _type,
+        language,
+        edition,
+        variant,
+        isPackageBooked,
+        name,
+        image {${globalImageFragment}},
+        description,
+        achievements,
+        hotelType,
+        ranking {
+          position,
+          category
+        },
+        segment,
+        "category": category->{
+          _id,
+          label,
+          "value": value.current,
+          edition
+        },
+        "slug": slug.current,
+        tags,
+        "address": address->{
+          street,
+          streetNumber,
+          postalCode,
+          city,
+          country
+        }
       },
-      segment,
-      category,
-      city,
-      "slug": slug.current,
-      tags,
+      "totalCount": count(*[${totalCountFilter}])
     }
   `;
 }
@@ -122,6 +152,7 @@ export const getHotelBySlugQuery = `
     _type,
     language,
     edition,
+    isPackageBooked,
     name,
     image {${globalImageFragment}},
     description,
@@ -132,8 +163,19 @@ export const getHotelBySlugQuery = `
       category
     },
     segment,
-    category,
-    city,
+    "category": category->{
+      _id,
+      label,
+      "value": value.current,
+      edition
+    },
+    "address": address->{
+      street,
+      streetNumber,
+      postalCode,
+      city,
+      country
+    },
     "slug": slug.current,
     tags,
     "primaryHeroSection": primaryHeroSection {
@@ -196,7 +238,6 @@ export const getHotelBySlugQuery = `
       image {${globalImageFragment}},
       title,
       description,
-      readMore
     },
    hotelInfoPremium {
       Person {
@@ -207,7 +248,6 @@ export const getHotelBySlugQuery = `
       },
       title,
       description,
-      readMore
     },
     "testimonials": testimonials {
       testimonial[] {
@@ -267,40 +307,6 @@ export const getHotelBySlugQuery = `
   }
 `;
 
-export const hotelsQuery = `*[_type == "hotel" && language == $language] {
-  _id,
-  _type,
-  name,
-  additionalName,
-  "slug": slug.current,
-  language,
-  edition,
-  segment,
-  category,
-  city,
-  ranking {
-    position,
-    category
-  },
-  "image": image.asset->url,
-  "imageAlt": image.alt,
-  "imageCaption": imageCaption,
-  "imageCredit": imageCredit,
-  "imageCreditLink": imageCreditLink,
-  "imageCreditLinkText": imageCreditLinkText,
-  sliderComponent,
-  textPointsAndImages,
-  hotelDescription,
-  fullwidthImage,
-  fullwidthVideo,
-  quoteSection,
-  interviewSection,
-  yourHost,
-  hotelEvents,
-  hotelHighlights,
-  mapSection
-}`;
-
 /**
  * Query for getting all hotels page with components
  */
@@ -344,5 +350,17 @@ export const getSpecialEditionHotelsQuery = `
       _type == "hotelCollection" => {${hotelCollectionComponentFragment}},
       _type == "specialHotels" => {${specialHotelsComponentFragment}}
     }
+  }
+`;
+
+/**
+ * Query for getting all hotel categories
+ */
+export const getHotelCategoriesQuery = `
+  *[_type == "hotelCategory" && $edition in edition && language == $language] | order(label asc) {
+    _id,
+    label,
+    "value": value.current,
+    edition
   }
 `;

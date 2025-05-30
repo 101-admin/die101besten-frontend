@@ -23,25 +23,34 @@ const RoomsSection = ({
         {/* Left Column - Image */}
         <div className="w-full lg:w-1/2 h-auto">
           <div className="relative w-full">
-            <Image
-              src={data?.image?.url || ""}
-              alt={data?.image?.alt || ""}
-              width={636}
-              height={605}
-              className="object-cover max-w-[636px] w-full h-[605px]"
-            />
+            {data?.image && (
+              <Image
+                src={data?.image?.url || ""}
+                alt={data?.image?.alt || ""}
+                width={636}
+                height={605}
+                className="object-cover max-w-[636px] w-full h-[605px]"
+              />
+            )}
           </div>
         </div>
 
         {/* Right */}
         <div className="w-full lg:w-[636px] flex flex-col lg:py-4 gap-5">
-          {data?.description && <PortableText value={data?.description} />}
+          {/* {data?.description && <PortableText value={data?.description} />} */}
+          {data?.description && (
+            <div className="prose prose-lg">
+              <div className="[display:-webkit-box] [-webkit-line-clamp:8] [-webkit-box-orient:vertical] overflow-hidden">
+                <PortableText value={data?.description} />
+              </div>
+            </div>
+          )}
 
           <button
             onClick={blurhandle2}
             className="mt-2 btn-primary btn-primary-hover-de w-[300px] "
           >
-            {data?.readMore}
+            MEHR INFOS
           </button>
         </div>
       </div>
@@ -51,9 +60,11 @@ const RoomsSection = ({
         } `}
       >
         <div className="w-full flex justify-between items-center mb-5 lg:mb-10">
-          <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-3 lg:mb-6">
-            <ColoredText text={data?.title} />
-          </h1>
+          {data?.title && (
+            <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-3 lg:mb-6">
+              <ColoredText text={data?.title} />
+            </h1>
+          )}
           <IoCloseOutline
             onClick={closehandle2}
             className="text-[25px] cursor-pointer"

@@ -15,7 +15,7 @@ const SecondaryDropdown = () => {
   const [value, setValue] = useState("deutschland");
   return (
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center px-5 lg:px-16  gap-16">
-      <div className="w-full flex flex-col justify-start items-baseline gap-5 lg:gap-10">
+      <div className="w-full flex flex-col justify-start items-baseline gap-5 ">
         {/* <div className="flex items-center gap-4">
           <h4 className="font-normal font-montserrat text-[14px]">
             Edition Deutschland
@@ -29,10 +29,12 @@ const SecondaryDropdown = () => {
             Editors’ Choice
           </h4>
         </div> */}
-        <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5">
-          Special Editions <span className="text-[#B65033]">Deutschland</span> -
-          Editors’ Choice
+        <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px]">
+          Special Editions <span className="text-[#B65033]">Deutschland</span>
         </h1>
+        <p className="font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] font-gte mb-8">
+          Alphabetische Sortierung
+        </p>
         <div className="w-full flex flex-col justify-start items-baseline md:flex-row md:justify-between md:items-end mt-4 lg:mt-7 gap-5">
           <div className="w-full max-w-full md:max-w-[310px] flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">

@@ -2,7 +2,7 @@ import { HotelsApi } from "@/lib/services";
 import type { HotelCollection } from "@/lib/types/components.types";
 import AllHotels from "./AllHotels";
 import Dropdown from "./Dropdown";
-import { DEFAULT_LANGUAGE } from "@/lib";
+import { DEFAULT_EDITION, DEFAULT_LANGUAGE, Hotel } from "@/lib";
 import SecondaryDropdown from "./SecondaryDropdown";
 import SpecialEditionHotels from "./SpecialEditionHotels";
 
@@ -12,27 +12,38 @@ interface HotelCollectionProps extends HotelCollection {
 
 const HotelCollection = async ({
   searchParams,
-  collectionVariant,
+  id,
+  variant,
 }: HotelCollectionProps) => {
-  const hotels = await HotelsApi.getAllHotels({
-    edition: searchParams.edition,
+  console.log(variant, "@variant");
+  const data = await HotelsApi.getAllHotels({
+    edition: DEFAULT_EDITION,
     language: DEFAULT_LANGUAGE,
     category: searchParams.category,
     city: searchParams?.city,
     segment: searchParams?.segment,
     search: searchParams?.search,
-    rankingCategory: searchParams?.rankingCategory,
+    variant: variant,
   });
-  console.log(hotels, "@collection hotels");
+
+  const categories = await HotelsApi.getHotelCategories();
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-5 py-5 lg:py-10 lg:px-16">
-      {collectionVariant === "all-hotels" && <Dropdown />}
-      {collectionVariant === "special-edition" && <SecondaryDropdown />}
+    <div
+      id={`${id}`}
+      className="w-full max-w-[1440px] mx-auto px-5 py-5 lg:py-10 lg:px-16"
+    >
+      {variant === "classic" && (
+        <Dropdown totalHotels={data.hotels?.length} categories={categories} />
+      )}
+      {variant === "special" && <SecondaryDropdown />}
 
-      {collectionVariant === "all-hotels" && <AllHotels hotels={hotels} />}
-      {collectionVariant === "special-edition" && (
-        <SpecialEditionHotels hotels={hotels} />
+      {variant === "classic" && <AllHotels hotels={data?.hotels} />}
+      {variant === "special" && (
+        <SpecialEditionHotels
+          totalHotels={data?.totalCount}
+          hotels={data?.hotels}
+        />
       )}
     </div>
   );

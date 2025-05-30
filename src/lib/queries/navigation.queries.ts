@@ -13,7 +13,8 @@ export const navbarQuery = `*[_type == "navbar" && language == $language] {
           columnTitle,
           links[] {
             label,
-            url
+            url,
+            id
           }
         }
       }

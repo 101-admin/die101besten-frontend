@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface ColoredTextProps {
@@ -43,7 +44,10 @@ export const ColoredText: React.FC<ColoredTextProps> = ({
             <span
               key={index}
               style={{ color }}
-              className={`${className} bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text`}
+              className={cn(
+                "bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text",
+                className
+              )}
             >
               {part}
             </span>

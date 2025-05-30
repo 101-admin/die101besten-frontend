@@ -18,6 +18,7 @@ export interface NavbarSubmenu {
 export interface NavbarMainMenuItem {
   label: string;
   url: string;
+  id: string;
   hasSubmenu?: boolean;
   submenu?: NavbarSubmenu;
 }

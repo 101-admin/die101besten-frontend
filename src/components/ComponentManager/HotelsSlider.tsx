@@ -9,6 +9,7 @@ import {
 import type { Hotels } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
+import { ColoredText } from "../ui/ColoredText";
 // import { urlFor } from "@/sanity/lib/image";
 
 // import { HOTELS_QUERYResult } from "@/sanity/types";
@@ -22,12 +23,16 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center px-5 lg:px-16 py-32 gap-16 select-none">
       <div className="w-full flex flex-col justify-center items-center">
         <div className=" w-full flex flex-col justify-start">
-          <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5">
-            {title}
-          </h1>
-          <p className="font-light text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] font-gte w-full md:w-1/2 mb-6 md:mb-12">
-            {description}
-          </p>
+          {title && (
+            <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5">
+              <ColoredText text={title} />
+            </h1>
+          )}
+          {description && (
+            <p className="font-light text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] font-gte w-full md:w-1/2 mb-6 md:mb-12">
+              {description}
+            </p>
+          )}
         </div>
         <div className="w-full flex flex-col justify-center items-center">
           <Carousel
@@ -50,21 +55,25 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                     }`}
                   >
                     <Link
-                      href={`/${hotel?.link}`}
+                      href={`${hotel?.link}`}
                       className="flex flex-col gap-3"
                     >
                       <div className="flex">
-                        <Image
-                          className="w-[304px] h-[480px] object-cover"
-                          src={`${hotel.image?.url}`}
-                          width={304}
-                          height={480}
-                          alt={`${hotel.image?.alt}`}
-                        />
+                        {hotel?.image && (
+                          <Image
+                            className="w-[304px] h-[480px] object-cover"
+                            src={`${hotel.image?.url}`}
+                            width={304}
+                            height={480}
+                            alt={`${hotel.image?.alt}`}
+                          />
+                        )}
                       </div>
-                      <p className="font-ogg font-normal text-[20px] pt-3 sm:text-[27px] md:text-[30px] lg:text-[38px] leading-[1.1] text-center">
-                        {hotel.name}
-                      </p>
+                      {hotel?.name && (
+                        <p className="font-ogg font-normal text-[20px] pt-3 sm:text-[27px] md:text-[30px] lg:text-[38px] leading-[1.1] text-center">
+                          {hotel.name}
+                        </p>
+                      )}
                     </Link>
                   </CarouselItem>
                 );

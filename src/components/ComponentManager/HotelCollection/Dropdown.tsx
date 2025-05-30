@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { MdKeyboardArrowRight } from "react-icons/md";
+// import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuSearch } from "react-icons/lu";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -11,8 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { HotelCategory } from "@/lib";
 
-const Dropdown = () => {
+const Dropdown = ({
+  totalHotels,
+  categories,
+}: {
+  totalHotels: number;
+  categories: HotelCategory[];
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState(
@@ -34,13 +41,12 @@ const Dropdown = () => {
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateSearchParams("search", searchValue);
+  const handleSearch = (value: string) => {
+    updateSearchParams("search", value);
   };
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center px-5 lg:px-16  gap-16">
+    <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center gap-16">
       <div className="w-full flex flex-col justify-start items-baseline gap-5 lg:gap-10">
         {/* <div className="flex items-center gap-4">
           <h4 className="font-normal font-montserrat text-[14px]">
@@ -69,7 +75,7 @@ const Dropdown = () => {
               // onValueChange={(value) => updateSearchParams("edition", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="Deutschland" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -88,51 +94,18 @@ const Dropdown = () => {
               onValueChange={(value) => updateSearchParams("category", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="alleKategorien" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="alleKategorien">
                     Alle Kategorien
                   </SelectItem>
-                  <SelectItem value="luxury-city-palais">
-                    Luxury City Palais
-                  </SelectItem>
-                  <SelectItem value="luxury-culinary-hotels">
-                    Luxury Culinary Hotels
-                  </SelectItem>
-                  <SelectItem value="luxury-design-lifestyle-resorts">
-                    Luxury Design & Lifestyle Resorts
-                  </SelectItem>
-                  <SelectItem value="luxury-family-resorts">
-                    Luxury Family Resorts
-                  </SelectItem>
-                  <SelectItem value="grand-hotels">Grand Hotels</SelectItem>
-                  <SelectItem value="luxury-lake-side-resorts">
-                    Luxury Lake Side Resorts
-                  </SelectItem>
-                  <SelectItem value="luxury-meeting-event-hotels">
-                    Luxury Meeting & Event Hotels
-                  </SelectItem>
-                  <SelectItem value="luxury-spa-health-resorts">
-                    Luxury Spa & Health Resorts
-                  </SelectItem>
-                  <SelectItem value="luxury-hideaways">
-                    Luxury Hideaways
-                  </SelectItem>
-                  <SelectItem value="luxury-alpine-resorts">
-                    Luxury Alpine Resorts
-                  </SelectItem>
-                  <SelectItem value="grand-resorts">Grand Resorts</SelectItem>
-                  <SelectItem value="luxury-hotels-historical-architecture">
-                    Luxury Hotels in Historical Architecture
-                  </SelectItem>
-                  <SelectItem value="luxury-city-hotels">
-                    Luxury City Hotels
-                  </SelectItem>
-                  <SelectItem value="luxury-golf-resorts">
-                    Luxury Golf Resorts
-                  </SelectItem>
+                  {categories?.map((category) => (
+                    <SelectItem key={category?._id} value={category?.value}>
+                      {category?.label}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -146,7 +119,7 @@ const Dropdown = () => {
               onValueChange={(value) => updateSearchParams("city", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="Alle Städte" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -169,7 +142,7 @@ const Dropdown = () => {
               onValueChange={(value) => updateSearchParams("segment", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="Bitte wählen" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -182,14 +155,14 @@ const Dropdown = () => {
           </div>
         </div>
         <div className="lg:w-full flex flex-col justify-start items-baseline lg:flex-row-reverse lg:justify-between lg:items-end my-4 lg:my-7 gap-5">
-          <form
-            onSubmit={handleSearch}
-            className="flex justify-end items-center gap-4 w-full"
-          >
+          <div className="flex justify-end items-center gap-4 w-full">
             <div className="w-full max-w-[300px] h-16 relative">
               <input
                 value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                  handleSearch(e.target.value);
+                }}
                 type="text"
                 placeholder="Suchen"
                 className="w-full h-full border-2 border-black relative text-[16px] font-montserrat font-bold pl-14 placeholder:text-black uppercase"
@@ -198,16 +171,10 @@ const Dropdown = () => {
                 <LuSearch />
               </div>
             </div>
-            <button
-              type="submit"
-              className="btn-secondary w-16 text-black border-black h-16"
-            >
-              <img src="/Logos/SeachLogo.svg" alt="" />
-            </button>
-          </form>
+          </div>
           <div className="w-full">
             <h4 className="font-montserrat font-normal text-[16px]">
-              12 von 101
+              {totalHotels} Hotels
             </h4>
           </div>
         </div>

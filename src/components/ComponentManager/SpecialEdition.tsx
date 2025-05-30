@@ -7,9 +7,12 @@ import {
 } from "@/components/ui/carousel";
 import styles from "./SpecialEditionsNew.module.css";
 
-import specialEdition from "@/Data/specialData";
+// import specialEdition from "@/Data/specialData";
 import type { SpecialEdition } from "@/lib";
+// import Link from "next/link";
+import { ColoredText } from "../ui/ColoredText";
 import Link from "next/link";
+
 const SpecialEdition = ({
   title,
   description,
@@ -17,27 +20,30 @@ const SpecialEdition = ({
 }: SpecialEdition) => {
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const box = e.currentTarget;
-    box.style.zIndex = "100"; // Bring to front
+    box.style.zIndex = "2"; // Bring to front
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
     const box = e.currentTarget;
-    box.style.zIndex = "100";
+    box.style.zIndex = "1";
     setTimeout(() => {
       box.style.zIndex = ""; // Reset after transition
     }, 500);
   };
+
   return (
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center pt-20 pb-0 md:pt-0 md:pb-32 gap-10 md:gap-16 px-0  md:pl-16 pr-0 lg:px-6">
       <div className=" w-full flex flex-col justify-center items-center gap-4 px-6 md:px-16">
-        <h2 className="heading-2-lg text-center">
-          Unsere
-          <span className="gradient-de-text"> Special Editions</span>
-        </h2>
-        <p className="w-full max-w-[700px] bodycopy-1-lg text-center">
-          Außergewöhnliche Hotels mit 101 Potenzial, die nicht im Ranking
-          vertreten sind – entdeckt in den Special Editions.
-        </p>
+        {title && (
+          <h1 className="heading-2-lg text-center">
+            <ColoredText text={title} />
+          </h1>
+        )}
+        {description && (
+          <p className="font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] font-gte mb-8 w-full max-w-[700px] text-center">
+            {description}
+          </p>
+        )}
       </div>
 
       {/* Mobile Section */}
@@ -50,56 +56,64 @@ const SpecialEdition = ({
           className="w-full relative"
         >
           <CarouselContent className="flex items-end">
-            {specialEdition.map((item) => {
-              return (
-                <CarouselItem
-                  key={item.id}
-                  className="flex min-w-[250px] max-[600px]:max-w-[67vw] w-full max-w-[400px] md:max-w-[368px]"
-                >
+            {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
+              <Link key={index} href={`/hotels/${item?.slug}`}>
+                <CarouselItem className="flex min-w-[250px] max-[600px]:max-w-[67vw] w-full max-w-[400px] md:max-w-[368px]">
                   <div className="w-full flex flex-col justify-center items-center gap-4">
-                    <h4 className="font-ogg font-normal text-[20px] py-3 sm:text-[27px] md:text-[30px] lg:text-[38px] leading-[1.1] text-center">
-                      {item.label}
-                    </h4>
-                    <img
-                      src={item.img}
-                      className="aspect-square md:aspect-auto object-cover"
-                      alt=""
-                    />
+                    {item.name && (
+                      <h4 className="font-ogg font-normal text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-[24px] sm:leading-[28px] md:leading-[38px] lg:leading-[40px] text-center mb-5">
+                        {item.name}
+                      </h4>
+                    )}
+                    {item?.image && (
+                      <img
+                        src={`${item.image?.url}`}
+                        className="aspect-square md:aspect-auto object-cover"
+                        alt=""
+                      />
+                    )}
                   </div>
                 </CarouselItem>
-              );
-            })}
+              </Link>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
 
       {/* Desktop Section */}
       <div className="w-full hidden lg:flex justify-between items-end">
-        {specialEdition.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className={styles.box}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
+        {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
+          <div
+            key={index}
+            className={styles.box}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {item.name && (
               <h4
-                className={`font-ogg font-normal text-[20px] py-3 sm:text-[27px] md:text-[30px] lg:text-[38px] leading-[1.1] text-center ${styles.title}`}
+                className={`font-ogg font-normal text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-[24px] sm:leading-[28px] md:leading-[38px] lg:leading-[40px] text-center mb-5 ${styles.title}`}
               >
-                {item.label}
+                {item.name}
               </h4>
-              <div className={styles.innerBox}>
-                <img src={item.img} alt="" />
-                <img className={styles.overlay} />
-                <button
-                  className={`btn-primary w-[300px] btn-primary-hover-de ${styles.button}`}
+            )}
+            <div className={styles.innerBox}>
+              {item?.image && <img src={`${item?.image?.url}`} alt="" />}
+              <img className={styles.overlay} />
+              {item.slug && (
+                <Link
+                  className={`${styles.button}`}
+                  href={`/hotels/${item?.slug}`}
                 >
-                  {item.btnLabel}
-                </button>
-              </div>
+                  <button
+                    className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
+                  >
+                    Special Editions Ansehen
+                  </button>
+                </Link>
+              )}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </section>
   );

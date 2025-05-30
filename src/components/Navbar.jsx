@@ -58,7 +58,7 @@ const Navbar = ({ navbar }) => {
     <>
       <section className="w-full flex justify-center items-center bg-[#000000] max-w-[1440px] mx-auto select-none">
         {/* Mobile Edition Section Desin */}
-        <div className="w-full flex md:hidden text-white">
+        <div className="w-full flex lg:hidden text-white">
           <Carousel
             opts={{
               align: "start",
@@ -78,8 +78,13 @@ const Navbar = ({ navbar }) => {
                       key={idx}
                       className="relative py-4 group flex flex-col justify-center items-center cursor-pointer"
                     >
-                      <div
+                      {/* <div
                         className={`w-full h-1 [clip-path:polygon(0%_50%,45%_0%,55%_0%,100%_50%,55%_100%,45%_100%)] bg-white absolute top-[0px] rounded-full group-hover:block ${
+                          editionIndex === idx ? "block" : "hidden"
+                        }`}
+                      ></div> */}
+                      <div
+                        className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
                           editionIndex === idx ? "block" : "hidden"
                         }`}
                       ></div>
@@ -96,7 +101,9 @@ const Navbar = ({ navbar }) => {
         {/* Destop Edition Section Desin */}
         <div
           className={`hidden lg:flex font-gte font-[350] w-full justify-center items-center bg-black px-16 absolute z-30 top-0 duration-500 ${
-            showEdition ? "h-[164px]" : "h-[52px] overflow-hidden"
+            showEdition
+              ? "h-[164px] overflow-hidden"
+              : "h-[52px] overflow-hidden"
           }   `}
         >
           <div className="w-full h-full max-w-[616px] flex justify-between items-start pt-4">
@@ -110,7 +117,7 @@ const Navbar = ({ navbar }) => {
                   className="relative group flex flex-col justify-center items-center cursor-pointer w-full"
                 >
                   <div
-                    className={`w-full h-1 [clip-path:polygon(0%_50%,45%_0%,55%_0%,100%_50%,55%_100%,45%_100%)] bg-white absolute top-[-16px] rounded-full group-hover:block ${
+                    className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
                       editionIndex === idx ? "block" : "hidden"
                     }`}
                   ></div>
@@ -351,14 +358,14 @@ const Navbar = ({ navbar }) => {
           onMouseEnter={() => setMenu(true)}
           onMouseLeave={() => setMenu(false)}
           className={`absolute w-full bg-[#F9F8FA] py-6 md:py-8 lg:py-12 flex flex-col justify-center items-center  ${
-            menu ? "md:flex hidden" : "hidden"
+            menu ? "lg:flex hidden" : "hidden"
           }`}
         >
           {navbarData?.mainMenu?.map((navitem, index) => {
             const { hasSubmenu, submenu } = navitem;
             return (
               <div
-                className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
+                className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 flex flex-wrap justify-center items-start  gap-10"
                 key={index}
               >
                 {hasSubmenu &&
@@ -375,7 +382,7 @@ const Navbar = ({ navbar }) => {
                         {links?.map((navitem, index) => {
                           return (
                             <Link
-                              href={`${navitem?.url}`}
+                              href={`${navitem?.url}#${navitem?.id}`}
                               key={index}
                               className="text-[14px] font-gte font-light hover:text-[#B65033]"
                             >
@@ -395,14 +402,14 @@ const Navbar = ({ navbar }) => {
         onMouseOver={() => setMenu(true)}
         // onMouseOut={() => setMenu(false)}
         className={`w-full bg-[#F9F8FA] py-6 md:py-8 lg:py-12 flex flex-col justify-center items-center  ${
-          menu ? "flex  md:hidden" : "hidden"
+          menu ? "flex  lg:hidden" : "hidden"
         }`}
       >
         {navbarData?.mainMenu?.map((navitem, index) => {
           const { hasSubmenu, submenu } = navitem;
           return (
             <div
-              className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+              className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 flex flex-wrap justify-center items-start gap-5"
               key={index}
             >
               {hasSubmenu &&

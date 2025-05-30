@@ -13,9 +13,11 @@ const TestimonialSec2 = ({ author, review }: Testimonial) => {
             alt=""
           />
         </div>
-        <h1 className="font-ogg font-normal leading-[25px] text-[20px] sm:leading-[30px] sm:text-[25px] md:leading-[35px] md:text-[30px] lg:leading-[38px] lg:text-[35px] xl:leading-[42px] xl:text-[38px] mb-3 lg:mb-6 text-center">
-          <ColoredText text={review} />
-        </h1>
+        {review && (
+          <h1 className="font-ogg font-normal leading-[25px] text-[20px] sm:leading-[30px] sm:text-[25px] md:leading-[35px] md:text-[30px] lg:leading-[38px] lg:text-[35px] xl:leading-[42px] xl:text-[38px] mb-3 lg:mb-6 text-center">
+            <ColoredText text={review} />
+          </h1>
+        )}
         <div className="w-[90%] flex justify-end items-baseline lg:mt-[-30px]">
           <img
             className="rotate-180 max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
@@ -24,9 +26,11 @@ const TestimonialSec2 = ({ author, review }: Testimonial) => {
           />
         </div>
         <div className="w-full flex justify-center items-center">
-          <p className="w-full text-center text-[18px] sm:text-[18px] lg:text-[20px] font-gte font-light mt-5">
-            {author}
-          </p>
+          {author && (
+            <p className="w-full text-center text-[18px] sm:text-[18px] lg:text-[20px] font-gte font-light mt-5">
+              {author}
+            </p>
+          )}
         </div>
       </div>
     </section>

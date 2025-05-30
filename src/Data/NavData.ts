@@ -15,7 +15,7 @@ const NavData: NavItem[] = [
   {
     id: "2",
     item: "Special Editions",
-    link: "/special-editions",
+    link: "/special-editions?rankingCategory=editors-choice",
   },
   {
     id: "3",

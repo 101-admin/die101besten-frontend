@@ -1,4 +1,7 @@
-import { pageTitleComponentFragment } from "../fragments/components.fragments";
+import {
+  imageSectionComponentFragment,
+  pageTitleComponentFragment,
+} from "../fragments/components.fragments";
 import { strategischePartnerComponentFragment } from "../fragments/components.fragments";
 import { medienPartnerComponentFragment } from "../fragments/components.fragments";
 import { partnerComponentFragment } from "../fragments/components.fragments";
@@ -20,7 +23,8 @@ export const partnersQuery = `*[_type == "partners" && language == $language  &&
     _type == "partner" => {${partnerComponentFragment}},
     _type == "werde101" => {${werde101ComponentFragment}},
     _type == "dasBush" => {${dasBushComponentFragment}},
-    _type=="newsletter"=> {${newsletterComponentFragment}}
+    _type=="newsletter"=> {${newsletterComponentFragment}},
+    _type == "imageSection" => {${imageSectionComponentFragment}}
   },
   seo {
     metaTitle,

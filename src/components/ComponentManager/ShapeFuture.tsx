@@ -20,7 +20,9 @@ const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
             {image && <img src={`${image?.url}`} alt={`${image?.url}`} />}
           </div>
           <div className="w-full flex flex-col justify-start items-baseline">
-            <div className="w-full text-[18px] sm:text-[18px] lg:text-[20px] font-gte font-light"></div>
+            <div className="w-full text-[18px] sm:text-[18px] lg:text-[20px] font-gte font-light">
+              {body && <PortableText value={body} />}
+            </div>
             {ctaButton && (
               <Link
                 target="_blank"

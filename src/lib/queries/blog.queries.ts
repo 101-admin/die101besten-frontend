@@ -2,6 +2,7 @@ import {
   blogCollectionComponentFragment,
   blogPageTitleComponentFragment,
   newsletterComponentFragment,
+  imageSectionComponentFragment,
 } from "../fragments/components.fragments";
 
 import {
@@ -26,7 +27,8 @@ export const getBlogPageQuery = `
       _type,
       _type == "blogPageTitle" => {${blogPageTitleComponentFragment}},
       _type == "blogCollection" => {${blogCollectionComponentFragment}},
-      _type == "newsletter" => {${newsletterComponentFragment}}
+      _type == "newsletter" => {${newsletterComponentFragment}},
+      _type == "imageSection" => {${imageSectionComponentFragment}}
     }
   }
 `;

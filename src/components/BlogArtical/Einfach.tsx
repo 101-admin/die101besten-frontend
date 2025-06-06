@@ -8,7 +8,7 @@ const Hero = ({
   description?: string;
 }) => {
   return (
-    <div className="w-full max-w-[1440px] mx-auto pb-16 md:pb-32  pt-8 md:pt-12 lg:pt-[64px] px-4 sm:px-6 md:px-12 lg:px-[128px]">
+    <div className="w-full max-w-[1440px] mx-auto  pt-8 md:pt-12 lg:pt-[64px] px-4 sm:px-6 md:px-12 lg:px-[128px]">
       <div className="max-w-[1140px] mx-auto flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-[32px]">
         {/* Text Content */}
         <div className="w-full lg:max-w-[700px] mx-auto">

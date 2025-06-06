@@ -3,10 +3,11 @@ import {
   BlogCollection,
   BlogPageTitle,
   Button,
+  ImageSection,
 } from "./components.types";
 import type { BaseDocument, BlockContent, SanityImage } from "./sanity.types";
 
-export type BlogComponent = BlogCollection | BlogPageTitle | Newsletter;
+export type BlogComponent = BlogCollection | BlogPageTitle | Newsletter | ImageSection;
 
 export interface BlogPage extends BaseDocument {
   _type: "blog";

@@ -1,4 +1,4 @@
-import { HotelAchievement, SecondaryHeroSection } from "@/lib";
+import { HotelAchievement, CTAButton, SecondaryHeroSection } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 // import { CiHeart } from "react-icons/ci";
@@ -8,15 +8,15 @@ interface HotelOfTheYearProps extends SecondaryHeroSection {
   achievements?: HotelAchievement[];
   city?: string;
   name?: string;
+  ctaButton?: CTAButton;
 }
 export default function HotelOfTheYear({
   brandImages,
-  ctaButton,
   image,
-  // saveOrSplitButtons,
   achievements,
   city,
   name,
+  ctaButton,
 }: HotelOfTheYearProps) {
   return (
     <section className="max-w-1440 mx-auto px-4 py-12">
@@ -45,13 +45,13 @@ export default function HotelOfTheYear({
           )}
           {name && (
             <h1 className="font-ogg font-[350] text-[32px] lg:text-[48px] lg:leading-[110%] mb-6">
-              {name}, {city}
+              {name}
             </h1>
           )}
 
           <div className="mb-8 flex flex-col items-center lg:items-start gap-4">
             {ctaButton && (
-              <Link href={`${ctaButton?.url}`} className="w-full max-w-[300px]">
+              <Link target="_blank" href={`${ctaButton?.url}`} className="w-full max-w-[300px]">
                 <button className="w-full  h-[64px] gap-[8px] py-[16px] px-[24px] bg-black text-white uppercase font-montserrat font-bold text-[16px] leading-[24px] text-center tracking-normal">
                   {ctaButton?.text}
                 </button>
@@ -96,11 +96,11 @@ export default function HotelOfTheYear({
               >
                 {item && (
                   <Image
-                    src={item?.url || ""}
-                    alt={item?.alt || ""}
+                    src={item?.image?.url || ""}
+                    alt={item?.image?.alt || ""}
                     width={180}
                     height={60}
-                    className="object-cover w-full h-full"
+                    className="w-full h-full"
                   />
                 )}
               </div>

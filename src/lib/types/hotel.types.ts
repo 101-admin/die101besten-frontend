@@ -5,8 +5,8 @@ import type {
   DieInstagram,
   Newsletter,
   HotelCollection,
-  Hotelmomente,
   SpecialHotels,
+  ImageSection,
 } from "./components.types";
 import type { HeroSlider } from "./components.types";
 
@@ -34,24 +34,24 @@ export interface SaveOrSplitButtons {
  */
 export interface PrimaryHeroSection {
   image?: SanityImage;
-  title?: string;
-  subTitle?: string;
-  ctaButton?: CTAButton;
 }
 
 export interface SecondaryHeroSection {
   image?: SanityImage;
-  ctaButton?: CTAButton;
-  saveOrSplitButtons?: SaveOrSplitButtons;
-  brandImages?: SanityImage[];
+  brandImages?: Array<{
+    image?: SanityImage;
+    name?: string;
+  }>;
 }
 
 export interface HotelDetailsSection {
   image?: SanityImage;
   description?: string;
-  ctaButton?: CTAButton;
   saveOrSplitButtons?: SaveOrSplitButtons;
-  brandImages?: SanityImage[];
+  brandImages?: Array<{
+    image?: SanityImage;
+    name?: string;
+  }>;
 }
 
 export interface AboutHotel {
@@ -158,19 +158,15 @@ export interface HotelHighlights {
 }
 
 export interface HotelMapInfo {
-  name?: string;
   city?: string;
   country?: string;
+  street?: string;
+  streetNumber?: string;
+  postalCode?: string;
 }
 
-export interface HotelMapIntegration {
-  showLocation?: boolean;
-  enableRouting?: boolean;
-  zoomLevel?: number;
-}
 
 export interface HotelContactInfo {
-  bookingText?: string;
   streetAddress?: string;
   phone?: string;
   email?: string;
@@ -179,10 +175,8 @@ export interface HotelContactInfo {
 
 export interface HotelMapSection {
   headline?: string;
-  hotelInfo?: HotelMapInfo;
-  mapIntegration?: HotelMapIntegration;
+  hotelLocation?: HotelMapInfo;
   contactInfo?: HotelContactInfo;
-  ctaButton?: CTAButton;
 }
 
 /**
@@ -240,7 +234,7 @@ export interface Hotel extends BaseDocument {
   ranking?: HotelRanking;
   slug?: string;
   image?: SanityImage;
-  description?: string;
+  ctaButton?: CTAButton;
   achievements?: HotelAchievement[];
   primaryHeroSection?: PrimaryHeroSection;
   secondaryHeroSection?: SecondaryHeroSection;
@@ -255,6 +249,15 @@ export interface Hotel extends BaseDocument {
   interviewSection?: HotelInterviewSection;
   hotelHighlights?: HotelHighlights;
   mapSection?: HotelMapSection;
+  adds?: Adds;
+}
+
+export interface Adds {
+  title?: string;
+  images?: Array<{
+    image?: SanityImage;
+    link?: string;
+  }>;
 }
 
 /**
@@ -310,14 +313,16 @@ export type HotelPageComponent =
   | SpecialEdition
   | DieInstagram
   | Newsletter
-  | HotelCollection;
+  | HotelCollection
+  | ImageSection;
 
 export type SpecialEditionHotelsPageComponent =
   | AllHotelsSlider
   | DieInstagram
   | Newsletter
   | HotelCollection
-  | SpecialHotels;
+  | SpecialHotels
+  | ImageSection;
 
 export interface AllHotelsPage extends BaseDocument {
   _type: "allHotels";

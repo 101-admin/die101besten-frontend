@@ -13,6 +13,7 @@ import {
   principlesComponentFragment,
   shapingFutureComponentFragment,
   hotelmomenteComponentFragment,
+  imageSectionComponentFragment,
 } from "../fragments/components.fragments";
 
 /**
@@ -47,7 +48,8 @@ export const componentsFragment = `
     _type == "boardofDas" => {${boardofDasComponentFragment}},
     _type == "principles" => {${principlesComponentFragment}},
     _type == "shapingFuture" => {${shapingFutureComponentFragment}},
-    _type == "hotelmomente" => {${hotelmomenteComponentFragment}}
+    _type == "hotelmomente" => {${hotelmomenteComponentFragment}},
+    _type == "imageSection" => {${imageSectionComponentFragment}}
   }
 `;
 

@@ -86,7 +86,7 @@ const SpecialEditionHotels = ({
                 }`}
               >
                 <h2
-                  className={`font-montserrat font-semibold  leading-[24px] group-hover:text-[#B65033] group-hover:text-[22px] duration-200 ${
+                  className={`font-montserrat font-semibold  leading-[24px] group-hover:text-[#B65033] duration-200 ${
                     index == idx
                       ? "text-[#B65033] text-[20px] sm:text-[22px]"
                       : "text-[18px]"

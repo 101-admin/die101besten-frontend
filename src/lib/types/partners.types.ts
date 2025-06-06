@@ -7,6 +7,7 @@ import type {
   Werde101,
   DasBuch,
   Newsletter,
+  ImageSection,
 } from "./components.types";
 
 /**
@@ -20,7 +21,8 @@ export type PartnersComponent =
   | PartnerComponent
   | Werde101
   | DasBuch
-  | Newsletter;
+  | Newsletter
+  | ImageSection;
 
 export interface PartnersPage extends BaseDocument {
   _type: "partners";

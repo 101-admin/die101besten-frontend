@@ -1,4 +1,4 @@
-import { HotelAchievement, HotelDetailsSection } from "@/lib";
+import { HotelAchievement, HotelDetailsSection , CTAButton } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 // import { CiHeart } from "react-icons/ci";
@@ -9,26 +9,27 @@ interface PremiumProps extends HotelDetailsSection {
   city?: string;
   country?: string;
   achievements?: HotelAchievement[];
+  ctaButton?: CTAButton;
 }
 export default function Premium({
   description,
   image,
   brandImages,
   city,
-  ctaButton,
+  country,
   name,
-  // saveOrSplitButtons,
+  ctaButton,
   achievements,
 }: PremiumProps) {
   return (
-    <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-5 lg:px-16 pt-8 sm:pt-12">
-      <div className="w-full flex flex-col justify-center items-center gap-10 pt-16 md:pt-32 pb-16 md:pb-32">
+    <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-5 lg:px-16 pb-5 lg:pb-10 pt-10 sm:pt-16 md:pt-20 lg:pt-24">
+      <div className="w-full flex flex-col justify-center items-center gap-10 ">
         <div className="w-full flex flex-col justify-center items-center lg:flex-row gap-8 lg:gap-10">
           {/* Image Section */}
           <div className="relative">
             {image && (
               <img
-                className="w-full max-w-[500px] h-[600px] object-cover"
+                className="w-full max-w-[500px] lg:w-[500px] h-[600px] object-cover"
                 src={image?.url || ""}
                 alt={image?.alt || ""}
               />
@@ -38,7 +39,7 @@ export default function Premium({
           {/* Right Text Content */}
           <div className="flex flex-col w-full max-w-[500px]">
             {achievements && (
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="w-full flex flex-wrap gap-2 mb-4">
                 {achievements?.map((tag, index) => (
                   <div
                     key={index}
@@ -51,18 +52,18 @@ export default function Premium({
             )}
 
             {city && (
-              <h3 className="font-gte font-light text-base sm:text-lg md:text-xl lg:text-2xl leading-7 mb-1">
-                {city}
+              <h3 className="font-gte font-[350] text-[20px] lg:text-[24px] leading-[24px] sm:leading-[32px] mb-1">
+                {country},{city}
               </h3>
             )}
             {name && (
-              <h1 className="font-ogg font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight sm:leading-snug md:leading-normal lg:leading-[110%] mb-6">
+              <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-6">
                 {name}
               </h1>
             )}
 
             {description && (
-              <p className="font-gte text-sm sm:text-base lg:text-lg leading-6 font-light mb-6 sm:mb-8">
+              <p className="font-gte font-[350] text-[16px] lg:text-[20px] leading-[20px] lg:leading-[24px] mb-6 sm:mb-8">
                 {description}
               </p>
             )}
@@ -70,11 +71,12 @@ export default function Premium({
             <div className="flex flex-col gap-4 mt-auto">
               {ctaButton && (
                 <Link
+                  target="_blank"
                   className="max-w-[300px] w-full"
                   href={`${ctaButton?.url}`}
                 >
                   <button className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
-                    {ctaButton?.text || "Zur Buchung"}
+                    {ctaButton?.text}
                   </button>
                 </Link>
               )}
@@ -92,18 +94,18 @@ export default function Premium({
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col justify-center item-center pt-16 sm:pt-24 md:pt-36 lg:pt-44">
           {brandImages && (
+        <div className="w-full flex flex-col justify-center item-center pt-16 sm:pt-24 md:pt-36">
             <div className="flex flex-wrap items-center justify-center lg:gap-16 gap-8 ">
               {brandImages?.map((brandImage, index) => (
                 <div
                   key={index}
                   className="relative w-[180px] lg:w-[243.83px] h-[60px] lg:h-[80px]"
                 >
-                  {brandImage && (
+                  {brandImage?.image && (
                     <Image
-                      src={brandImage?.url || ""}
-                      alt={brandImage?.alt || ""}
+                      src={brandImage?.image?.url || ""}
+                      alt={brandImage?.image?.alt || ""}
                       fill
                       className="object-contain"
                     />
@@ -111,8 +113,8 @@ export default function Premium({
                 </div>
               ))}
             </div>
-          )}
         </div>
+          )}
       </div>
     </div>
   );

@@ -1,13 +1,10 @@
-import { PrimaryHeroSection } from "@/lib";
+// import { PrimaryHeroSection } from "@/lib";
+import type { SanityImage , Button } from "@/lib";
 import Image from "next/image";
+import Link from "next/link";
 import { HiPhoto } from "react-icons/hi2";
 
-export default function Gallery({
-  ctaButton,
-  image,
-  subTitle,
-  title,
-}: PrimaryHeroSection) {
+export default function Gallery({name, city, image, ctaButton }: {name?: string, city?: string, image?:SanityImage , ctaButton?: Button}) {
   return (
     <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col">
       {/* Background Image */}
@@ -22,7 +19,9 @@ export default function Gallery({
             priority
           />
         )}
-        <div className="absolute inset-0 bg-black opacity-35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent from-35.1% via-black/39 via-60.43% to-black/90 z-10"></div>
+
+        
       </div>
 
       {/* Top-right Button */}
@@ -36,23 +35,25 @@ export default function Gallery({
       <div className="flex-grow" />
 
       {/* Bottom text*/}
-      <div className="flex flex-col items-center text-white text-center gap-6 pb-8 lg:pb-12">
+      <div className="flex flex-col items-center text-white text-center gap-6">
         <div className="flex flex-col gap-2 sm:gap-4">
-          {title && (
+          {name && (
             <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-tight">
-              {title || "Das James Hotel"}
+              {name}
             </h1>
           )}
-          {subTitle && (
+          {city && (
             <p className="font-gte font-light text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] leading-[32px]">
-              {subTitle || "Flensburg"}
+              {city}
             </p>
           )}
         </div>
         {ctaButton && (
-          <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
-            {ctaButton?.text || "ZUR BUCHUNG"}
+          <Link target="_blank" href={`${ctaButton?.url}`}>
+            <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
+            {ctaButton?.text}
           </button>
+          </Link>
         )}
       </div>
     </section>

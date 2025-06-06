@@ -1,6 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import type { ImageSection } from "@/lib";
+import Link from "next/link";
 const Image1 = ({ title, images }: ImageSection) => {
   const randomImage = useMemo(() => {
     const index = Math.floor(Math.random() * images?.length);
@@ -16,12 +17,16 @@ const Image1 = ({ title, images }: ImageSection) => {
               {title}
             </h6>
           )}
-          {randomImage && (
-            <img
-              src={`${randomImage?.image?.url}`}
-              alt={randomImage?.image?.alt}
-            />
-          )}
+          {
+            randomImage && (
+              <Link href={`${randomImage?.link}`}>
+                <img
+                  src={`${randomImage?.image?.url}`}
+                  alt={`${randomImage?.image?.alt}`}
+                />
+              </Link>
+            )
+          }
         </div>
       </div>
     </div>

@@ -1,34 +1,24 @@
+"use client"
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
 import type { HotelHighlights } from "@/lib";
-import { Hotel } from "lucide-react";
-// import { PortableText } from "@/lib/components/PortableText";
+
 import { ColoredText } from "./ui/ColoredText";
+import { useState } from "react";
 export default function HotelHighlights({
-  blur,
-  blurState,
-  close,
   hotelHighlights,
 }: {
-  blur: () => void;
-  close: () => void;
-  blurState: boolean;
   hotelHighlights: HotelHighlights;
 }) {
-  // console.log(hotelHighlights.image);
+  const [showPopUp, setShowPopUp] = useState(false);
   return (
     <section
       className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16"
-      // style={{
-      //   height: "805px",
-      //   paddingTop: "64px",
-      //   paddingBottom: "128px",
-      // }}
     >
       <div className="flex flex-col lg:flex-row h-full gap-12">
         {/* Left Image */}
         <div className="w-full  h-full relative">
-          <div className="relative w-full h-full rounded-xl overflow-hidden">
+          <div className="relative w-full h-full overflow-hidden">
             {hotelHighlights?.image && (
               <Image
                 className="max-w-[630px] w-full h-[600px] object-cover"
@@ -78,7 +68,7 @@ export default function HotelHighlights({
 
           {hotelHighlights?.ctaButton && (
             <button
-              onClick={blur}
+              onClick={() => setShowPopUp(true)}
               className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de"
             >
               {hotelHighlights?.ctaButton?.text}
@@ -87,8 +77,14 @@ export default function HotelHighlights({
         </div>
       </div>
       <div
-        className={`absolute w-full top-[60%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[5] p-8 md:p-12 lg:p-16 bg-white flex-col justify-center items-center ${
-          blurState ? "flex" : "hidden"
+        onClick={() => setShowPopUp(false)}
+        className={`w-screen h-screen z-50 bg-[black] bg-opacity-25 backdrop-blur-[8px] fixed top-0 left-0 px-5 ${
+          showPopUp ? "block" : "hidden"
+        }`}
+      ></div>
+      <div
+        className={`absolute w-full top-[60%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-8 md:p-12 lg:p-16 bg-white flex-col justify-center items-center ${
+          showPopUp ? "flex" : "hidden"
         } `}
       >
         <div className="w-full flex justify-between items-center mb-5 lg:mb-10">
@@ -98,7 +94,7 @@ export default function HotelHighlights({
             </h1>
           )}
           <IoCloseOutline
-            onClick={close}
+            onClick={() => setShowPopUp(false)}
             className="text-[25px] cursor-pointer"
           />
         </div>

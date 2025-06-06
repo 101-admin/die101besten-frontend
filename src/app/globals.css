@@ -5,6 +5,11 @@
 html {
   scroll-behavior: smooth;
 }
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
 
 @layer base {
   :root {
@@ -122,7 +127,7 @@ html {
     @apply hover:border-white hover:bg-black;
   }
   .btn-secondary-hover-de {
-    @apply hover:p-[22px] hover:border-gradient-de hover:border-none hover:gradient-de-text;
+    @apply hover:p-[21.5px] hover:border-gradient-de hover:border-none hover:gradient-de-text;
   }
 
   .btn-socialmedia {

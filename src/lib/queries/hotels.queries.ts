@@ -15,6 +15,7 @@ import {
   newsletterComponentFragment,
   hotelCollectionComponentFragment,
   specialHotelsComponentFragment,
+  imageSectionComponentFragment,
 } from "../fragments/components.fragments";
 
 /**
@@ -115,7 +116,10 @@ export function getAllHotelsQuery(filters: {
         name,
         image {${globalImageFragment}},
         description,
-        achievements,
+        achievements[]->{
+          _id,
+          name
+        },
         hotelType,
         ranking {
           position,
@@ -155,8 +159,11 @@ export const getHotelBySlugQuery = `
     isPackageBooked,
     name,
     image {${globalImageFragment}},
-    description,
-    achievements,
+    ctaButton {${globalButtonFragment}},
+    achievements[]->{
+      _id,
+      name
+    },
     hotelType,
     ranking {
       position,
@@ -180,28 +187,29 @@ export const getHotelBySlugQuery = `
     tags,
     "primaryHeroSection": primaryHeroSection {
       image {${globalImageFragment}},
-      title,
-      subTitle,
-      ctaButton {${globalButtonFragment}}
     },
     "secondaryHeroSection": secondaryHeroSection {
       image {${globalImageFragment}},
-      ctaButton {${globalButtonFragment}},
       saveOrSplitButtons {
         saveButton,
         splitButton
       },
-      brandImages[] {${globalImageFragment}}
+      brandImages[]->{
+      image {${globalImageFragment}},
+      name,
+      }
     },
     "hotelDetailsSection": hotelDetailsSection {
       image {${globalImageFragment}},
       description,
-      ctaButton {${globalButtonFragment}},
       saveOrSplitButtons {
         saveButton,
         splitButton
       },
-      brandImages[] {${globalImageFragment}}
+      brandImages[]->{
+      image {${globalImageFragment}},
+      name,
+      }
     },
     "aboutHotel": aboutHotel {
       aboutHotels[] {
@@ -285,24 +293,18 @@ export const getHotelBySlugQuery = `
     "fullwidthImage": fullwidthImage {${globalImageWithCaptionFragment}},
     "mapSection": mapSection {
       headline,
-      hotelInfo {
-        name,
-        city,
-        country
-      },
-      mapIntegration {
-        showLocation,
-        enableRouting,
-        zoomLevel
-      },
       contactInfo {
-        bookingText,
-        streetAddress,
         phone,
         email,
         website
       },
-      ctaButton {${globalButtonFragment}}
+    },
+    "adds": adds {
+      title,
+      images[] {
+        image {${globalImageFragment}},
+        link
+      }
     }
   }
 `;
@@ -325,7 +327,8 @@ export const getHotelPageQuery = `
       _type == "specialEdition" => {${specialEditionComponentFragment}},
       _type == "dieInstagram" => {${dieInstagramComponentFragment}},
       _type == "newsletter" => {${newsletterComponentFragment}},
-      _type == "hotelCollection" => {${hotelCollectionComponentFragment}}
+      _type == "hotelCollection" => {${hotelCollectionComponentFragment}},
+      _type == "imageSection" => {${imageSectionComponentFragment}}
     }
   }
 `;
@@ -348,7 +351,8 @@ export const getSpecialEditionHotelsQuery = `
       _type == "dieInstagram" => {${dieInstagramComponentFragment}},
       _type == "newsletter" => {${newsletterComponentFragment}},
       _type == "hotelCollection" => {${hotelCollectionComponentFragment}},
-      _type == "specialHotels" => {${specialHotelsComponentFragment}}
+      _type == "specialHotels" => {${specialHotelsComponentFragment}},
+      _type == "imageSection" => {${imageSectionComponentFragment}}
     }
   }
 `;

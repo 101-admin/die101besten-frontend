@@ -11,7 +11,7 @@ export default function LuxuryHotelSection({
 }) {
   console.log(aboutHotel, "aboutHotel");
   return (
-    <div className="max-w-[1440px] mx-auto px-16 py-16 md:py-32 space-y-10 font-ogg">
+    <div className="max-w-[1440px] mx-auto px-5 lg:px-16 py-16 md:py-32 space-y-10 font-ogg">
       {aboutHotel?.aboutHotels?.map((aboutHotel, index) => {
         const { imagePosition, description, image } = aboutHotel;
         return (
@@ -35,7 +35,7 @@ export default function LuxuryHotelSection({
                     <Image
                       src={image?.url || ""}
                       alt={image?.alt || ""}
-                      className="rounded-lg w-full object-cover h-[520px]"
+                      className="w-full object-cover h-[520px]"
                       width={636}
                       height={520}
                     />

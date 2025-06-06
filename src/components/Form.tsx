@@ -22,6 +22,9 @@ const Form = () => {
   };
 
   return (
+    <>
+    <div id="lc-text"></div>
+
     <section className="bg-[#F9F8FA] max-w-[1920px] w-full flex flex-col justify-center items-center">
       <div className=" w-full max-w-[1440px] flex flex-col lg:flex-row gap-8 lg:gap-4 px-6 pt-20 pb-10 md:p-16">
         <div className="w-full flex flex-col gap-6">
@@ -73,7 +76,7 @@ const Form = () => {
                   onChange={(e) => setIsGdprAccepted(e.target.checked)}
                   className="min-w-8 min-h-8 border-2 border-black rounded-none"
                 />
-                <span className="bodycopy-4-lg">
+                <span className="bodycopy-4-lg text-black">
                   Ich bin damit einverstanden, dass die &quot;Die 101
                   Besten&quot; - Institute for Service- and Leadership
                   Excellence AG mich regelmäßig per E-Mail-Newsletter über
@@ -114,6 +117,7 @@ const Form = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

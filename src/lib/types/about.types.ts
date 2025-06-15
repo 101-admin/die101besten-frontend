@@ -16,6 +16,7 @@ import type {
   Hotelmomente,
   AllHotelsSlider,
   HotelCollection,
+  ImageSection,
 } from "./components.types";
 
 // Union type for all possible about page components
@@ -35,7 +36,8 @@ export type AboutComponent =
   | ShapingFuture
   | Hotelmomente
   | AllHotelsSlider
-  | HotelCollection;
+  | HotelCollection
+  | ImageSection;
 
 export interface AboutPage extends BaseDocument {
   _type: "aboutUs";

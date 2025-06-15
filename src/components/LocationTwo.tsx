@@ -1,12 +1,22 @@
 import React from "react";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa6";
-import type { HotelMapSection } from "@/lib";
+// import { FaPlus } from "react-icons/fa6";
+// import { FaMinus } from "react-icons/fa6";
+import type { HotelMapSection , HotelAddress , CTAButton } from "@/lib";
 import Link from "next/link";
 
-const Location = ({ mapSection }: { mapSection: HotelMapSection }) => {
+const Location = ({
+  mapSection,
+  name,
+  address,
+  ctaButton,
+}: {
+  mapSection: HotelMapSection;
+  name?: string;
+  address?: HotelAddress;
+  ctaButton?: CTAButton;
+}) => {
   return (
-    <section className="mt-8 w-full max-w-[1920px] mx-auto pb-7  sm:pb-10 md:pb-12 lg:pb-16">
+    <section className="mt-8 w-full max-w-[1920px] mx-auto">
       {/* Text Section */}
       <div className="my-8 w-full gap-6 lg:gap-8 px-8 lg:px-14 md:px-8">
         {mapSection?.headline && (
@@ -14,10 +24,10 @@ const Location = ({ mapSection }: { mapSection: HotelMapSection }) => {
             {mapSection.headline}
           </h1>
         )}
-        {mapSection?.hotelInfo && (
+        {address  && (
           <h2 className="mt-4 font-ogg font-normal text-[15px] sm:text-[18px] md:text-[21px] lg:text-[32px] leading-[40px]">
-            {mapSection.hotelInfo?.name}, {mapSection.hotelInfo?.city} –{" "}
-            {mapSection.hotelInfo?.country}
+            {name}, {address?.city} –{" "}
+            {address?.country}
           </h2>
         )}
       </div>
@@ -33,7 +43,10 @@ const Location = ({ mapSection }: { mapSection: HotelMapSection }) => {
                 Buchung und Kontakt
               </h2>
               <p className="text-[16px] font-gte font-[350]">
-                {mapSection.contactInfo?.streetAddress}
+                {address?.street}{" "}
+                {address?.streetNumber},{" "}
+                {address?.postalCode}{" "}
+                {address?.city}
               </p>
               <p className="text-[16px] font-gte font-[350]">
                 {mapSection.contactInfo?.phone}
@@ -44,12 +57,17 @@ const Location = ({ mapSection }: { mapSection: HotelMapSection }) => {
               <p className="text-[16px] font-gte font-[350]">
                 {mapSection.contactInfo?.website}
               </p>
-              <Link
-                href={mapSection.ctaButton?.url ?? {}}
+              {
+                ctaButton && (
+                  <Link
+                href={`${ctaButton?.url}`}
+                target="_blank"
                 className="max-w-[280px] btn-primary-hover-de w-full h-16 flex justify-center items-center bg-black cursor-pointer font-montserrat font-bold text-[16px] text-white mt-2 uppercase"
               >
-                Zur Buchung
+                {ctaButton?.text}
               </Link>
+                )
+              }
             </div>
           )}
         </div>

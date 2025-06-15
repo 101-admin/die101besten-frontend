@@ -13,7 +13,7 @@ export default function ContentSection({
       <div className="w-full">
         {data?.content?.map((section, index) => (
           <div key={index} className="w-full flex flex-col">
-            <div className="w-full flex flex-col lg:flex-row justify-start items-baseline lg:justify-start lg:items-center gap-5 lg:gap-7">
+            <div className="w-full flex flex-col lg:flex-row justify-start items-baseline lg:justify-center lg:items-center gap-6 lg:gap-12">
               {/* Image */}
 
               {section.image?.url && (
@@ -29,7 +29,7 @@ export default function ContentSection({
               )}
 
               {/* Text */}
-              <div className="flex w-full max-w-[576px]">
+              <div className="flex w-full max-w-[576px] px-5 lg:px-0">
                 {/* <ColoredText
                   className="text-[18px] sm:text-[20px] font-[350] leading-[22px] sm:leading-[24px]"
                   text={section.description}

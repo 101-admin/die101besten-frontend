@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { type Hotel } from "@/lib";
 
-const SingleHotel = ({ data, index }: { data: Hotel; index: number }) => {
+const SingleHotel = ({ data }: { data: Hotel }) => {
   return (
     <Link
       className="w-full"
@@ -52,9 +52,11 @@ const SingleHotel = ({ data, index }: { data: Hotel; index: number }) => {
                       key={index}
                       className="py-1 px-2 border-2 border-black rounded-xl"
                     >
-                      <p className="font-bold font-montserrat text-[12px] uppercase">
-                        {item?.name}
-                      </p>
+                      {item?.name && (
+                         <p className="font-bold font-montserrat text-[12px] uppercase">
+                         {item?.name}
+                       </p>
+                      )}
                     </div>
                   );
                 })}

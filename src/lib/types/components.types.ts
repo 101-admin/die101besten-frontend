@@ -130,6 +130,7 @@ export interface ImageSection extends BaseDocument {
   title: string;
   images: Array<{
     image?: SanityImage;
+    link?: string;
   }>;
 }
 

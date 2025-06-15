@@ -5,7 +5,7 @@ import { ColoredText } from "../ui/ColoredText";
 const BlogTitle = ({ title, description, id }: BlogPageTitle) => {
   return (
     <div id={id} className="w-full pt-12 lg:pt-20">
-      <div className="w-full max-w-[1184px] mx-auto font-ogg py-12 px-4 gap-8">
+      <div className="w-full max-w-[1184px] mx-auto font-ogg px-4 gap-8">
         {/* Main Heading */}
         <div className="max-w-[700px] mx-auto">
           {title && (

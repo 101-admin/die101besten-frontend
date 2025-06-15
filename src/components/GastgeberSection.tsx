@@ -1,21 +1,17 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import type { HotelInfoPremium } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "./ui/ColoredText";
 const GastgeberSection = ({
-  blurhandle2,
-  blur2,
-  closehandle2,
   hotelInfo,
 }: {
-  blurhandle2: () => void;
-  blur2: boolean;
-  closehandle2: () => void;
   hotelInfo: HotelInfoPremium;
 }) => {
+    const [showPopUp, setShowPopUp] = useState(false);
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 md:px-16 py-16 md:py-32 relative">
+    <section className="w-full max-w-[1440px] flex flex-col justify-center items-center mx-auto px-4 sm:px-8 md:px-16 py-16 md:py-20 relative">
       <div className="max-w-[1192px] w-full">
         <div className="w-full flex flex-col justify-center items-center lg:flex-row gap-8 md:gap-16">
           {/* Image */}
@@ -58,9 +54,9 @@ const GastgeberSection = ({
               </div>
             )}
 
-            <div className="mt-4">
+            <div className="mt-8">
               <button
-                onClick={blurhandle2}
+                onClick={() => setShowPopUp(true)}
                 className="btn-primary btn-primary-hover-de w-full sm:w-[300px]"
               >
                 MEHR INFOS
@@ -69,9 +65,16 @@ const GastgeberSection = ({
           </div>
         </div>
       </div>
+
       <div
-        className={`absolute w-full top-[50%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[5] p-4 sm:p-6 md:p-8 lg:p-16 bg-white flex-col justify-center items-center ${
-          blur2 ? "flex" : "hidden"
+        onClick={() => setShowPopUp(false)}
+        className={`w-screen h-screen z-50 bg-[black] bg-opacity-25 backdrop-blur-[8px] fixed top-0 left-0 px-5 ${
+          showPopUp ? "block" : "hidden"
+        }`}
+      ></div>
+      <div
+        className={`absolute w-full top-[50%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-4 sm:p-6 md:p-8 lg:p-16 bg-white flex-col justify-center items-center ${
+          showPopUp ? "flex" : "hidden"
         }`}
       >
         <div className="w-full flex justify-between items-center mb-4 md:mb-6 lg:mb-10">
@@ -81,7 +84,7 @@ const GastgeberSection = ({
             </h1>
           )}
           <IoCloseOutline
-            onClick={closehandle2}
+            onClick={() => setShowPopUp(false)}
             className="text-[22px] sm:text-[25px] cursor-pointer"
           />
         </div>

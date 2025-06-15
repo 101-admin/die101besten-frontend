@@ -116,6 +116,7 @@ export const imageSectionComponentFragment = `
   language,
   images[] {
     image {${globalImageFragment}},
+    link,
   }
 `;
 

@@ -1,5 +1,4 @@
 import { ColoredText } from "@/components/ui/ColoredText";
-import { StyledColoredText } from "@/components/ui/StyledColoredText";
 import {
   PortableText as PortableTextComponent,
   PortableTextProps,
@@ -16,27 +15,27 @@ import BlogGrid from "@/components/BlogArtical/BlogGrid";
 export const portableComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }) => (
-      <p className="font-gte text-[16px] lg:text-[20px] font-[350] leading-[20px] lg:leading-[24px] my-3 container-primary">
+      <p className="font-gte text-[16px] lg:text-[20px] font-[350] leading-[20px] lg:leading-[24px] my-3 container-primary text-black">
         {children}
       </p>
     ),
     h1: ({ children }) => (
-      <h1 className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30px] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight container-primary">
+      <h1 className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30px] md:text-[34px] lg:text-[38px] leading-[28px] text-black sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight container-primary">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30px] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight container-primary mb-4">
+      <h2 className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30px] md:text-[34px] text-black lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight container-primary mb-4">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="container-primary text-[20px] lg:text-[24px] font-[350] leading-[24px] lg:leading-[32px] mb-4 container-primary p-0">
+      <h3 className="container-primary text-[20px] lg:text-[24px] font-[350] leading-[24px] lg:leading-[32px] text-black mb-4 container-primary p-0">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className=" container-primary font-gte text-[20px] lg:text-[24px] font-[350] leading-[28px] lg:leading-[32px] m-0">
+      <h4 className=" container-primary font-gte text-[20px] lg:text-[24px] font-[350] leading-[28px] lg:leading-[32px] text-black m-0">
         {children}
       </h4>
     ),
@@ -62,13 +61,19 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
         </Link>
       );
     },
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+    strong: ({ children }) => (
+      <strong className="font-bold bg-clip-text text-inherit">
+        {children}
+      </strong>
+    ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
       <code className="bg-gray-100 px-1 rounded">{children}</code>
     ),
     coloredText: ({ children }) => (
-      <span className="text-[#B65033]">{children}</span>
+      <span className="bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text box-decoration-clone">
+        {children}
+      </span>
     ),
   },
   types: {
@@ -86,9 +91,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
               height={600}
               className="rounded-lg"
             />
-            {value.caption && (
-              <p className="text-sm text-gray-500 mt-2">{value.caption}</p>
-            )}
+            {value.caption && <p className="text-sm mt-2">{value.caption}</p>}
           </div>
         </div>
       );
@@ -111,12 +114,12 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
       </div>
     ),
     descriptionGrid: ({ value }) => (
-      <div className="my-10 sm:my-14 md:my-16 lg:my-24 md:px-8 container-primary">
+      <div className="my-10 md:px-8 container-primary">
         {value?.descriptions?.length === 1 && (
           <div className="w-full flex flex-col justify-center items-center">
             {value?.descriptions?.map((item: string, index: number) => (
               <p
-                className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30x] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight text-center"
+                className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30x] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight text-center px-5 lg:px-0"
                 key={index}
               >
                 <ColoredText text={item} />
@@ -129,7 +132,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {value?.descriptions?.map((item: string, index: number) => (
               <p
-                className="font-ogg max-w-[572px] w-full font-normal text-[24px] sm:text-[30x] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight"
+                className="font-ogg w-full font-normal text-[24px] sm:text-[30x] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight px-5 lg:px-0 text-center lg:text-start"
                 key={index}
               >
                 <ColoredText text={item} />
@@ -155,6 +158,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
         }}
       />
     ),
+    coloredText: ({ value }) => <ColoredText text={value?.text} />,
     contentSection: ({ value }) => (
       <ContentSection
         data={{

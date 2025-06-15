@@ -102,7 +102,11 @@ const SpecialEdition = ({
               {item.slug && (
                 <Link
                   className={`${styles.button}`}
-                  href={`/hotels/${item?.slug}`}
+                  href={`/special-editions/${
+                    (index === 0 && "?rankingCategory=luxury") ||
+                    (index === 1 && "?rankingCategory=editors-choice") ||
+                    (index === 2 && "?rankingCategory=new")
+                  }`}
                 >
                   <button
                     className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}

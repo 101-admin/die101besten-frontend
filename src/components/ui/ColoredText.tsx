@@ -43,9 +43,8 @@ export const ColoredText: React.FC<ColoredTextProps> = ({
           return (
             <span
               key={index}
-              style={{ color }}
               className={cn(
-                "bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text",
+                "bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text box-decoration-clone",
                 className
               )}
             >

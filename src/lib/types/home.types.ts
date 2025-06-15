@@ -17,6 +17,7 @@ import type {
   DieInstagram,
   DasBush,
   Location,
+  ImageSection,
 } from "./components.types";
 
 // Union type for all possible homepage components
@@ -38,7 +39,8 @@ export type HomeComponent =
   | Hotelmomente
   | DieInstagram
   | DasBush
-  | RankingMitRelevanz;
+  | RankingMitRelevanz
+  | ImageSection;
 
 export interface HomePage extends BaseDocument {
   _type: "home";

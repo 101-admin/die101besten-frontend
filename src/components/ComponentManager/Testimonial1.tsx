@@ -8,9 +8,12 @@ import TestimonialSec from "@/shared/TestimonialSec";
 
 import type { AboutTestimonials } from "@/lib";
 
-const Testimonial1 = ({ slider }: AboutTestimonials) => {
+const Testimonial1 = ({ slider, id }: AboutTestimonials) => {
   return (
-    <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center py-10 lg:py-24 select-none">
+    <section
+      id={id}
+      className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center py-10 lg:py-24 select-none"
+    >
       <div className=" w-full flex flex-col justify-center items-center px-5 lg:px-16">
         <Carousel
           opts={{

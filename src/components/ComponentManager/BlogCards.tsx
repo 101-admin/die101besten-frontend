@@ -17,63 +17,72 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
             const { category, readMore, mainImage, title, description, slug } =
               post;
             return (
-              <div
-                key={index}
-                className="flex flex-col relative pb-24 cursor-pointer"
-              >
-                {/* Image  */}
-                <div className="relative w-full mb-4 sm:mb-6 rounded-lg overflow-hidden">
-                  <img
-                    src={`${mainImage?.url}`}
-                    alt={`${mainImage?.alt}`}
-                    className="object-cover w-full  max-w-[632px] h-[552px]"
-                  />
-                  {/* <Image
-                    width={632}
-                    height={552}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  /> */}
-                </div>
+              <Link href={`/blogs/${slug}`}>
+                <div
+                  key={index}
+                  className="flex flex-col relative pb-24 cursor-pointer"
+                >
+                  {/* Image  */}
+                  <div className="relative w-full mb-4 sm:mb-6  overflow-hidden">
+                    {mainImage && (
+                      <img
+                        src={`${mainImage?.url}`}
+                        alt={`${mainImage?.alt}`}
+                        className="object-cover w-full  max-w-[632px] h-[552px]"
+                      />
+                    )}
+                  </div>
 
-                {/* text */}
-                <div className="max-w-[632px] space-y-4 sm:space-y-6">
-                  <div className="mb-2 sm:mb-4">
-                    <div className="inline-block border border-black rounded-sm px-2 py-1">
-                      <h2 className="text-[12px] font-bold leading-[12px] tracking-[0] text-center uppercase font-montserrat text-black">
-                        {category}
-                      </h2>
+                  {/* text */}
+                  <div className="max-w-[632px] space-y-4 sm:space-y-6">
+                    <div className="mb-2 sm:mb-4">
+                      <div className="inline-block border border-black rounded-sm px-2 py-1">
+                        {category && (
+                          <h2 className="text-[12px] font-bold leading-[12px] tracking-[0] text-center uppercase font-montserrat text-black">
+                            {category[0]?.title}
+                          </h2>
+                        )}
+                      </div>
+                    </div>
+                    {/* Content */}
+                    <div className="flex flex-col flex-grow space-y-2">
+                      {title && (
+                        <h3 className="font-ogg font-normal text-[32px] sm:text-2xl leading-[32px] sm:leading-[40px] tracking-[0]">
+                          {title}
+                        </h3>
+                      )}
+
+                      {description && (
+                        <p className="font-gte text-[24px] sm:text-xl font-[350] leading-[32px] sm:leading-8 tracking-[0]">
+                          {description}
+                        </p>
+                      )}
+
+                      <div className="mt-4 sm:mt-8 absolute bottom-2">
+                        {readMore && (
+                          <button className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
+                            {readMore}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  {/* Content */}
-                  <div className="flex flex-col flex-grow space-y-2">
-                    <h3 className="font-ogg font-normal text-[32px] sm:text-2xl leading-[32px] sm:leading-[40px] tracking-[0]">
-                      {title}
-                    </h3>
-
-                    <p className="font-gte text-[24px] sm:text-xl font-[350] leading-[32px] sm:leading-8 tracking-[0]">
-                      {description}
-                    </p>
-
-                    <div className="mt-4 sm:mt-8 absolute bottom-2">
-                      <Link href={`/blogs/${slug}`}>
-                        <button className="w-full sm:w-[300px] h-[56px] sm:h-[64px] px-6 py-3 border-2 border-black text-[16px] font-bold leading-[24px] tracking-[0] uppercase font-montserrat hover:bg-black hover:text-white transition-colors duration-300">
-                          {readMore}
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
         <div className="w-full flex justify-start items-baseline md:justify-center ms:items-center mt-10">
-          <button
-            onClick={() => setNumOfBlogs(numOfBlogs + 4)}
-            className="w-[300px] h-[56px] sm:h-[64px] px-6 py-3  text-white bg-black text-[16px] font-bold leading-[24px] uppercase font-montserrat"
-          >
-            mehr anzeigen
-          </button>
+          {blogData?.length != 0 && (
+            <button
+              onClick={() => setNumOfBlogs(numOfBlogs + 4)}
+              className={`btn-primary w-[300px] btn-primary-hover-de justify-center items-center ${
+                numOfBlogs < blogData?.length ? "flex" : "hidden"
+              }`}
+            >
+              mehr anzeigen
+            </button>
+          )}
         </div>
       </div>
     </section>
@@ -81,3 +90,4 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
 };
 
 export default BlogCards;
+//

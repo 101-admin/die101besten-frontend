@@ -7,12 +7,12 @@ import { HotelsApi } from "@/lib/services";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const hotels = await HotelsApi.getAllHotels({
+  const data = await HotelsApi.getAllHotels({
     edition: DEFAULT_EDITION,
     language: DEFAULT_LANGUAGE,
   });
   return (
-    hotels?.map((hotel: Hotel) => ({
+    data?.hotels?.map((hotel: Hotel) => ({
       slug: (hotel.slug as string) || "#",
     })) || []
   );

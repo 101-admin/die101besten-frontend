@@ -16,11 +16,13 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
                 <Link href={`${partner?.link}`} className="w-full">
-                  <img
-                    className="w-full"
-                    src={`${partner?.image?.url}`}
-                    alt={`${partner?.image?.alt}`}
-                  />
+                  {partner?.image && (
+                    <img
+                      className="w-full"
+                      src={`${partner?.image?.url}`}
+                      alt={`${partner?.image?.alt}`}
+                    />
+                  )}
                 </Link>
               </div>
             </div>
@@ -32,11 +34,13 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
                 <Link href={`${partner?.link}`} className="w-full">
-                  <img
-                    className="w-full"
-                    src={`${partner?.image?.url}`}
-                    alt={`${partner?.image?.alt}`}
-                  />
+                  {partner?.image && (
+                    <img
+                      className="w-full"
+                      src={`${partner?.image?.url}`}
+                      alt={`${partner?.image?.alt}`}
+                    />
+                  )}
                 </Link>
               </div>
             </div>

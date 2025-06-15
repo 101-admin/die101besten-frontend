@@ -5,6 +5,7 @@ import {
   getHotelBySlugQuery,
   getHotelPageQuery,
   getSpecialEditionHotelsQuery,
+  getHotelCategoriesQuery,
 } from "@/lib/queries/hotels.queries";
 
 export const HotelsApi = {
@@ -20,6 +21,7 @@ export const HotelsApi = {
       segment,
       search,
       rankingCategory,
+      variant,
     }) => {
       const params = Object.fromEntries(
         Object.entries({
@@ -30,6 +32,7 @@ export const HotelsApi = {
           segment,
           search,
           rankingCategory,
+          variant,
         }).filter(([_, v]) => v !== undefined && v !== null)
       );
       return await client.fetch(
@@ -41,6 +44,7 @@ export const HotelsApi = {
           segment,
           search,
           rankingCategory,
+          variant,
         }),
         params
       );
@@ -90,4 +94,18 @@ export const HotelsApi = {
   /**
    * Get featured hotels (limited to 6)
    */
+
+  /**
+   * Get all hotel categories
+   */
+  getHotelCategories: unstable_cache(
+    async (language = DEFAULT_LANGUAGE, edition = DEFAULT_EDITION) => {
+      return await client.fetch(getHotelCategoriesQuery, {
+        language,
+        edition,
+      });
+    },
+    ["hotel-categories"],
+    { tags: ["hotels", "categories"], revalidate: 25 }
+  ),
 };

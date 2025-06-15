@@ -11,9 +11,8 @@ import { PortableText } from "@/lib/components/PortableText";
 const BlogArtical = ({ blog }: { blog?: BlogPage }) => {
   return (
     <section className="w-full flex flex-col justify-center items-center ">
-      <Einfach data={blog?.heroSection} description={blog?.description} />
+      <Einfach title={blog?.title} description={blog?.description} />
       {blog?.body && <PortableText value={blog?.body} />}
-      <AnzeigeImage data={blog?.partnerSection} />
       <LatestArticles data={blog?.articleSection} />
       <Form />
       {/* <Footer /> */}

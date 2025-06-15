@@ -1,5 +1,4 @@
-import { BaseDocument, SanityImage } from "./sanity.types";
-import { BlockContent } from "./blocks.types";
+import { BaseDocument, BlockContent, SanityImage } from "./sanity.types";
 
 /**
  * Button interface for consistent button structure
@@ -63,6 +62,7 @@ export interface HeroSlider extends BaseDocument {
 export interface TextQuote extends BaseDocument {
   _type: "textQuote";
   heading: string;
+  id: string;
   language: string;
   author?: string;
   image?: SanityImage;
@@ -76,6 +76,7 @@ export interface ImageQuote extends BaseDocument {
   _type: "imageQuote";
   language: string;
   image?: SanityImage;
+  id: string;
   name: string;
   post: string;
   description?: string;
@@ -87,6 +88,7 @@ export interface ImageQuote extends BaseDocument {
 export interface PartnerLogo extends BaseDocument {
   _type: "partnerLogo";
   title: string;
+  id: string;
   language: string;
   logoSlider?: Array<{
     image?: SanityImage;
@@ -115,8 +117,9 @@ export interface Hotels extends BaseDocument {
 export interface SuccessStory extends BaseDocument {
   _type: "successStory";
   title: string;
+  id: string;
   language: string;
-  story?: BlockContent[];
+  story?: BlockContent;
   image?: SanityImage;
   name?: string;
   role?: string;
@@ -136,6 +139,7 @@ export interface ImageSection extends BaseDocument {
 export interface Newsletter extends BaseDocument {
   _type: "newsletter";
   heading: string;
+  id?: string;
   language: string;
   description?: string;
   placeholder?: string;
@@ -164,6 +168,7 @@ export interface SocialLink {
 export interface HeroAbout extends BaseDocument {
   _type: "heroAbout";
   title: string;
+  id: string;
   subtitle?: string;
   image?: SanityImage;
 }
@@ -183,6 +188,7 @@ export interface Testimonial {
 
 export interface AboutTestimonials extends BaseDocument {
   _type: "testimonials";
+  id: string;
   language: string;
   title?: string;
   slider?: Testimonial[];
@@ -194,6 +200,7 @@ export interface AboutTestimonials extends BaseDocument {
 export interface DieBesten extends BaseDocument {
   _type: "dieBesten";
   title: string;
+  id: string;
   language: string;
   description?: string;
   bestenSection?: Array<{
@@ -209,6 +216,7 @@ export interface DieBesten extends BaseDocument {
 export interface BoardofDas extends BaseDocument {
   _type: "boardofDas";
   title: string;
+  id: string;
   language: string;
   description1?: string;
   description2?: string;
@@ -230,9 +238,10 @@ export interface BoardofDas extends BaseDocument {
 export interface Principles extends BaseDocument {
   _type: "principles";
   title: string;
+  id: string;
   subTitle: string;
   language: string;
-  body?: BlockContent[];
+  body?: BlockContent;
   principlesSection?: Array<{
     title?: string;
     description?: string;
@@ -245,9 +254,10 @@ export interface Principles extends BaseDocument {
 export interface ShapingFuture extends BaseDocument {
   _type: "shapingFuture";
   title: string;
+  id: string;
   language: string;
   image?: SanityImage;
-  body?: BlockContent[];
+  body?: BlockContent;
   ctaButton?: Button;
 }
 
@@ -260,19 +270,22 @@ export interface Events101 extends BaseDocument {
   language: string;
   upcomigTitle?: string;
   upcomingEvents?: Array<{
-    image?: SanityImage;
-    date?: string;
-    name?: string;
+    title?: string;
+    slug?: string;
+    mainImage?: SanityImage;
     description?: string;
-    link?: string;
+    startDate?: string;
+    endDate?: string;
   }>;
   upcomingCtaButton?: Button;
   pastTitle?: string;
   pastEvents?: Array<{
-    image?: SanityImage;
-    name?: string;
+    title?: string;
+    slug?: string;
+    mainImage?: SanityImage;
     description?: string;
-    link?: string;
+    startDate?: string;
+    endDate?: string;
   }>;
   pastCtaButton?: Button;
 }
@@ -359,6 +372,7 @@ export interface Masbstab extends BaseDocument {
 export interface DasBuch extends BaseDocument {
   _type: "dasBuch";
   title: string;
+  id: string;
   language: string;
   imagePosition?: string;
   bgColor?: string;
@@ -373,6 +387,7 @@ export interface DasBuch extends BaseDocument {
 export interface DieInstagram extends BaseDocument {
   _type: "dieInstagram";
   title: string;
+  id: string;
   language: string;
   description?: string;
   instagramSlider?: Array<{
@@ -387,15 +402,18 @@ export interface DieInstagram extends BaseDocument {
 export interface Hotelmomente extends BaseDocument {
   _type: "hotelmomente";
   title: string;
+  id: string;
   language: string;
   description?: string;
   ctaButton?: Button;
-  slider?: Array<{
+  allBlogs?: Array<{
     title?: string;
-    catogory: string;
+    slug?: string;
+    category: Array<{
+      title?: string;
+    }>;
     description?: string;
-    image?: SanityImage;
-    ctaButton?: Button;
+    mainImage?: SanityImage;
   }>;
 }
 
@@ -409,8 +427,8 @@ export interface SpecialEdition extends BaseDocument {
   description?: string;
   specialEditionHotels?: Array<{
     name?: string;
-    fullwidthImage?: SanityImage;
-    ctaButton?: Button;
+    image?: SanityImage;
+    slug: string;
   }>;
 }
 
@@ -420,6 +438,7 @@ export interface SpecialEdition extends BaseDocument {
 export interface Utr extends BaseDocument {
   _type: "utr";
   title: string;
+  id: string;
   language: string;
   subTitle?: string;
   description?: BlockContent;
@@ -432,6 +451,7 @@ export interface Utr extends BaseDocument {
 export interface DasBush extends BaseDocument {
   _type: "dasBush";
   title: string;
+  id: string;
   language: string;
   imagePosition?: string;
   description?: string;
@@ -481,7 +501,8 @@ export interface AllHotelsSlider extends BaseDocument {
 export interface HotelCollection extends BaseDocument {
   _type: "hotelCollection";
   title: string;
-  collectionVariant?: "special-edition" | "all-hotels";
+  id: string;
+  variant?: "classic" | "special";
 }
 
 /**
@@ -522,6 +543,10 @@ export interface PartnerComponent extends BaseDocument {
     image?: SanityImage;
     link?: string;
   }>;
+  premiumPartners?: Array<{
+    image?: SanityImage;
+    link?: string;
+  }>;
   otherPartners?: Array<{
     image?: SanityImage;
     link?: string;
@@ -542,6 +567,7 @@ export interface Werde101 extends BaseDocument {
 export interface BlogPageTitle extends BaseDocument {
   _type: "blogPageTitle";
   title: string;
+  id: string;
   language: string;
   description?: string;
 }
@@ -549,15 +575,18 @@ export interface BlogPageTitle extends BaseDocument {
 export interface BlogCollection extends BaseDocument {
   _type: "blogCollection";
   title: string;
+  id: string;
   language: string;
 }
 
 export interface SpecialHotels extends BaseDocument {
   _type: "specialHotels";
   title: string;
+  id: string;
   language: string;
   hotels?: Array<{
     image?: SanityImage;
     name?: string;
+    link?: string;
   }>;
 }

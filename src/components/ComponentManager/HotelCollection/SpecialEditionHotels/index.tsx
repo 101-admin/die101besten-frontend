@@ -4,40 +4,56 @@ import { useRouter, useSearchParams } from "next/navigation";
 import SingleHotel from "./SingleHotel";
 import { Hotel } from "@/lib/types/hotel.types";
 
-const SpecialEditionHotels = ({ hotels }: { hotels: Hotel[] }) => {
+const SpecialEditionHotels = ({
+  totalHotels,
+  hotels,
+}: {
+  totalHotels: number;
+  hotels: Hotel[];
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const currentCategory = searchParams.get("rankingCategory");
   const [idx, setIdx] = useState(() => {
-    const currentCategory = searchParams.get("rankingCategory");
     if (currentCategory === "luxury") return 0;
     if (currentCategory === "editors-choice") return 1;
     if (currentCategory === "new") return 2;
-    return 0;
+    return 1;
   });
 
+  const sortedHotels = hotels
+    ?.filter(
+      (hotel) =>
+        hotel?.ranking?.category === (currentCategory || "editors-choice")
+    )
+    ?.sort((a, b) => a?.name?.localeCompare(b?.name));
+
+  console.log({ currentCategory, sortedHotels }, "@currentCategory");
   const length1 = hotels?.filter(
     (hotel) => hotel?.ranking?.category === "luxury"
-  );
+  )?.length;
   const length2 = hotels?.filter(
     (hotel) => hotel?.ranking?.category === "editors-choice"
-  );
-  const length3 = hotels?.filter((hotel) => hotel?.ranking?.category === "new");
+  )?.length;
+  const length3 = hotels?.filter(
+    (hotel) => hotel?.ranking?.category === "new"
+  )?.length;
 
   const buttons = [
     {
       title: "International Luxury Partner",
       value: "luxury",
-      length: length1?.length,
+      length: length1,
     },
     {
       title: "Editors' Choice",
       value: "editors-choice",
-      length: length2?.length,
+      length: length2,
     },
     {
       title: "Best New Hotel Openings",
-      value: "new-openings",
-      length: length3?.length,
+      value: "new",
+      length: length3,
     },
   ];
 
@@ -60,7 +76,7 @@ const SpecialEditionHotels = ({ hotels }: { hotels: Hotel[] }) => {
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center px-5 lg:px-16 py-14 lg:py-32 gap-16">
       <div className="w-full flex flex-col justify-center items-center">
         <div className="w-full flex flex-col justify-start items-baseline gap-3 lg:flex-row lg:justify-around lg:items-center mb-5 lg:mb-10">
-          {buttons.map((button, index) => {
+          {buttons?.map((button, index) => {
             return (
               <button
                 key={index}
@@ -97,7 +113,7 @@ const SpecialEditionHotels = ({ hotels }: { hotels: Hotel[] }) => {
             idx === 0 || idx === 1 || idx === 2 ? "flex" : "hidden"
           }`}
         >
-          {hotels?.map((hotel, index) => {
+          {sortedHotels?.map((hotel, index) => {
             return <SingleHotel key={index} data={hotel} />;
           })}
         </div>

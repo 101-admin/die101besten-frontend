@@ -24,32 +24,25 @@ export interface BlogPage extends BaseDocument {
     bio?: BlockContent;
   }>;
   mainImage?: SanityImage;
-  category?: string;
-  body?: BlockContent;
-  heroSection?: HeroSection;
-  partnerSection?: PartnerSection;
-  articleSection?: ArticleSection;
-}
-
-export interface HeroSection extends BaseDocument {
-  title?: string;
-}
-
-export interface PartnerSection extends BaseDocument {
-  title?: string;
-  images?: Array<{
-    image?: SanityImage;
+  category?: Array<{
+    title?: string;
   }>;
+  body?: BlockContent;
+  articleSection?: ArticleSection;
 }
 
 export interface ArticleSection extends BaseDocument {
   title?: string;
   articles?: Array<{
-    image?: SanityImage;
+    _id?: string;
+    mainImage?: SanityImage;
     title?: string;
     description?: string;
-    category?: string;
-    ctaButton?: Button;
+    category?: Array<{
+      title?: string;
+    }>;
+    readMore?: string;
+    slug?: string;
   }>;
   button?: Button;
 }

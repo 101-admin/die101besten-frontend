@@ -31,13 +31,15 @@ export default function LuxuryHotelSection({
                 }`}
               >
                 <div className="md:max-w-[636] ">
-                  <Image
-                    src={image?.url || ""}
-                    alt={image?.alt || ""}
-                    className="rounded-lg w-full object-cover h-[520px]"
-                    width={636}
-                    height={520}
-                  />
+                  {image && (
+                    <Image
+                      src={image?.url || ""}
+                      alt={image?.alt || ""}
+                      className="rounded-lg w-full object-cover h-[520px]"
+                      width={636}
+                      height={520}
+                    />
+                  )}
                 </div>
                 <div className="md:max-w-[636px]">
                   {description && <PortableText value={description} />}

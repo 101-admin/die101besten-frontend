@@ -11,9 +11,11 @@ const HotelInfo = ({
   body,
   imagePosition,
   bgColor,
+  id,
 }: DasBuch) => {
   return (
     <section
+      id={id}
       className={` ${
         bgColor == "white" ? "bg-white" : "bg-[#F9F8FA]"
       } w-full  max-w-[1920px] mx-auto flex flex-col justify-center items-center py-10 lg:py-36 select-none`}
@@ -25,24 +27,32 @@ const HotelInfo = ({
           }`}
         >
           <div className="w-[70%] flex justify-center">
-            <img
-              className="sm:max-w-[428px] sm:max-h-[508px]"
-              src={`${image?.url}`}
-              alt={`${image?.alt}`}
-            />
+            {image && (
+              <img
+                className="sm:max-w-[428px] sm:max-h-[508px]"
+                src={`${image?.url}`}
+                alt={`${image?.alt}`}
+              />
+            )}
           </div>
           <div className="w-full flex flex-col justify-start items-baseline">
-            <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5 lg:mb-8">
-              <ColoredText text={title} />
-            </h1>
-            <h4 className="font-gte font-normal text-[16px] sm:text-[20px] mb-5">
-              {body && <PortableText value={body} />}
-            </h4>
-            <Link href={`/${ctaButton?.link}`}>
-              <button className="btn-primary btn-primary-hover-de ">
-                {ctaButton?.text}
-              </button>
-            </Link>
+            {title && (
+              <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5 lg:mb-8">
+                <ColoredText text={title} />
+              </h1>
+            )}
+            {body && (
+              <h4 className="font-gte font-normal text-[16px] sm:text-[20px] mb-5">
+                {body && <PortableText value={body} />}
+              </h4>
+            )}
+            {ctaButton && (
+              <Link href={`${ctaButton?.link}`}>
+                <button className="btn-primary btn-primary-hover-de ">
+                  {ctaButton?.text}
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

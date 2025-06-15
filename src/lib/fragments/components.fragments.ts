@@ -48,6 +48,7 @@ export const heroSliderComponentFragment = `
 export const partnerLogoComponentFragment = `
   _id,
   _type,
+  id,
   title,
   language,
   logoSlider[] {
@@ -60,6 +61,7 @@ export const textQuoteComponentFragment = `
   _id,
   _type,
   heading,
+  id,
   language,
   author,
   image {${globalImageFragment}},
@@ -97,6 +99,7 @@ export const businessLeisureComponentFragment = `
 export const successStoryComponentFragment = `
   _id,
   _type,
+  id,
   title,
   language,
   story,
@@ -144,8 +147,8 @@ export const specialEditionComponentFragment = `
   description,
   specialEditionHotels[]->{
   name,
-  ctaButton {${globalButtonFragment}},
-  fullwidthImage {${globalImageFragment}},
+  "slug": slug.current,
+  image {${globalImageFragment}},
   }
 `;
 
@@ -155,20 +158,23 @@ export const events101ComponentFragment = `
   title,
   language,
   upcomigTitle,
-  upcomingEvents[] {
-    image {${globalImageFragment}},
-    date,
-    name,
+  upcomingEvents[]-> {
+    title,
+    "slug": slug.current,
     description,
-    link
+    startDate,
+    endDate,
+    mainImage {${globalImageFragment}},
   },
   upcomingCtaButton {${globalButtonFragment}},
   pastTitle,
-  pastEvents[] {
-    image {${globalImageFragment}},
-    name,
+  pastEvents[]-> {
+    title,
+    "slug": slug.current,
     description,
-    link
+    startDate,
+    endDate,
+    mainImage {${globalImageFragment}},
   },
   pastCtaButton {${globalButtonFragment}}
 `;
@@ -176,6 +182,7 @@ export const events101ComponentFragment = `
 export const imageQuoteComponentFragment = `
   _id,
   _type,
+  id,
   language,
   image {${globalImageFragment}},
   name,
@@ -211,6 +218,7 @@ export const locationComponentFragment = `
 export const newsletterComponentFragment = `
   _id,
   _type,
+  id,
   heading,
   language,
   description,
@@ -229,23 +237,27 @@ export const newsletterComponentFragment = `
 export const hotelmomenteComponentFragment = `
   _id,
   _type,
+  id,
   title,
   language,
   description,
   ctaButton {${globalButtonFragment}},
-  slider[] {
+  allBlogs[]-> {
     title,
-    catogory,
+    "slug": slug.current,
     description,
-    image {${globalImageFragment}},
-    ctaButton {${globalButtonFragment}}
-  }
+    category[]-> {
+      title
+    },
+    mainImage{${globalImageFragment}},
+      }
 `;
 
 export const dieInstagramComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   description,
   instagramSlider[] {
@@ -258,6 +270,7 @@ export const dasBushComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   imagePosition,
   bgColor,
@@ -270,6 +283,7 @@ export const heroAboutComponentFragment = `
   _id,
   _type,
   title,
+  id,
   subtitle,
   image {${globalImageFragment}}
 `;
@@ -278,6 +292,7 @@ export const utrComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   subTitle,
   description,
@@ -289,6 +304,7 @@ export const aboutTestimonialsComponentFragment = `
   _type,
   language,
   title,
+  id,
   slider[] {
     image {
       ${globalImageFields},
@@ -304,6 +320,7 @@ export const dieBestenComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   description,
   bestenSection[] {
@@ -317,6 +334,7 @@ export const boardofDasComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   description1,
   description2,
@@ -336,6 +354,7 @@ export const principlesComponentFragment = `
   _id,
   _type,
   title,
+  id,
   subTitle,
   language,
   body,
@@ -348,6 +367,7 @@ export const principlesComponentFragment = `
 export const shapingFutureComponentFragment = `
   _id,
   _type,
+  id,
   title,
   language,
   image {${globalImageFragment}},
@@ -384,8 +404,9 @@ export const allHotelsSliderComponentFragment = `
 export const hotelCollectionComponentFragment = `
   _id,
   _type,
+  id,
   title,
-  collectionVariant
+  variant
 `;
 
 // ... Add similar fragments for all homepage components, reusing global fragments as needed.
@@ -434,6 +455,10 @@ export const partnerComponentFragment = `
     image {${globalImageFragment}},
     link
   },
+  premiumPartners[] {
+    image {${globalImageFragment}},
+    link
+  },
   otherPartners[] {
     image {${globalImageFragment}},
     link
@@ -455,6 +480,7 @@ export const werde101ComponentFragment = `
 export const blogPageTitleComponentFragment = `
   _id,
   _type,
+  id,
   title,
   description,
   language
@@ -464,6 +490,7 @@ export const blogCollectionComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language
 `;
 
@@ -471,9 +498,11 @@ export const specialHotelsComponentFragment = `
   _id,
   _type,
   title,
+  id,
   language,
   hotels[]{
     image {${globalImageFragment}},
-    name
+    name,
+    link
   }
 `;

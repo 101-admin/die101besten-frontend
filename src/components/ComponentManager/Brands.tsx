@@ -17,60 +17,67 @@ import type { PartnerLogo } from "@/lib";
 
 import Link from "next/link";
 
-const Brands = ({ logoSlider }: PartnerLogo) => {
+const Brands = ({ logoSlider, id }: PartnerLogo) => {
   return (
-    <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center gap-10 lg:gap-16 py-5 lg:py-10  select-none">
+    <section
+      id={id}
+      className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center gap-10 lg:gap-16 py-5 lg:py-10  select-none"
+    >
       <div className="w-full flex justify-center items-center">
         <div className="container xl:w-[80%] flex h-[87px] justify-between items-center">
-          <Swiper
-            className="w-full h-full"
-            modules={[Autoplay, FreeMode]}
-            loop={true}
-            slidesPerView={2}
-            spaceBetween={20}
-            speed={10000}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            freeMode={{
-              enabled: true,
-              momentum: false,
-            }}
-            // grabCursor={true}
-            breakpoints={{
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 50,
-              },
-            }}
-          >
-            {logoSlider?.map((brand, index) => {
-              const { image, link } = brand;
-              return (
-                <SwiperSlide key={index}>
-                  <div key={index} className="">
-                    <Link href={`/${link}`}>
-                      <img
-                        className="max-w-[141px]"
-                        src={`${image?.url}`}
-                        alt={`${image?.alt}`}
-                      />
-                    </Link>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          {logoSlider && (
+            <Swiper
+              className="w-full h-full"
+              modules={[Autoplay, FreeMode]}
+              loop={true}
+              slidesPerView={2}
+              spaceBetween={20}
+              speed={10000}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              freeMode={{
+                enabled: true,
+                momentum: false,
+              }}
+              // grabCursor={true}
+              breakpoints={{
+                640: {
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 50,
+                },
+              }}
+            >
+              {logoSlider?.map((brand, index) => {
+                const { image, link } = brand;
+                return (
+                  <SwiperSlide key={index}>
+                    <div key={index} className="">
+                      <Link href={`${link}`}>
+                        {image && (
+                          <img
+                            className="max-w-[141px]"
+                            src={`${image?.url}`}
+                            alt={`${image?.alt}`}
+                          />
+                        )}
+                      </Link>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          )}
         </div>
       </div>
 

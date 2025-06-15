@@ -59,7 +59,7 @@ const gtEestiProTextFont = localFont({
       style: "italic",
     },
     {
-      path: "../../public/fonts/GTEestiProText-LightItalic.ttf",
+      path: "../../public/fonts/GTEestiProText-ThinItalic.woff",
       weight: "300",
       style: "italic",
     },

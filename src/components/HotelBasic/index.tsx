@@ -24,7 +24,7 @@ const HotelBasic = ({ hotel }: { hotel: Hotel }) => {
       {/* secondaryHeroSection */}
       <HotelOfTheYear
         name={hotel?.name}
-        city={hotel?.city}
+        city={hotel?.address?.city}
         achievements={hotel?.achievements}
         {...hotel?.secondaryHeroSection}
       />

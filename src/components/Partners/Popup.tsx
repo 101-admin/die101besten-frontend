@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogClose } from "../ui/dialog";
 import { Button } from "../ui/button";
 import {
@@ -38,6 +38,12 @@ const Popup = ({
     consent: false,
   });
   const [error, setError] = useState("");
+  const [pop, setPop] = useState(open);
+
+  // Add this useEffect to sync the internal state with the prop
+  useEffect(() => {
+    setPop(open);
+  }, [pop]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,7 +91,7 @@ const Popup = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-0 rounded-lg">
+      <DialogContent className="max-h-[90vh] overflow-y-auto rounded-lg">
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 flex flex-col gap-3 relative"
@@ -94,6 +100,7 @@ const Popup = ({
           <DialogClose asChild>
             <button
               type="button"
+              onClick={() => onOpenChange(false)}
               className="absolute right-4 top-4 text-black hover:text-gray-600"
             >
               <X size={20} />
@@ -103,7 +110,7 @@ const Popup = ({
             Werde 101 Partner
           </h2>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Company Name</label>
+            <label className="text-xs font-medium">Name Firma</label>
             <input
               name="company"
               value={form.company}
@@ -113,7 +120,7 @@ const Popup = ({
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-xs font-medium">
-              Company headquarters and location
+              Firmenhauptsitz and Standort
             </label>
             <input
               name="location"
@@ -123,6 +130,15 @@ const Popup = ({
             />
           </div>
           <div className="flex flex-col gap-2">
+            <label className="text-xs font-medium">Industrie</label>
+            <input
+              name="location"
+              value={form.industry}
+              onChange={handleChange}
+              className="border border-black h-9 px-2 text-sm"
+            />
+          </div>
+          {/* <div className="flex flex-col gap-2">
             <label className="text-xs font-medium">Industry</label>
             <Select value={form.industry} onValueChange={handleIndustryChange}>
               <SelectTrigger className="h-9 px-2 text-sm border border-black">
@@ -136,9 +152,9 @@ const Popup = ({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Contact Person Name</label>
+            <label className="text-xs font-medium">Name Kontaktperson</label>
             <input
               name="contactName"
               value={form.contactName}
@@ -147,7 +163,9 @@ const Popup = ({
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Contact Person Role</label>
+            <label className="text-xs font-medium">
+              Rolle der Kontaktperson
+            </label>
             <input
               name="contactRole"
               value={form.contactRole}
@@ -166,7 +184,7 @@ const Popup = ({
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Phone</label>
+            <label className="text-xs font-medium">Telefonnummer</label>
             <input
               name="phone"
               value={form.phone}
@@ -175,7 +193,7 @@ const Popup = ({
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Your Message</label>
+            <label className="text-xs font-medium">Ihre Nachricht</label>
             <textarea
               name="message"
               value={form.message}
@@ -184,7 +202,7 @@ const Popup = ({
               maxLength={500}
             />
             <div className="text-right text-xs text-gray-400">
-              max. 500 characters
+              max. 500 Zeichen
             </div>
           </div>
           <div className="flex items-start gap-2 mt-2">
@@ -210,7 +228,7 @@ const Popup = ({
               className="w-1/3 rounded-none"
               onClick={() => onOpenChange(false)}
             >
-              CANCEL
+              Abbrechen
             </Button>
             <Button type="submit" className="w-2/3 rounded-none">
               ABSENDEN

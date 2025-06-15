@@ -47,7 +47,9 @@ export const getAllBlogQuery = `
     bio
   },
   mainImage{${globalImageWithCaptionFragment}},
-  category,
+  category[]-> {
+    title
+  }
 }
 `;
 
@@ -69,23 +71,19 @@ export const getBlogBySlugQuery = `
   mainImage{${globalImageWithCaptionFragment}},
   category,
   body,
-  heroSection{
-  title
-  },
-  partnerSection{
-    title,
-    images[]{
-      image{${globalImageFragment}},
-    }
-  },
   articleSection{
     title,
-    articles[]{
-      image {${globalImageFragment}},
+    articles[]->{
+      _id,
+      mainImage {${globalImageWithCaptionFragment}},
       category,
       title,
       description,
-      ctaButton{${globalButtonFragment}}
+      "slug": slug.current,
+      readMore,
+      category[]->{
+        title
+      },
     },
     button{${globalButtonFragment}}
   }

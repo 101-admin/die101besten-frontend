@@ -38,7 +38,7 @@ const HotelPremium = ({ hotel }: { hotel: Hotel }) => {
 
       {/* hotelDetailsSection */}
       <Premium
-        city={hotel?.city}
+        city={hotel?.address?.city}
         name={hotel?.name}
         achievements={hotel?.achievements}
         {...hotel?.hotelDetailsSection}

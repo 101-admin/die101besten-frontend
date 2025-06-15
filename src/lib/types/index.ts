@@ -9,3 +9,4 @@ export * from "./partners.types";
 export * from "./hotel.types";
 export * from "./components.types";
 export * from "./blog.types";
+export * from "./blocks.types";

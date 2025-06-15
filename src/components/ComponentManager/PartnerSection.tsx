@@ -6,6 +6,7 @@ const PartnerSection = ({
   title,
   otherPartners,
   partners,
+  premiumPartners,
 }: PartnerComponent) => {
   console.log(otherPartners, "@otherPartners");
   return (
@@ -22,11 +23,30 @@ const PartnerSection = ({
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] cursor-pointer hover:scale-[1.10] duration-200">
                 <Link href={`${partner?.link}`} className="w-full">
-                  <img
-                    className="w-full"
-                    src={`${partner?.image?.url}`}
-                    alt={`${partner?.image?.alt}`}
-                  />
+                  {partner?.image && (
+                    <img
+                      className="w-full"
+                      src={`${partner?.image?.url}`}
+                      alt={`${partner?.image?.alt}`}
+                    />
+                  )}
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-full flex flex-wrap justify-center items-center  gap-8 lg:gap-16 mb-8 lg:mb-16">
+          {premiumPartners?.map((partner, index) => (
+            <div key={index} className="flex justify-center items-center">
+              <div className="w-full max-w-[150px] md:max-w-[213px] cursor-pointer hover:scale-[1.10] duration-200">
+                <Link href={`${partner?.link}`} className="w-full">
+                  {partner?.image && (
+                    <img
+                      className="w-full"
+                      src={`${partner?.image?.url}`}
+                      alt={`${partner?.image?.alt}`}
+                    />
+                  )}
                 </Link>
               </div>
             </div>
@@ -38,11 +58,13 @@ const PartnerSection = ({
             <div key={index} className="flex justify-center items-center ">
               <div className="w-full max-w-[145px] cursor-pointer hover:scale-[1.10] duration-200">
                 <Link href={`${partner?.link}`} className="w-full">
-                  <img
-                    className="w-full"
-                    src={`${partner?.image?.url}`}
-                    alt={`${partner?.image?.alt}`}
-                  />
+                  {partner?.image && (
+                    <img
+                      className="w-full"
+                      src={`${partner?.image?.url}`}
+                      alt={`${partner?.image?.alt}`}
+                    />
+                  )}
                 </Link>
               </div>
             </div>

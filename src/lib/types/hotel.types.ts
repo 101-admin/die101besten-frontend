@@ -102,7 +102,6 @@ export interface HotelInfo {
   title?: string;
   image?: SanityImage;
   description?: BlockContent;
-  readMore?: string;
 }
 
 export interface HotelInfoPerson {
@@ -116,7 +115,6 @@ export interface HotelInfoPremium {
   Person?: HotelInfoPerson;
   title?: string;
   description?: BlockContent;
-  readMore?: string;
 }
 
 export interface TestimonialHotel {
@@ -188,25 +186,27 @@ export interface HotelMapSection {
 }
 
 /**
+ * Hotel Address interface
+ */
+export interface HotelAddress {
+  street: string;
+  streetNumber?: string;
+  postalCode: string;
+  city: string;
+  country: string;
+}
+
+/**
  * Main Hotel interface
  */
 export type HotelSegment = "leisure" | "business";
 
-export type HotelCategory =
-  | "luxury-city-palais"
-  | "luxury-culinary-hotels"
-  | "luxury-design-lifestyle-resorts"
-  | "luxury-family-resorts"
-  | "grand-hotels"
-  | "luxury-lake-side-resorts"
-  | "luxury-meeting-event-hotels"
-  | "luxury-spa-health-resorts"
-  | "luxury-hideaways"
-  | "luxury-alpine-resorts"
-  | "grand-resorts"
-  | "luxury-hotels-historical-architecture"
-  | "luxury-city-hotels"
-  | "luxury-golf-resorts";
+export interface HotelCategory {
+  _id: string;
+  label: string;
+  value: string;
+  edition: string[];
+}
 
 export type HotelCity = "berlin" | "munich" | "zurich" | "vienna" | "hamburg";
 
@@ -221,16 +221,21 @@ export interface HotelAchievement {
   name?: string;
 }
 
+export interface HotelVariant {
+  variant: "classic" | "special";
+}
+
 export interface Hotel extends BaseDocument {
   _type: "hotel";
   name: string;
-  additionalName?: string;
   language: string;
   edition: "deutschland" | "dach" | "schweiz";
+  variant: HotelVariant;
+  isPackageBooked?: boolean;
   hotelType?: HotelType;
   segment?: HotelSegment;
   category?: HotelCategory;
-  city?: HotelCity;
+  address?: HotelAddress;
   tags?: string[];
   ranking?: HotelRanking;
   slug?: string;

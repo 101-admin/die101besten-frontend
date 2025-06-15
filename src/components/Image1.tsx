@@ -19,7 +19,7 @@ const Image1 = ({ title, images }: ImageSection) => {
           )}
           {
             randomImage && (
-              <Link href={`${randomImage?.link}`}>
+              <Link target="_blank" href={`${randomImage?.link}`}>
                 <img
                   src={`${randomImage?.image?.url}`}
                   alt={`${randomImage?.image?.alt}`}

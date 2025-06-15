@@ -9,21 +9,21 @@ export default function ContentSection({
   data?: ContentSectionBlock;
 }) {
   return (
-    <div className="font-gte py-10 lg:py-14 max-w-[1440px] mx-auto">
+    <div className="font-gte py-10 lg:py-14 max-w-[1440px] mx-auto px-5 lg:px-16">
       <div className="w-full">
         {data?.content?.map((section, index) => (
           <div key={index} className="w-full flex flex-col">
-            <div className="w-full flex flex-col lg:flex-row justify-start items-baseline lg:justify-center lg:items-center gap-6 lg:gap-12">
+            <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-12">
               {/* Image */}
 
               {section.image?.url && (
-                <div className="w-full max-w-[632px] flex ">
+                <div className="w-full lg:max-w-[632px] flex ">
                   <Image
                     src={section.image?.url || ""}
                     alt={section.image?.alt || ""}
                     width={632}
                     height={576}
-                    className="w-[632px] h-[596px] object-cover"
+                    className="lg:w-[632px] w-full h-[596px] object-cover"
                   />
                 </div>
               )}

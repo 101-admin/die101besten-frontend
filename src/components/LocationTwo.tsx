@@ -1,7 +1,7 @@
 import React from "react";
 // import { FaPlus } from "react-icons/fa6";
 // import { FaMinus } from "react-icons/fa6";
-import type { HotelMapSection , HotelAddress , CTAButton } from "@/lib";
+import type { HotelMapSection, HotelAddress, CTAButton } from "@/lib";
 import Link from "next/link";
 
 const Location = ({
@@ -24,10 +24,10 @@ const Location = ({
             {mapSection.headline}
           </h1>
         )}
-        {address  && (
+        {address && (
           <h2 className="mt-4 font-ogg font-normal text-[15px] sm:text-[18px] md:text-[21px] lg:text-[32px] leading-[40px]">
-            {name}, {address?.city} –{" "}
-            {address?.country}
+            {name}, {address?.city?.label} –{" "}
+            {address?.country?.name}
           </h2>
         )}
       </div>
@@ -46,7 +46,7 @@ const Location = ({
                 {address?.street}{" "}
                 {address?.streetNumber},{" "}
                 {address?.postalCode}{" "}
-                {address?.city}
+                {address?.city?.label}
               </p>
               <p className="text-[16px] font-gte font-[350]">
                 {mapSection.contactInfo?.phone}
@@ -57,17 +57,15 @@ const Location = ({
               <p className="text-[16px] font-gte font-[350]">
                 {mapSection.contactInfo?.website}
               </p>
-              {
-                ctaButton && (
-                  <Link
-                href={`${ctaButton?.url}`}
-                target="_blank"
-                className="max-w-[280px] btn-primary-hover-de w-full h-16 flex justify-center items-center bg-black cursor-pointer font-montserrat font-bold text-[16px] text-white mt-2 uppercase"
-              >
-                {ctaButton?.text}
-              </Link>
-                )
-              }
+              {ctaButton && (
+                <Link
+                  href={`${ctaButton?.url}`}
+                  target="_blank"
+                  className="max-w-[280px] btn-primary-hover-de w-full h-16 flex justify-center items-center bg-black cursor-pointer font-montserrat font-bold text-[16px] text-white mt-2 uppercase"
+                >
+                  {ctaButton?.text}
+                </Link>
+              )}
             </div>
           )}
         </div>

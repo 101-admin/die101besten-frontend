@@ -427,9 +427,9 @@ export interface SpecialEdition extends BaseDocument {
   language: string;
   description?: string;
   specialEditionHotels?: Array<{
-    name?: string;
+    title?: string;
     image?: SanityImage;
-    slug: string;
+    link?: string;
   }>;
 }
 

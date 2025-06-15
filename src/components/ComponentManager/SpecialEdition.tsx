@@ -18,12 +18,13 @@ const SpecialEdition = ({
   description,
   specialEditionHotels,
 }: SpecialEdition) => {
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const box = e.currentTarget;
     box.style.zIndex = "2"; // Bring to front
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const box = e.currentTarget;
     box.style.zIndex = "1";
     setTimeout(() => {
@@ -57,12 +58,12 @@ const SpecialEdition = ({
         >
           <CarouselContent className="flex items-end">
             {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-              <Link key={index} href={`/hotels/${item?.slug}`}>
+              <Link key={index} href={`${item?.link}`}>
                 <CarouselItem className="flex min-w-[250px] max-[600px]:max-w-[67vw] w-full max-w-[400px] md:max-w-[368px]">
                   <div className="w-full flex flex-col justify-center items-center gap-4">
-                    {item.name && (
+                    {item.title && (
                       <h4 className="font-ogg font-normal text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-[24px] sm:leading-[28px] md:leading-[38px] lg:leading-[40px] text-center mb-5">
-                        {item.name}
+                        {item.title}
                       </h4>
                     )}
                     {item?.image && (
@@ -83,40 +84,34 @@ const SpecialEdition = ({
       {/* Desktop Section */}
       <div className="w-full hidden lg:flex justify-between items-end">
         {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-          <div
+          <Link
             key={index}
+            href={`${item?.link}`}
             className={styles.box}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {item.name && (
+            {item.title && (
               <h4
                 className={`font-ogg font-normal text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-[24px] sm:leading-[28px] md:leading-[38px] lg:leading-[40px] text-center mb-5 ${styles.title}`}
               >
-                {item.name}
+                {item.title}
               </h4>
             )}
             <div className={styles.innerBox}>
               {item?.image && <img src={`${item?.image?.url}`} alt="" />}
               <img className={styles.overlay} />
-              {item.slug && (
-                <Link
+                <div
                   className={`${styles.button}`}
-                  href={`/special-editions/${
-                    (index === 0 && "?rankingCategory=luxury") ||
-                    (index === 1 && "?rankingCategory=editors-choice") ||
-                    (index === 2 && "?rankingCategory=new")
-                  }`}
                 >
                   <button
                     className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
                   >
                     Special Editions Ansehen
                   </button>
-                </Link>
-              )}
+                </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

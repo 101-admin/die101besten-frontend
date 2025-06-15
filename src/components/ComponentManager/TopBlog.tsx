@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import type { BlogPage } from "@/lib";
 import Link from "next/link";
+import { ColoredText } from "../ui/ColoredText";
 
 const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
   const blog = blogData?.[0];
@@ -40,7 +41,7 @@ const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
                     <div className="space-y-6">
                       {blog?.title && (
                         <p className="font-ogg font-normal text-2xl leading-[40px] tracking-[0]">
-                          {blog.title}
+                          <ColoredText text={blog.title} />
                         </p>
                       )}
 

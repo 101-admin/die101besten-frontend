@@ -6,6 +6,7 @@ import {
   getHotelPageQuery,
   getSpecialEditionHotelsQuery,
   getHotelCategoriesQuery,
+  getCitiesQuery,
 } from "@/lib/queries/hotels.queries";
 
 export const HotelsApi = {
@@ -107,5 +108,18 @@ export const HotelsApi = {
     },
     ["hotel-categories"],
     { tags: ["hotels", "categories"], revalidate: 25 }
+  ),
+
+  /**
+   * Get all cities
+   */
+  getCities: unstable_cache(
+    async (edition = DEFAULT_EDITION) => {
+      return await client.fetch(getCitiesQuery, {
+        edition,
+      });
+    },
+    ["cities"],
+    { tags: ["hotels", "cities"], revalidate: 25 }
   ),
 };

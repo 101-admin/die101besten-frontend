@@ -47,7 +47,7 @@ const HotelInfo = ({
               </h4>
             )}
             {ctaButton && (
-              <Link href={`${ctaButton?.link}`}>
+              <Link target="_blank" href={`${ctaButton?.link}`}>
                 <button className="btn-primary btn-primary-hover-de ">
                   {ctaButton?.text}
                 </button>

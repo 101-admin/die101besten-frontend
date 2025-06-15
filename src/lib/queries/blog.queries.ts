@@ -88,6 +88,15 @@ export const getBlogBySlugQuery = `
       },
     },
     button{${globalButtonFragment}}
+  },
+  adds{
+    add->{
+    title,
+    images[] {
+      image {${globalImageFragment}},
+      link
+    }
+    }
   }
 }
 `;

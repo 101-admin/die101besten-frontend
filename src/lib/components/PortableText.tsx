@@ -104,7 +104,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
       </pre>
     ),
     fullWidthImage: ({ value }) => (
-      <div className="py-10 lg:py-14">
+      <div className="py-10 lg:py-14 max-w-[1920px] mx-auto">
         <GlobalImage
           src={urlFor(value?.image).url()}
           alt={value?.image?.alt}
@@ -114,7 +114,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
       </div>
     ),
     descriptionGrid: ({ value }) => (
-      <div className="my-10 md:px-8 container-primary">
+      <div className=" md:px-8 container-primary">
         {value?.descriptions?.length === 1 && (
           <div className="w-full flex flex-col justify-center items-center">
             {value?.descriptions?.map((item: string, index: number) => (
@@ -129,7 +129,7 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
         )}
 
         {value?.descriptions?.length > 1 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 my-10 lg:my-14">
             {value?.descriptions?.map((item: string, index: number) => (
               <p
                 className="font-ogg w-full font-normal text-[24px] sm:text-[30x] md:text-[34px] lg:text-[38px] leading-[28px] sm:leading-[34px] md:leading-[38px] lg:leading-[42px] tracking-tight px-5 lg:px-0 text-center lg:text-start"

@@ -28,13 +28,19 @@ const HotelCollection = async ({
 
   const categories = await HotelsApi.getHotelCategories();
 
+  const cities = await HotelsApi.getCities();
+
   return (
     <div
       id={`${id}`}
       className="w-full max-w-[1440px] mx-auto px-5 py-5 lg:py-10 lg:px-16"
     >
       {variant === "classic" && (
-        <Dropdown totalHotels={data.hotels?.length} categories={categories} />
+        <Dropdown
+          totalHotels={data.hotels?.length}
+          categories={categories}
+          cities={cities}
+        />
       )}
       {variant === "special" && <SecondaryDropdown />}
 

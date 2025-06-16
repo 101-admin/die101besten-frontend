@@ -21,84 +21,64 @@ const HotelGrand = ({ hotel }: { hotel: Hotel }) => {
   return (
     <section className=" w-full h-full flex flex-col justify-center items-center relative">
       {/* primaryHeroSection */}
-      {
-        hotel?.primaryHeroSection && (
-          <Gallery {...hotel?.primaryHeroSection} name={hotel?.name} ctaButton={hotel?.ctaButton} city={hotel?.address?.city}/>
-        )
-      }
+      {hotel?.primaryHeroSection && (
+        <Gallery
+          {...hotel?.primaryHeroSection}
+          name={hotel?.name}
+          ctaButton={hotel?.ctaButton}
+          city={hotel?.address?.city?.label}
+        />
+      )}
 
       {/* hotelDetailsSection */}
-      {
-        hotel?.hotelDetailsSection && (
-          <Premium
-            city={hotel?.address?.city}
-            country={hotel?.address?.country}
-            name={hotel?.name}
-            achievements={hotel?.achievements}
-            {...hotel?.hotelDetailsSection}
-            ctaButton={hotel?.ctaButton}
-          />
-        )
-      }
+      {hotel?.hotelDetailsSection && (
+        <Premium
+          city={hotel?.address?.city?.label}
+          country={hotel?.address?.country?.name}
+          name={hotel?.name}
+          achievements={hotel?.achievements}
+          {...hotel?.hotelDetailsSection}
+          ctaButton={hotel?.ctaButton}
+        />
+      )}
 
       {hotel?.body && <PortableText value={hotel?.body} />}
 
       {/* hotelEvents */}
-      {
-        hotel?.hotelEvents && (
-          <ExclusiveEvents {...hotel?.hotelEvents} />
-        )
-      }
+      {hotel?.hotelEvents && <ExclusiveEvents {...hotel?.hotelEvents} />}
 
       {/* HotelInfo */}
-      {
-        hotel?.hotelInfo && (
-          <RoomsSection
-            data={hotel?.hotelInfo}
-          />
-        )
-      }
+      {hotel?.hotelInfo && <RoomsSection data={hotel?.hotelInfo} />}
 
       {/* testimonials */}
-      {
-        hotel?.testimonials && (
-          <Testimonial2 testimonial={hotel?.testimonials?.testimonial} />
-        )
-      }
+      {hotel?.testimonials && (
+        <Testimonial2 testimonial={hotel?.testimonials?.testimonial} />
+      )}
 
       {/* interviewSection */}
-      {
-        hotel?.interviewSection && (
-          <HostSection {...hotel?.interviewSection} />
-        )
-      }
+      {hotel?.interviewSection && <HostSection {...hotel?.interviewSection} />}
 
       {/* hotelHighlights */}
-      {
-        hotel?.hotelHighlights && (
-          <HotelHighlights
-            hotelHighlights={hotel?.hotelHighlights ?? {}}
-          />
-        )
-      }
+      {hotel?.hotelHighlights && (
+        <HotelHighlights hotelHighlights={hotel?.hotelHighlights ?? {}} />
+      )}
 
       {hotel?.fullwidthImage && (
         <HotelDescription fullwidthImage={hotel.fullwidthImage} />
       )}
 
       {/* mapSection */}
-      {
-        hotel?.mapSection && (
-          <LocationTwo name={hotel?.name} ctaButton={hotel?.ctaButton} address={hotel?.address} mapSection={hotel.mapSection ?? {}} />
-        )
-      }
+      {hotel?.mapSection && (
+        <LocationTwo
+          name={hotel?.name}
+          ctaButton={hotel?.ctaButton}
+          address={hotel?.address}
+          mapSection={hotel.mapSection ?? {}}
+        />
+      )}
 
       {/* adds */}
-      {
-        hotel?.adds && (
-          <Adds data={hotel?.adds} />
-        )
-      }
+      {hotel?.adds && <Adds data={hotel?.adds} />}
 
       <Form />
     </section>

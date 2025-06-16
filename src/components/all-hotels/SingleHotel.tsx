@@ -41,7 +41,7 @@ const SingleHotel = ({ data }: { data: Hotel }) => {
             )}
             {data?.address?.city && (
               <h4 className="text-[20px] leading-[25px] md:text-[24px] md:leading-[32px] font-gte font-[350]">
-                {data?.address?.city}
+                {data?.address?.city?.label}
               </h4>
             )}
             {data?.achievements && (
@@ -53,9 +53,9 @@ const SingleHotel = ({ data }: { data: Hotel }) => {
                       className="py-1 px-2 border-2 border-black rounded-xl"
                     >
                       {item?.name && (
-                         <p className="font-bold font-montserrat text-[12px] uppercase">
-                         {item?.name}
-                       </p>
+                        <p className="font-bold font-montserrat text-[12px] uppercase">
+                          {item?.name}
+                        </p>
                       )}
                     </div>
                   );

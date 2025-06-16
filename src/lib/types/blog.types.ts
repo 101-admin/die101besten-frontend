@@ -30,6 +30,17 @@ export interface BlogPage extends BaseDocument {
   }>;
   body?: BlockContent;
   articleSection?: ArticleSection;
+  adds?: BlogAdds;
+}
+
+export interface BlogAdds extends BaseDocument {
+  add?: {
+    title?: string;
+    images?: Array<{
+      image?: SanityImage;
+      link?: string;
+    }>;
+  };
 }
 
 export interface ArticleSection extends BaseDocument {

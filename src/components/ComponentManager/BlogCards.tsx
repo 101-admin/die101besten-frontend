@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import type { BlogPage } from "@/lib";
 import Link from "next/link";
+import { ColoredText } from "../ui/ColoredText";
 
 const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
   // console.log(blogData, "@blogData");
@@ -48,7 +49,7 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
                     <div className="flex flex-col flex-grow space-y-2">
                       {title && (
                         <h3 className="font-ogg font-normal text-[32px] sm:text-2xl leading-[32px] sm:leading-[40px] tracking-[0]">
-                          {title}
+                          <ColoredText text={title} />
                         </h3>
                       )}
 

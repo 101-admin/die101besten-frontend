@@ -78,7 +78,7 @@ export function getAllHotelsQuery(filters: {
     filterString += ` && category->value.current == "${filters.category}"`;
   }
   if (!!filters?.city) {
-    filterString += ` && address->city == "${filters.city}"`;
+    filterString += ` && address->city->value.current == "${filters.city}"`;
   }
   if (!!filters?.segment) {
     filterString += ` && segment == "${filters.segment}"`;
@@ -138,8 +138,16 @@ export function getAllHotelsQuery(filters: {
           street,
           streetNumber,
           postalCode,
-          city,
-          country
+          "city": city->{
+            _id,
+            label,
+            "value": value.current,
+            edition
+          },
+          "country": country->{
+            _id,
+            name
+          }
         }
       },
       "totalCount": count(*[${totalCountFilter}])
@@ -180,8 +188,16 @@ export const getHotelBySlugQuery = `
       street,
       streetNumber,
       postalCode,
-      city,
-      country
+      "city": city->{
+        _id,
+        label,
+        "value": value.current,
+        edition
+      },
+      "country": country->{
+        _id,
+        name
+      }
     },
     "slug": slug.current,
     tags,
@@ -300,10 +316,12 @@ export const getHotelBySlugQuery = `
       },
     },
     "adds": adds {
+      add->{
       title,
       images[] {
         image {${globalImageFragment}},
         link
+      }
       }
     }
   }
@@ -368,3 +386,10 @@ export const getHotelCategoriesQuery = `
     edition
   }
 `;
+
+export const getCitiesQuery = `*[_type == "city" && $edition in edition] {
+  _id,
+  label,
+  "value": value.current,
+  edition
+} | order(label asc)`;

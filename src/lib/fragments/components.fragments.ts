@@ -146,10 +146,10 @@ export const specialEditionComponentFragment = `
   title,
   language,
   description,
-  specialEditionHotels[]->{
-  name,
-  "slug": slug.current,
-  image {${globalImageFragment}},
+  specialEditionHotels[] {
+    title,
+    image {${globalImageFragment}},
+    link
   }
 `;
 

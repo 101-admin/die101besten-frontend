@@ -81,7 +81,7 @@ const Articles = ({
                       </div>
                       {title && (
                         <h1 className="font-ogg line-clamp-2 font-normal text-[20px] sm:text-[25px] md:text-[33px] lg:text-[38px] leading-[28px] sm:leading-[33px] md:leading-[38px] lg:leading-[42px] my-3">
-                          {title}
+                          <ColoredText text={title} />
                         </h1>
                       )}
                     </Link>

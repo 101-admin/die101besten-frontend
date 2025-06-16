@@ -49,11 +49,13 @@ export default function Gallery({name, city, image, ctaButton }: {name?: string,
           )}
         </div>
         {ctaButton && (
-          <Link target="_blank" href={`${ctaButton?.url}`}>
+<div className="w-full flex justify-center items-center h-20">
+<Link target="_blank" href={`${ctaButton?.url}`}>
             <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
             {ctaButton?.text}
           </button>
           </Link>
+</div>
         )}
       </div>
     </section>

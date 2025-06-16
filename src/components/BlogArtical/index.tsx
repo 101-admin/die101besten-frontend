@@ -1,21 +1,25 @@
 import React from "react";
-import AnzeigeImage from "./AnzeigeImage";
 import Form from "../Form";
-// import HotelImage from "./HotelImage";
 import LatestArticles from "../LatestArticles";
-// import Footer from "../Footer";
+import Adds from "../Adds";
 import Einfach from "./Einfach";
-// import ImageSection from "./ImageSection";
 import type { BlogPage } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 const BlogArtical = ({ blog }: { blog?: BlogPage }) => {
+
   return (
     <section className="w-full flex flex-col justify-center items-center ">
-      <Einfach title={blog?.title} description={blog?.description} />
+      {
+        blog?.title && <Einfach title={blog?.title} description={blog?.description} />
+      }
       {blog?.body && <PortableText value={blog?.body} />}
-      <LatestArticles data={blog?.articleSection} />
+      {
+        blog?.articleSection && <LatestArticles data={blog?.articleSection} />
+      }
+      {
+        blog?.adds && <Adds data={blog?.adds} />
+      }
       <Form />
-      {/* <Footer /> */}
     </section>
   );
 };

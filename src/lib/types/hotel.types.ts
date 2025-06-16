@@ -165,7 +165,6 @@ export interface HotelMapInfo {
   postalCode?: string;
 }
 
-
 export interface HotelContactInfo {
   streetAddress?: string;
   phone?: string;
@@ -186,8 +185,8 @@ export interface HotelAddress {
   street: string;
   streetNumber?: string;
   postalCode: string;
-  city: string;
-  country: string;
+  city: HotelCity;
+  country: HotelCountry;
 }
 
 /**
@@ -202,7 +201,16 @@ export interface HotelCategory {
   edition: string[];
 }
 
-export type HotelCity = "berlin" | "munich" | "zurich" | "vienna" | "hamburg";
+export interface HotelCity {
+  _id: string;
+  label: string;
+  value: string;
+  edition: string[];
+}
+
+export interface HotelCountry {
+  name: string;
+}
 
 export type HotelType = "classic" | "exclusive" | "grand" | "premium";
 
@@ -253,11 +261,13 @@ export interface Hotel extends BaseDocument {
 }
 
 export interface Adds {
-  title?: string;
-  images?: Array<{
-    image?: SanityImage;
-    link?: string;
-  }>;
+  add?: {
+    title?: string;
+    images?: Array<{
+      image?: SanityImage;
+      link?: string;
+    }>;
+  };
 }
 
 /**

@@ -64,7 +64,7 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
                           )}
                           {title && (
                             <h3 className="mt-7 text-2xl font-bold leading-8 tracking-normal font-gte">
-                              {title}
+                              <ColoredText text={title} />
                             </h3>
                           )}
                           {description && (

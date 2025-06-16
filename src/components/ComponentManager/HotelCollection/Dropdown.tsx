@@ -12,14 +12,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { HotelCategory } from "@/lib";
+import { HotelCategory, HotelCity } from "@/lib";
 
 const Dropdown = ({
   totalHotels,
   categories,
+  cities,
 }: {
   totalHotels: number;
   categories: HotelCategory[];
+  cities: HotelCity[];
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,7 +32,7 @@ const Dropdown = ({
   const updateSearchParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (
-      value === "alleKategorien" ||
+      value === "AlleKategorien" ||
       value === "alleStädte" ||
       value === "bittewählen" ||
       !value
@@ -66,7 +68,13 @@ const Dropdown = ({
           Die 101 besten Hotels{" "}
           <span className="text-[#B65033]">Deutschland</span>
         </h1>
-        <div className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 ${DEFAULT_EDITION === "deutschland" ? "xl:grid-cols-3" : "xl:grid-cols-4"}`}>
+        <div
+          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 ${
+            DEFAULT_EDITION === "deutschland"
+              ? "xl:grid-cols-3"
+              : "xl:grid-cols-4"
+          }`}
+        >
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Ranking Edition
@@ -90,7 +98,11 @@ const Dropdown = ({
               </SelectContent>
             </Select>
           </div>
-          <div className={`w-full  flex-col justify-start items-baseline gap-1 ${DEFAULT_EDITION === "deutschland" ? "hidden" : "flex"}`}>
+          <div
+            className={`w-full  flex-col justify-start items-baseline gap-1 ${
+              DEFAULT_EDITION === "deutschland" ? "hidden" : "flex"
+            }`}
+          >
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Hotel Segment
             </h3>
@@ -119,7 +131,7 @@ const Dropdown = ({
               onValueChange={(value) => updateSearchParams("category", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="AlleKategorien" />
+                <SelectValue placeholder="Alle Kategorien" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -149,11 +161,11 @@ const Dropdown = ({
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="alleStädte">Alle Städte</SelectItem>
-                  <SelectItem value="berlin">Berlin</SelectItem>
-                  <SelectItem value="munich">Munich</SelectItem>
-                  <SelectItem value="hamburg">Hamburg</SelectItem>
-                  <SelectItem value="zurich">Zurich</SelectItem>
-                  <SelectItem value="vienna">Vienna</SelectItem>
+                  {cities?.map((city) => (
+                    <SelectItem key={city._id} value={city?.value}>
+                      {city?.label}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>

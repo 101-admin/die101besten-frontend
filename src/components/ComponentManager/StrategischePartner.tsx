@@ -15,7 +15,7 @@ const StrategischePartner = ({ title, partners }: StrategischePartner) => {
           {partners?.slice(0, 4).map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative  cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"
@@ -36,7 +36,7 @@ const StrategischePartner = ({ title, partners }: StrategischePartner) => {
             <div key={index} className="flex justify-center items-center">
               <div className="w-full h-full md:w-[230px] md:h-[108px] relative">
                 <div className="w-full max-w-[150px] md:max-w-[230px] relative  cursor-pointer hover:scale-[1.10] duration-200">
-                  <Link href={`${partner?.link}`} className="w-full">
+                  <Link target="_blank" href={`${partner?.link}`} className="w-full">
                     {partner?.image && (
                       <img
                         className="w-full"

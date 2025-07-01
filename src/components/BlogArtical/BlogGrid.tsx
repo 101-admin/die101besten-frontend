@@ -12,7 +12,6 @@ const BlogGrid = ({ data }: { data: BlogDescriptionGridBlock }) => {
               {data?.descriptions?.length === 1 && (
                 <div className="w-full flex justify-center items-center flex-col">
                   {data?.descriptions?.slice(0, 2)?.map((item, index) => {
-                    const {} = item;
                     return (
                       <div className="w-full flex justify-center items-center flex-col max-w-[640px] px-5 lg:px-0 ">
                         {item?.description && (
@@ -27,9 +26,8 @@ const BlogGrid = ({ data }: { data: BlogDescriptionGridBlock }) => {
           )}
 
           {data?.descriptions?.length > 1 && (
-            <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-5 lg:gap-7">
+            <div className="w-full flex flex-col lg:flex-row justify-center items-center lg:items-start gap-5 lg:gap-7">
               {data?.descriptions?.slice(0, 2)?.map((item, index) => {
-                const {} = item;
                 return (
                   <div className="w-full flex justify-center items-center flex-col max-w-[640px] px-5 lg:px-0">
                     {item?.description && (

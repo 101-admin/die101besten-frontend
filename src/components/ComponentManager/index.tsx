@@ -6,6 +6,7 @@ import type {
   HotelPageComponent,
   PartnersComponent,
   BlogComponent,
+  EventsComponent,
   SpecialEditionHotelsPageComponent,
 } from "@/lib";
 
@@ -45,6 +46,8 @@ import WerdePartner from "./WerdePartner";
 import BlogTitle from "./BlogTitle";
 import BlogSection from "./BlogSection";
 import HotelCategories from "./HotelCategories";
+import EventHero from "./EventHero";
+import EventCollection from "./EventCollection";
 
 const components = new Map();
 // components.set("heroSlider", Hero);
@@ -94,6 +97,10 @@ components.set("werde101", WerdePartner);
 components.set("blogPageTitle", BlogTitle);
 components.set("blogCollection", BlogSection);
 
+//Events Page
+components.set("eventsHero", EventHero);
+components.set("eventsCollection", EventCollection);
+
 export const getSectionComponent = (blockType: string) => {
   const section = components.get(blockType);
   if (!section) {
@@ -116,7 +123,8 @@ const BlockManager = ({
     | HotelPageComponent[]
     | PartnersComponent[]
     | BlogComponent[]
-    | SpecialEditionHotelsPageComponent[];
+    | SpecialEditionHotelsPageComponent[]
+    | EventsComponent[];
   wrapperClass?: string;
   searchParams?: any;
 }) => {
@@ -130,7 +138,8 @@ const BlockManager = ({
             | HotelPageComponent
             | PartnersComponent
             | BlogComponent
-            | SpecialEditionHotelsPageComponent,
+            | SpecialEditionHotelsPageComponent
+            | EventsComponent,
           index: number
         ) => {
           const Compnent = getSectionComponent(item._type);

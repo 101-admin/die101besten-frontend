@@ -71,11 +71,9 @@ const Articles = ({
                                 {description}
                               </p>
                             )}
-                            <Link className="w-full" href={`/blogs/${slug}`}>
-                              <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#F49E6E] to-[#B64F32] leading-[24px] text-center  uppercase">
-                                Weiterlesen
-                              </button>
-                            </Link>
+                            <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#F49E6E] to-[#B64F32] leading-[24px] text-center  uppercase">
+                              Weiterlesen
+                            </button>
                           </div>
                         </div>
                       </div>

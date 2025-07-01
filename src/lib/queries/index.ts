@@ -8,3 +8,4 @@ export * from "./about.queries";
 export * from "./partner.queries";
 export * from "./navigation.queries";
 export * from "./blog.queries";
+export * from "./events.queries";

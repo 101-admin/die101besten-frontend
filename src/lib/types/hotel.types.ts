@@ -8,7 +8,7 @@ import type {
   SpecialHotels,
   ImageSection,
 } from "./components.types";
-import type { HeroSlider } from "./components.types";
+// import type { HeroSlider } from "./components.types";
 
 /**
  * Common types

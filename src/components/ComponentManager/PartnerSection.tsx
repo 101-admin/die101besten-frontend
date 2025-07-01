@@ -22,7 +22,7 @@ const PartnerSection = ({
           {partners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"
@@ -39,7 +39,7 @@ const PartnerSection = ({
           {premiumPartners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[213px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"
@@ -57,7 +57,7 @@ const PartnerSection = ({
           {otherPartners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center ">
               <div className="w-full max-w-[145px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"

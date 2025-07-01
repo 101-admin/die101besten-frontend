@@ -82,7 +82,7 @@ const SingleMember = ({
         }`}
       ></div>
       <div
-        className={`max-w-[1300px] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex flex-col w-full bg-white p-7 sm:p-9 md:p-12 lg:p-16 gap-6 lg:gap-12 ${
+        className={`max-w-[1300px] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex flex-col w-full bg-white p-4 sm:p-9 md:p-12 lg:p-16 gap-6 lg:gap-12 max-h-[90vh] overflow-y-auto ${
           showPopUp ? "block" : "hidden"
         }`}
       >
@@ -99,7 +99,7 @@ const SingleMember = ({
             <IoCloseOutline className="text-black text-[24px] " />
           </div>
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-5 md:gap-10 lg:gap-12 sm:flex-row sm:justify sm:items-center">
+        <div className="w-full flex flex-col gap-5 md:gap-10 lg:gap-12 sm:flex-row justify-start items-baseline sm:items-center">
           <div className="flex w-full max-w-[276px]">
             {image && (
               <img
@@ -109,7 +109,7 @@ const SingleMember = ({
               />
             )}
           </div>
-          <div className="flex flex-col justify-center items-center w-full sm:justify-start sm:items-baseline">
+          <div className="flex flex-col w-full justify-start items-baseline">
             {name && (
               <h3 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[34px]  lg:text-[38px]">
                 {name}
@@ -120,7 +120,7 @@ const SingleMember = ({
                 {role}
               </p>
             )}
-            <div className="hidden sm:flex flex-col mt-5">
+            <div className="flex flex-col mt-5">
               {description && (
                 <p className="font-gte font-[350] text-[16px] lg:text-[24px] leading-[20px] lg:leading-[32px]">
                   {description}

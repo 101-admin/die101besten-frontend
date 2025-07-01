@@ -10,7 +10,7 @@ const Adds = ({ data }: { data?: Adds }) => {
   }, [data?.add?.images]);
 
   return (
-    <div className="w-full container-primary py-12 lg:py-24">
+    <div className="w-full container-primary py-12 lg:py-24 px-5">
       <div className="max-w-[1440px] w-full mx-auto">
         <div className="flex flex-col justify-center items-center">
           <h6 className="text-[16px] font-gte text-[#75787C] font-[350]">

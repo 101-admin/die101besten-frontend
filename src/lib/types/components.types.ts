@@ -591,3 +591,20 @@ export interface SpecialHotels extends BaseDocument {
     link?: string;
   }>;
 }
+
+
+// Events page components
+
+export interface EventsHero extends BaseDocument {
+  _type: "eventsHero";
+  title: string;
+  id: string;
+  language: string;
+}
+
+export interface EventCollection extends BaseDocument {
+  _type: "eventCollection";
+  title: string;
+  id: string;
+  language: string;
+}

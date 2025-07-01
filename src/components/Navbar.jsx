@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
-// import { FiSearch } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 // import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-// import { IoClose } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import Edition from "@/Data/Edition";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import {
   Carousel,
@@ -16,14 +17,17 @@ import {
 const Navbar = ({ navbar }) => {
   const navbarData = navbar[0];
   // console.log(navbarData, "navbarData");
-  // const [text, setText] = useState("");
-  // const [displayText, setDisplayText] = useState("");
+  const [text, setText] = useState("");
+  const [displayText, setDisplayText] = useState("");
   const [barBtn, setBarBtn] = useState(true);
   const [search, setSearch] = useState(false);
-  // const [displaySearch, setdisplaySearch] = useState(true);
+  const [displaySearch, setdisplaySearch] = useState(true);
   const [menu, setMenu] = useState(false);
   const [editionIndex, setEditionIndex] = useState(0);
   const [showEdition, setShowEdition] = useState(false);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,11 +58,33 @@ const Navbar = ({ navbar }) => {
     }
   };
 
+  const updateSearchParams = (key, value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (
+      value === "AlleKategorien" ||
+      value === "alleStädte" ||
+      value === "bittewählen" ||
+      !value
+    ) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    router.push(`/hotels?search=${value}`);
+  };
+
+  const handleSubmit = (e) => {
+    updateSearchParams("search", displayText);
+  };
+
   return (
     <>
       <section className="w-full flex justify-center items-center bg-[#000000] max-w-[1440px] mx-auto select-none">
         {/* Mobile Edition Section Desin */}
-        <div className="w-full flex lg:hidden text-white">
+        <div
+          onClick={() => setMenu(false)}
+          className="w-full flex lg:hidden text-white"
+        >
           <Carousel
             opts={{
               align: "start",
@@ -148,8 +174,11 @@ const Navbar = ({ navbar }) => {
         {/* Mobile Navbar  */}
 
         <nav className="w-full flex flex-col lg:hidden justify-center items-center py-2 relative duration-200 bg-white">
-          <div className="flex justify-between items-center w-full px-4 mb-5">
-            {/* <div>
+          <div
+            onClick={() => setMenu(false)}
+            className="flex justify-between items-center w-full px-4 mb-5"
+          >
+            <div>
               <button onClick={handleSearch}>
                 <FiSearch
                   className={`text-[20px] ${
@@ -157,9 +186,9 @@ const Navbar = ({ navbar }) => {
                   }`}
                 />
               </button>
-            </div> */}
+            </div>
 
-            <Link href="/">
+            <Link onClick={() => setBarBtn(true)} href="/">
               <div className="flex">
                 <img
                   className="max-w-[83.78px]"
@@ -194,60 +223,112 @@ const Navbar = ({ navbar }) => {
                   </svg>
                 </div>
               ) : (
-                <AiOutlineClose className="text-[20px]" />
+                <div className="flex justify-center items-center border-2 border-black px-[10px] py-[6px]">
+                  <AiOutlineClose className="text-[25px]" />
+                </div>
               )}
             </button>
           </div>
-          {/* <div className="w-full flex justify-center items-center">
-            <input
-              type="text"
-              onChange={(e) => setText(e.target.value)}
-              value={text}
-              className={`w-[320px] h-8  border-black border-2 placeholder:text-black pl-3 py-5 font-gte ${
-                search ? "block " : "hidden"
-              }`}
-              placeholder={navbarData?.utilities?.search?.placeholder}
-            />
-          </div> */}
-          <ul
-            className={`flex flex-col absolute right-0 py-3 top-[80px]  justify-center items-center gap-4 z-10 duration-100 bg-white overflow-hidden ${
+          <div className="w-full flex justify-center items-center">
+            <form className={`w-full  justify-center items-center ${
+                  search ? "flex " : "hidden"
+                }`} onSubmit={handleSubmit}>
+              <input
+                type="text"
+                onChange={(e) => setDisplayText(e.target.value)}
+                value={displayText}
+                className="w-[60%] h-8  border-black border-2 placeholder:text-black pl-3 py-5 font-gte outline-none"
+                placeholder={navbarData?.utilities?.search?.placeholder}
+              />
+              <button className="w-[15%] h-[43px] p-5 bg-black text-white flex justify-center items-center">
+                <FiSearch className="text-[30px]"/>
+              </button>
+            </form>
+          </div>
+          <div
+            className={`flex flex-col absolute right-0 py-3 top-[80px] justify-start items-center z-10 duration-100 bg-white overflow-y-auto max-h-[calc(100vh-80px)] ${
               barBtn ? "w-0 " : "w-full"
             }`}
           >
-            {navbarData?.mainMenu?.map((navitem, index) => {
-              const { label, url, hasSubmenu } = navitem;
-              return (
-                <div
-                  className="w-full flex justify-start items-baseline"
-                  key={index}
-                >
-                  {hasSubmenu ? (
-                    <li
-                      onClick={() => {
-                        setBarBtn(true);
-                        setMenu(true);
-                      }}
-                      className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]"
-                    >
-                      <div onClick={scrollToTop}>{label}</div>
-                    </li>
-                  ) : (
-                    <Link
-                      className="w-full flex justify-start items-baseline"
-                      href={`${url}`}
-                    >
-                      <li className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]">
-                        {label}
+            <ul className="flex flex-col w-full gap-4">
+              {navbarData?.mainMenu?.map((navitem, index) => {
+                const { label, url, hasSubmenu } = navitem;
+                return (
+                  <div
+                    className="w-full flex justify-start items-baseline"
+                    key={index}
+                  >
+                    {hasSubmenu ? (
+                      <li
+                        onClick={() => {
+                          setMenu(!menu);
+                        }}
+                        className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]"
+                      >
+                        <div onClick={scrollToTop}>{label}</div>
                       </li>
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
-            {/* <button className="w-1/2 md:w-1/3 bg-black text-white flex justify-center items-center py-2 font-bold font-montserrat active:scale-95">
+                    ) : (
+                      <Link
+                        className="w-full flex justify-start items-baseline"
+                        onClick={() => setBarBtn(true)}
+                        href={`${url}`}
+                      >
+                        <li className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]">
+                          {label}
+                        </li>
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
+              {/* <button className="w-1/2 md:w-1/3 bg-black text-white flex justify-center items-center py-2 font-bold font-montserrat active:scale-95">
               Login
             </button> */}
-          </ul>
+            </ul>
+            <div
+              onMouseOver={() => setMenu(true)}
+              className={`w-full bg-[#F9F8FA] py-6 md:py-8 lg:py-12 flex flex-col justify-center items-center ${
+                menu ? "flex  lg:hidden" : "hidden"
+              }`}
+            >
+              {navbarData?.mainMenu?.map((navitem, index) => {
+                const { hasSubmenu, submenu } = navitem;
+                return (
+                  <div
+                    className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
+                    key={index}
+                  >
+                    {hasSubmenu &&
+                      submenu?.columns?.map((navitem, index) => {
+                        const { columnTitle, links } = navitem;
+                        return (
+                          <div
+                            key={index}
+                            className="w-full max-w-[220px] flex flex-col justify-start items-baseline gap-4"
+                          >
+                            <span className="text-[16px] font-gte font-medium ">
+                              {columnTitle}
+                            </span>
+                            {links?.map((navitem, index) => {
+                              return (
+                                <Link
+                                  href={`${navitem?.url}`}
+                                  onClick={() => setBarBtn(true)}
+                                  key={index}
+                                  className="text-[14px] font-gte font-light hover:text-[#B65033]"
+                                >
+                                  {navitem?.label}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </nav>
 
         {/* Display Navbar */}
@@ -292,7 +373,7 @@ const Navbar = ({ navbar }) => {
             })}
           </div>
           <div className="flex items-center justify-end gap-4 w-1/6">
-            {/* <div
+            <div
               className={`flex h-10 items-center border-black  ${
                 displaySearch ? "border-none" : "border-2"
               }`}
@@ -307,25 +388,27 @@ const Navbar = ({ navbar }) => {
                     : "hover:none cursor-auto"
                 } `}
               >
-                <FiSearch className="text-[20px] leading-6" />
+                <FiSearch className="text-[20px]" />
               </button>
               <div
-                className={`w-full relative ${
+                className={`w-full relative h-full ${
                   displaySearch ? "hidden" : "flex"
                 }`}
               >
-                <input
-                  type="text"
-                  onChange={(e) => setDisplayText(e.target.value)}
-                  value={displayText}
-                  placeholder={navbarData?.utilities?.search?.placeholder}
-                  className="h-full border-2 placeholder:text-black text-[12px] font-bold font-montserrat outline-0 border-none pl-[-20px]"
-                />
+                <form className="h-full" onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    onChange={(e) => setDisplayText(e.target.value)}
+                    value={displayText}
+                    placeholder={navbarData?.utilities?.search?.placeholder}
+                    className="h-full placeholder:text-black text-[12px] font-bold font-montserrat outline-none  pl-[-20px] pr-10"
+                  />
+                </form>
                 <button
                   onClick={() => {
                     setdisplaySearch(true);
                   }}
-                  className={`absolute right-2 top-0  ${
+                  className={`absolute right-2 top-0 h-full  ${
                     displaySearch
                       ? "hover:none cursor-auto"
                       : "hover:text-[#B64F32] cursor-pointer"
@@ -335,7 +418,7 @@ const Navbar = ({ navbar }) => {
                 </button>
               </div>
             </div>
-            <div className="gap-4 flex">
+            {/* <div className="gap-4 flex">
               <button className="font-montserrat font-bold text-[12px] uppercase py-2 px-3 max-h-7 leading-3 bg-black text-white cursor-pointer">
                 Login
               </button>
@@ -398,49 +481,6 @@ const Navbar = ({ navbar }) => {
           })}
         </div>
       </header>
-      <div
-        onMouseOver={() => setMenu(true)}
-        // onMouseOut={() => setMenu(false)}
-        className={`w-full bg-[#F9F8FA] py-6 md:py-8 lg:py-12 flex flex-col justify-center items-center  ${
-          menu ? "flex  lg:hidden" : "hidden"
-        }`}
-      >
-        {navbarData?.mainMenu?.map((navitem, index) => {
-          const { hasSubmenu, submenu } = navitem;
-          return (
-            <div
-              className="w-full max-w-[1000px] px-5 sm:px-10 md:px-14 lg:px-0 flex flex-wrap justify-center items-start gap-5"
-              key={index}
-            >
-              {hasSubmenu &&
-                submenu?.columns?.map((navitem, index) => {
-                  const { columnTitle, links } = navitem;
-                  return (
-                    <div
-                      key={index}
-                      className="w-full max-w-[220px] flex flex-col justify-start items-baseline gap-4"
-                    >
-                      <span className="text-[16px] font-gte font-medium ">
-                        {columnTitle}
-                      </span>
-                      {links?.map((navitem, index) => {
-                        return (
-                          <Link
-                            href={`${navitem?.url}`}
-                            key={index}
-                            className="text-[14px] font-gte font-light hover:text-[#B65033]"
-                          >
-                            {navitem?.label}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-            </div>
-          );
-        })}
-      </div>
     </>
   );
 };

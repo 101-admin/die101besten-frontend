@@ -92,8 +92,24 @@ export function getAllHotelsQuery(filters: {
   if (!!filters?.variant) {
     filterString += ` && variant == "${filters.variant}"`;
   }
+
+  // Create search conditions
+  let orderBy = "order(ranking.position asc)";
   if (!!filters?.search) {
-    filterString += ` && (name match "${filters.search}" || description match "${filters.search}")`;
+    const searchTerm = filters.search.toLowerCase();
+    filterString += ` && (
+      lower(name) match "*${searchTerm}*" ||
+      lower(description) match "*${searchTerm}*"
+    )`;
+
+    orderBy = `order(
+      select(
+        lower(name) match "*${searchTerm}*" => 2,
+        lower(description) match "*${searchTerm}*" => 1,
+        0
+      ) desc,
+      ranking.position asc
+    )`;
   }
 
   // Create a separate filter string for total count that only includes variant
@@ -106,7 +122,7 @@ export function getAllHotelsQuery(filters: {
 
   return `
     {
-      "hotels": *[${filterString}] | order(ranking.position asc) {
+      "hotels": *[${filterString}] | ${orderBy} {
         _id,
         _type,
         language,

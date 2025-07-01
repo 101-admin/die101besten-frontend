@@ -15,7 +15,7 @@ const AllHotelSlider = ({ allHotelsSection }: AllHotelsSlider) => {
       modules={[EffectFade, Autoplay]}
       autoplay={{ delay: 7000, disableOnInteraction: false }}
       loop
-      className="w-full lg:max-w-[1920px] h-[900px] mb-5"
+      className="w-full lg:max-w-[1920px] h-[500px] md:h-[900px] mb-5"
     >
       {allHotelsSection.imageGallery?.images?.map((image, index) => {
         return (

@@ -1,4 +1,4 @@
-import type { BaseDocument } from "./sanity.types";
+import type { BaseDocument, SanityPageSEO } from "./sanity.types";
 import type {
   HeroAbout,
   Utr,
@@ -51,4 +51,5 @@ export interface AboutPage extends BaseDocument {
     | string;
   edition: "deutschland" | "dach" | "schweiz";
   components?: AboutComponent[];
+  seo?: SanityPageSEO;
 }

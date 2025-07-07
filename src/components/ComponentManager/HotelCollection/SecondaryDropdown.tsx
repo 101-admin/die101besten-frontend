@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuSearch } from "react-icons/lu";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const SecondaryDropdown = () => {
+const SecondaryDropdownContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState(
@@ -93,6 +93,14 @@ const SecondaryDropdown = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const SecondaryDropdown = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SecondaryDropdownContent />
+    </Suspense>
   );
 };
 

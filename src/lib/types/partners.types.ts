@@ -1,4 +1,9 @@
-import type { BaseDocument, BlockContent, SanityImage } from "./sanity.types";
+import type {
+  BaseDocument,
+  BlockContent,
+  SanityImage,
+  SanityPageSEO,
+} from "./sanity.types";
 import type {
   PageTitle,
   StrategischePartner,
@@ -31,6 +36,8 @@ export interface PartnersPage extends BaseDocument {
   partners: Partner[];
   edition: string;
   language: string;
+  seo?: SanityPageSEO;
+  components?: PartnersComponent[];
 }
 
 /**

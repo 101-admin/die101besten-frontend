@@ -18,6 +18,8 @@ import {
   imageSectionComponentFragment,
 } from "../fragments/components.fragments";
 
+import { seoFragment } from "../fragments/global.fragments";
+
 /**
  * Query for getting all hotels with basic information
  */
@@ -184,6 +186,9 @@ export const getHotelBySlugQuery = `
     name,
     image {${globalImageFragment}},
     ctaButton {${globalButtonFragment}},
+    seo {
+      ${seoFragment}
+    },
     achievements[]->{
       _id,
       name
@@ -354,6 +359,9 @@ export const getHotelPageQuery = `
     language,
     edition,
     "slug": slug.current,
+    seo {
+      ${seoFragment}
+    },
     components[]-> {
       _id,
       _type,
@@ -378,6 +386,9 @@ export const getSpecialEditionHotelsQuery = `
     language,
     edition,
     "slug": slug.current,
+    seo {
+      ${seoFragment}
+    },
     components[]-> {
       _id,
       _type,

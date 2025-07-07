@@ -5,16 +5,27 @@ import Form from "@/components/Form";
 
 const Page = () => {
   const [content, setContent] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(
-      "https://app.cockpit.legal/api/cockpit/resources/legaldocumentshare/339d190143d759306016a534dc8e56de/document/render/html?language=de"
-    )
-      .then((result) => result.text())
-      .then((content) => {
-        setContent(content);
-      });
+    const fetchData = async()=>{
+      await fetch(
+        "https://app.cockpit.legal/api/cockpit/resources/legaldocumentshare/339d190143d759306016a534dc8e56de/document/render/html?language=de"
+      )
+        .then((result) => result.text())
+        .then((content) => {
+          setContent(content);
+          setLoading(false);
+        });
+    }
+    fetchData()
   }, []);
+
+  if(loading){
+    return(
+      <div className="flex w-full py-10 items-center justify-center text-5xl font-bold">Loading...</div>
+    )
+  }
 
   return (
     <>
@@ -24,15 +35,15 @@ const Page = () => {
           Sie können diesen Rechtstext nicht sehen, weil Sie JavaScript
           deaktiviert haben. Folgen Sie bitte diesem{" "}
           <Link
-          target="_blank"
-          href="https://app.cockpit.legal/api/cockpit/resources/legaldocumentshare/339d190143d759306016a534dc8e56de/document/render/html?language=de"
-          rel="noopener noreferrer"
-        >
-          Link
-        </Link>
-        , um den Rechtstext anzuzeigen.
-      </noscript>
-    </section>
+            target="_blank"
+            href="https://app.cockpit.legal/api/cockpit/resources/legaldocumentshare/339d190143d759306016a534dc8e56de/document/render/html?language=de"
+            rel="noopener noreferrer"
+          >
+            Link
+          </Link>
+          , um den Rechtstext anzuzeigen.
+        </noscript>
+      </section>
       <Form />
     </>
   );

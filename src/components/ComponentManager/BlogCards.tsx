@@ -18,11 +18,8 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
             const { category, readMore, mainImage, title, description, slug } =
               post;
             return (
-              <Link href={`/blogs/${slug}`}>
-                <div
-                  key={index}
-                  className="flex flex-col relative pb-24 cursor-pointer"
-                >
+              <Link key={index} href={`/blogs/${slug}`}>
+                <div className="flex flex-col relative pb-24 cursor-pointer">
                   {/* Image  */}
                   <div className="relative w-full mb-4 sm:mb-6  overflow-hidden">
                     {mainImage && (

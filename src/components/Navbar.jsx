@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { FiSearch } from "react-icons/fi";
 // import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
@@ -14,7 +14,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-const Navbar = ({ navbar }) => {
+const NavbarContent = ({ navbar }) => {
   const navbarData = navbar[0];
   // console.log(navbarData, "navbarData");
   const [text, setText] = useState("");
@@ -70,10 +70,11 @@ const Navbar = ({ navbar }) => {
     } else {
       params.set(key, value);
     }
-    router.push(`/hotels?search=${value}`);
+    router.push(`/hotels?search=${value}#anchor-ranking`);
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     updateSearchParams("search", displayText);
   };
 
@@ -230,9 +231,12 @@ const Navbar = ({ navbar }) => {
             </button>
           </div>
           <div className="w-full flex justify-center items-center">
-            <form className={`w-full  justify-center items-center ${
-                  search ? "flex " : "hidden"
-                }`} onSubmit={handleSubmit}>
+            <form
+              className={`w-full  justify-center items-center ${
+                search ? "flex " : "hidden"
+              }`}
+              onSubmit={handleSubmit}
+            >
               <input
                 type="text"
                 onChange={(e) => setDisplayText(e.target.value)}
@@ -241,7 +245,7 @@ const Navbar = ({ navbar }) => {
                 placeholder={navbarData?.utilities?.search?.placeholder}
               />
               <button className="w-[15%] h-[43px] p-5 bg-black text-white flex justify-center items-center">
-                <FiSearch className="text-[30px]"/>
+                <FiSearch className="text-[30px]" />
               </button>
             </form>
           </div>
@@ -482,6 +486,14 @@ const Navbar = ({ navbar }) => {
         </div>
       </header>
     </>
+  );
+};
+
+const Navbar = (props) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NavbarContent {...props} />
+    </Suspense>
   );
 };
 

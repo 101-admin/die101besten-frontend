@@ -155,8 +155,13 @@ export const partnerLogoFragment = `{
 /**
  * SEO fields projection
  */
-export const seoFragment = `{
-  title,
-  description,
-  image ${globalImageFragment}
-}`;
+export const seoFragment = `
+  metaTitle,
+  metaDescription,
+  "openGraphImage": openGraphImage {
+    ${globalImageFragment}
+  },
+  keywords,
+  canonicalUrl,
+  noIndex
+`;

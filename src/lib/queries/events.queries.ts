@@ -7,6 +7,7 @@ import {
 } from "../fragments/components.fragments";
 
 import { globalImageFragment, globalButtonFragment } from "../fragments";
+import { seoFragment } from "../fragments/global.fragments";
 
 export const getEventsPageQuery = `
   *[_type == "allEvents" && language == $language && edition == $edition][0] {
@@ -16,6 +17,9 @@ export const getEventsPageQuery = `
     language,
     edition,
     "slug": slug.current,
+    seo {
+      ${seoFragment}
+    },
     components[]-> {
     _id,
     _type,
@@ -25,7 +29,7 @@ export const getEventsPageQuery = `
     _type == "newsletter" => {${newsletterComponentFragment}},
     _type == "imageSection" => {${imageSectionComponentFragment}}
     }
-    }
+  }
 `;
 
 export const getAllEventsQuery = `
@@ -34,10 +38,13 @@ export const getAllEventsQuery = `
   type,
   title,
   "slug": slug.current,
-  eventHotel,
   startDate,
   description,
+  location,
   mainImage {${globalImageFragment}},
+  seo {
+    ${seoFragment}
+  }
 }`;
 
 export const getEventsBySlugQuery = `
@@ -48,18 +55,22 @@ export const getEventsBySlugQuery = `
   language,
   edition,
   "slug": slug.current,
-  eventHotel,
+  eventType[]-> {
+    _id,
+    title
+  },
   startDate,
-  endDate,
   location,
   description,
   body,
   mainImage {${globalImageFragment}},
-  tags[]->{
-    _id,
-    title
+  seo {
+    ${seoFragment}
   },
-  youtubeVideo {
+  gallery[] {
+    image {${globalImageFragment}},
+  },
+  youtubeVideo { 
     url
   },
   allEvents{
@@ -70,7 +81,7 @@ export const getEventsBySlugQuery = `
     title,
     startDate,
     "slug": slug.current,
-    eventHotel,
+    location,
     description,
     mainImage {${globalImageFragment}},
   },
@@ -84,7 +95,5 @@ export const getEventsBySlugQuery = `
         link
       }
     }
-  },
-  
-}
-`;
+  }
+}`;

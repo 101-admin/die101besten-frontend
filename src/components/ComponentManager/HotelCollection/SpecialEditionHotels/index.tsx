@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import SingleHotel from "./SingleHotel";
 import { Hotel } from "@/lib/types/hotel.types";
 
-const SpecialEditionHotels = ({
+const SpecialEditionHotelsContent = ({
   totalHotels,
   hotels,
 }: {
@@ -28,7 +28,6 @@ const SpecialEditionHotels = ({
     )
     ?.sort((a, b) => a?.name?.localeCompare(b?.name));
 
-  console.log({ currentCategory, sortedHotels }, "@currentCategory");
   const length1 = hotels?.filter(
     (hotel) => hotel?.ranking?.category === "luxury"
   )?.length;
@@ -119,6 +118,17 @@ const SpecialEditionHotels = ({
         </div>
       </div>
     </section>
+  );
+};
+
+const SpecialEditionHotels = (props: {
+  totalHotels: number;
+  hotels: Hotel[];
+}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SpecialEditionHotelsContent {...props} />
+    </Suspense>
   );
 };
 

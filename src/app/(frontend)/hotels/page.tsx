@@ -1,10 +1,39 @@
 import ComponentManager from "@/components/ComponentManager";
 import { HotelsApi } from "@/lib";
+import { DEFAULT_SEO } from "@/lib";
+import type { AllHotelsPage } from "@/lib";
+import { Metadata } from "next";
 import React from "react";
 
-const page = async ({ searchParams }: { searchParams: any }) => {
-  const hotelPage = await HotelsApi.getHotelPage();
+export async function generateMetadata(): Promise<Metadata> {
+  const hotelData: AllHotelsPage = await HotelsApi.getHotelPage();
 
+  const metadata: Metadata = {
+    title: hotelData?.seo?.metaTitle || DEFAULT_SEO.metaTitle,
+    description: hotelData?.seo?.metaDescription || DEFAULT_SEO.metaDescription,
+    keywords: hotelData?.seo?.keywords || DEFAULT_SEO.keywords,
+    openGraph: {
+      title: hotelData?.seo?.metaTitle || DEFAULT_SEO.metaTitle,
+      description:
+        hotelData?.seo?.metaDescription || DEFAULT_SEO.metaDescription,
+      images: hotelData?.seo?.openGraphImage
+        ? [hotelData.seo.openGraphImage.url]
+        : [],
+    },
+    robots: hotelData?.seo?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+
+  if (hotelData?.seo?.canonicalUrl) {
+    metadata.alternates = {
+      canonical: hotelData.seo.canonicalUrl,
+    };
+  }
+
+  return metadata;
+}
+
+const Page = async ({ searchParams }: { searchParams: any }) => {
+  const hotelPage = await HotelsApi.getHotelPage();
   const queryParams = await searchParams;
 
   console.log(hotelPage, "@hotel page");
@@ -25,4 +54,4 @@ const page = async ({ searchParams }: { searchParams: any }) => {
   );
 };
 
-export default page;
+export default Page;

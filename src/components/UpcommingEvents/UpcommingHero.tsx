@@ -29,17 +29,18 @@ const UpcommingHero = ({ event }: { event: Event }) => {
         )}
         <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-12">
           <div className="w-full flex flex-col justify-start items-baseline gap-4">
-            <div className="w-full flex flex-wrap gap-2">
-              {event?.tags?.map((tag, index) => (
-                <div
-                  key={index}
-                  className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
-                >
-                  {tag?.title}
-                </div>
-              ))}
+            <div className="w-full flex flex-wrap gap-3">
+              {
+                event?.eventType?.map((type , index) => (
+                  <div
+                    key={index}
+                    className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
+                  >
+                    {type.title}
+                  </div>
+                ))
+              }
             </div>
-
             {event?.title && (
               <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px]">
                 {event?.title}

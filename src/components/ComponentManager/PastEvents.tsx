@@ -20,7 +20,7 @@ const PastEvents = ({ events }: { events: Event[] }) => {
               })
               ?.slice(0, showMore)
               ?.map((event, index) => {
-                const { title, description, eventHotel, mainImage, slug } =
+                const { title, description, location, mainImage, slug } =
                   event;
                 return (
                   <Link key={index} className="w-full" href={`/events/${slug}`}>
@@ -38,15 +38,15 @@ const PastEvents = ({ events }: { events: Event[] }) => {
                       </div>
                       <div className="w-full flex flex-col justify-start items-baseline gap-4">
                         {
-                          eventHotel && (
+                          location && (
                             <h6 className="font-[350] font-gte text-[20px] sm:text-[24px] leading-[32px]">
-                              {eventHotel}
+                              {location}
                             </h6>
                           )
                         }
                         {
                           title && (
-                            <h4 className="font-ogg font-normal text-[24px] sm:text-[32px] leading-[40px]">
+                            <h4 className="font-ogg font-normal text-[24px] sm:text-[32px] leading-[40px] line-clamp-2">
                               {title}
                             </h4>
                           )

@@ -11,6 +11,8 @@ import {
   globalButtonFragment,
 } from "../fragments";
 
+import { seoFragment } from "../fragments/global.fragments";
+
 /**
  * Query for getting all blogs page with components
  */
@@ -22,6 +24,9 @@ export const getBlogPageQuery = `
     language,
     edition,
     "slug": slug.current,
+    seo {
+      ${seoFragment}
+    },
     components[]-> {
       _id,
       _type,
@@ -65,6 +70,9 @@ export const getBlogBySlugQuery = `
   readMore,
   edition,
   "slug": slug.current,
+  seo {
+    ${seoFragment}
+  },
   author[]-> {
     name,
     image{${globalImageFragment}},
@@ -98,5 +106,4 @@ export const getBlogBySlugQuery = `
     }
     }
   }
-}
-`;
+}`;

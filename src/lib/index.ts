@@ -13,3 +13,6 @@ export * from "./services";
 
 // Config
 export * from "./config/sanity";
+
+// SEO
+export * from "./seo";

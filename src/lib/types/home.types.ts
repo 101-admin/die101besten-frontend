@@ -1,4 +1,4 @@
-import type { BaseDocument } from "./sanity.types";
+import type { BaseDocument, SanityPageSEO } from "./sanity.types";
 import type {
   AllHotelsSlider,
   PartnerLogo,
@@ -54,4 +54,5 @@ export interface HomePage extends BaseDocument {
     | string;
   edition: "deutschland" | "dach" | "schweiz";
   components?: HomeComponent[];
+  seo?: SanityPageSEO;
 }

@@ -15,6 +15,7 @@ import {
   hotelmomenteComponentFragment,
   imageSectionComponentFragment,
 } from "../fragments/components.fragments";
+import { seoFragment } from "../fragments/global.fragments";
 
 /**
  * Fragment for the core about page fields
@@ -25,7 +26,10 @@ export const aboutUsFields = `
   title,
   language,
   "slug": slug.current,
-  edition
+  edition,
+  seo {
+    ${seoFragment}
+  }
 `;
 
 /**

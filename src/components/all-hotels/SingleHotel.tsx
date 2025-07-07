@@ -2,7 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { type Hotel } from "@/lib";
 
-const SingleHotel = ({ data }: { data: Hotel }) => {
+interface SingleHotelProps {
+  data: Hotel;
+  srNo?: "alphabatic" | "ranking";
+}
+
+const SingleHotel = ({ data, srNo = "ranking" }: SingleHotelProps) => {
   return (
     <Link
       className="w-full"
@@ -11,9 +16,12 @@ const SingleHotel = ({ data }: { data: Hotel }) => {
     >
       <div className="w-full flex flex-col justify-center items-center lg:flex-row lg:items-start cursor-pointer hover:scale-[1.03] duration-200">
         <div className="w-full lg:w-auto flex flex-col justify-start items-baseline">
-          {data?.ranking?.position && (
+          {(data?.ranking?.position || data?.ranking?.position == 0) && (
             <div className="w-10 h-10 sm:w-16 sm:h-16 bg-[linear-gradient(90deg,#B65033_0.21%,#F49E6E_100%)] flex justify-center items-center font-gte font-bold text-[20px] sm:text-[24px] text-white rounded-t-lg lg:rounded-l-xl lg:rounded-r-none">
-              {data?.ranking?.position}.
+              {srNo === "ranking"
+                ? data?.ranking?.position
+                : data?.name?.slice(0, 1).toUpperCase()}
+              .
             </div>
           )}
         </div>

@@ -2,8 +2,9 @@ import HotelBasic from "@/components/HotelBasic";
 import HotelExclusive from "@/components/HotelExclusive";
 import HotelGrand from "@/components/HotelGrand";
 import HotelPremium from "@/components/HotelPremium";
-import { DEFAULT_EDITION, DEFAULT_LANGUAGE, Hotel } from "@/lib";
+import { DEFAULT_EDITION, DEFAULT_LANGUAGE, Hotel, DEFAULT_SEO } from "@/lib";
 import { HotelsApi } from "@/lib/services";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -20,6 +21,58 @@ export async function generateStaticParams() {
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const hotelData = await HotelsApi.getHotelBySlug(slug);
+
+  if (!hotelData) {
+    return {
+      title: DEFAULT_SEO.metaTitle,
+      description: DEFAULT_SEO.metaDescription,
+    };
+  }
+
+  const metadata: Metadata = {
+    // Use SEO title, fallback to hotel name, then default
+    title: hotelData?.seo?.metaTitle || hotelData.name || DEFAULT_SEO.metaTitle,
+    // Use SEO description, fallback to hotel description, then default
+    description:
+      hotelData?.seo?.metaDescription ||
+      hotelData.description ||
+      DEFAULT_SEO.metaDescription,
+    // Use SEO keywords or default
+    keywords: hotelData?.seo?.keywords || DEFAULT_SEO.keywords,
+    openGraph: {
+      title:
+        hotelData?.seo?.metaTitle || hotelData.name || DEFAULT_SEO.metaTitle,
+      description:
+        hotelData?.seo?.metaDescription ||
+        hotelData.description ||
+        DEFAULT_SEO.metaDescription,
+      // Use SEO image, fallback to hotel image
+      images: hotelData?.seo?.openGraphImage
+        ? [hotelData.seo.openGraphImage.url]
+        : hotelData?.image
+        ? [hotelData.image.url]
+        : [],
+      type: "website",
+    },
+    // Use SEO noIndex setting or default to indexing
+    robots: hotelData?.seo?.noIndex ? "noindex, nofollow" : "index, follow",
+  };
+
+  // Add canonical URL if specified in SEO
+  if (hotelData?.seo?.canonicalUrl) {
+    metadata.alternates = {
+      canonical: hotelData.seo.canonicalUrl,
+    };
+  }
+
+  return metadata;
 }
 
 export default async function Page({ params }: PageProps) {

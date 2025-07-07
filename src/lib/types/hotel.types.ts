@@ -1,4 +1,9 @@
-import type { BaseDocument, BlockContent, SanityImage } from "./sanity.types";
+import type {
+  BaseDocument,
+  BlockContent,
+  SanityImage,
+  SanityPageSEO,
+} from "./sanity.types";
 import type {
   AllHotelsSlider,
   SpecialEdition,
@@ -242,6 +247,8 @@ export interface Hotel extends BaseDocument {
   ranking?: HotelRanking;
   slug?: string;
   image?: SanityImage;
+  description?: string;
+  seo?: SanityPageSEO;
   ctaButton?: CTAButton;
   achievements?: HotelAchievement[];
   primaryHeroSection?: PrimaryHeroSection;
@@ -344,6 +351,7 @@ export interface AllHotelsPage extends BaseDocument {
     _type: "slug";
   };
   components?: HotelPageComponent[];
+  seo?: SanityPageSEO;
 }
 
 /**
@@ -358,5 +366,6 @@ export interface SpecialEditionHotelsPage extends BaseDocument {
     current: string;
     _type: "slug";
   };
+  seo?: SanityPageSEO;
   components?: SpecialEditionHotelsPageComponent[];
 }

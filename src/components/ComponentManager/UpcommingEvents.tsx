@@ -54,9 +54,8 @@ const UpcommingEvents = ({ events }: { events: Event[] }) => {
                   title,
                   description,
                   startDate,
-                  mainImage,
+                  location,
                   slug,
-                  eventHotel,
                 } = event;
                 return (
                   <Link className="w-full" href={`/events/${slug}`} key={index}>
@@ -77,9 +76,9 @@ const UpcommingEvents = ({ events }: { events: Event[] }) => {
                         </p>
                       </div>
                       <div className="w-full p-5 lg:p-8 border-2 border-[#000000] lg:border-none flex flex-col justify-start items-baseline gap-2">
-                        {eventHotel && (
+                        {location && (
                           <h5 className="font-[350] font-gte text-[20px] sm:text-[24px] leading-[32px]">
-                            {eventHotel}
+                            {location}
                           </h5>
                         )}
                         {title && (

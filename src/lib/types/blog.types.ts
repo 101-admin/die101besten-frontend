@@ -5,9 +5,31 @@ import {
   Button,
   ImageSection,
 } from "./components.types";
-import type { BaseDocument, BlockContent, SanityImage } from "./sanity.types";
+import type {
+  BaseDocument,
+  BlockContent,
+  SanityImage,
+  SanityPageSEO,
+} from "./sanity.types";
 
-export type BlogComponent = BlogCollection | BlogPageTitle | Newsletter | ImageSection;
+export type BlogComponent =
+  | BlogCollection
+  | BlogPageTitle
+  | Newsletter
+  | ImageSection;
+
+export interface AllBlogsPage extends BaseDocument {
+  _type: "allBlogs";
+  title: string;
+  language: string;
+  slug?: {
+    current: string;
+    _type: "slug";
+  };
+  edition?: "deutschland" | "dach" | "schweiz";
+  components?: BlogComponent[];
+  seo?: SanityPageSEO;
+}
 
 export interface BlogPage extends BaseDocument {
   _type: "blog";
@@ -15,10 +37,8 @@ export interface BlogPage extends BaseDocument {
   language: string;
   description?: string;
   readMore?: string;
-  slug?: {
-    current: string;
-    _type: "slug";
-  };
+  seo?: SanityPageSEO;
+  slug?: string;
   author?: Array<{
     name?: string;
     image?: SanityImage;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 // import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuSearch } from "react-icons/lu";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { HotelCategory, HotelCity } from "@/lib";
 
-const Dropdown = ({
+const DropdownContent = ({
   totalHotels,
   categories,
   cities,
@@ -197,6 +197,18 @@ const Dropdown = ({
         </div>
       </div>
     </section>
+  );
+};
+
+const Dropdown = (props: {
+  totalHotels: number;
+  categories: HotelCategory[];
+  cities: HotelCity[];
+}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DropdownContent {...props} />
+    </Suspense>
   );
 };
 

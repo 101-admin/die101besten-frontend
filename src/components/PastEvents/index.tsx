@@ -6,6 +6,7 @@ import  PastHero from './PastHero'
 import Adds from '../Adds'
 import type { Event } from '@/lib'
 const index = ({events}: {events: Event}) => {
+  console.log(events , "Events")
   return (
     <section className='w-full flex flex-col'>
         {

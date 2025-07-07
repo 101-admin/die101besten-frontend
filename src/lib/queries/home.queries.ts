@@ -18,6 +18,7 @@ import {
   locationComponentFragment,
   imageSectionComponentFragment,
 } from "../fragments/components.fragments";
+import { seoFragment } from "../fragments/global.fragments";
 
 export const getHomePageQuery = `
   *[_type == "home" && language == $language && edition == $edition][0] {
@@ -27,6 +28,9 @@ export const getHomePageQuery = `
     language,
     slug,
     edition,
+    seo {
+      ${seoFragment}
+    },
     components[]-> {
       _id,
       _type,

@@ -8,12 +8,16 @@ import { partnerComponentFragment } from "../fragments/components.fragments";
 import { werde101ComponentFragment } from "../fragments/components.fragments";
 import { dasBushComponentFragment } from "../fragments/components.fragments";
 import { newsletterComponentFragment } from "../fragments/components.fragments";
+import { seoFragment } from "../fragments/global.fragments";
 export const partnersQuery = `*[_type == "partners" && language == $language  && edition == $edition][0] {
   _id,
   _type,
   title,
   language,
   edition,
+  seo {
+    ${seoFragment}
+  },
   components[]-> {
     _id,
     _type,
@@ -25,10 +29,5 @@ export const partnersQuery = `*[_type == "partners" && language == $language  &&
     _type == "dasBush" => {${dasBushComponentFragment}},
     _type=="newsletter"=> {${newsletterComponentFragment}},
     _type == "imageSection" => {${imageSectionComponentFragment}}
-  },
-  seo {
-    metaTitle,
-    metaDescription,
-    keywords
   }
 }`;

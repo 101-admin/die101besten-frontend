@@ -113,3 +113,15 @@ export interface SanityRawImage {
   caption?: string;
   // Add any other custom fields you use in block content images
 }
+
+/**
+ * SEO fields from Sanity
+ */
+export interface SanityPageSEO {
+  metaTitle?: string;
+  metaDescription?: string;
+  openGraphImage?: SanityImage;
+  keywords?: string[];
+  canonicalUrl?: string;
+  noIndex?: boolean;
+}

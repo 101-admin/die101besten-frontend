@@ -9,7 +9,7 @@ const Image1 = ({ title, images }: ImageSection) => {
   }, [images]);
 
   return (
-    <div className="w-full lg:max-w-[1920px] mx-auto py-16 sm:py-20 md:py-24 lg:py-32 select-none">
+    <div className="w-full lg:max-w-[1920px] mx-auto px-5 py-16 sm:py-20 md:py-24 lg:py-32 select-none">
       <div className="max-w-[1440px] w-full mx-auto">
         <div className="flex flex-col justify-center items-center">
           {title && (

@@ -2,13 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogClose } from "../ui/dialog";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from "../ui/select";
 import { X } from "lucide-react";
 
 const industries = [
@@ -106,42 +99,42 @@ const Popup = ({
               <X size={20} />
             </button>
           </DialogClose>
-          <h2 className="font-ogg text-lg font-normal mb-2">
+          <h2 className="font-ogg text-[32px] font-normal mb-2">
             Werde 101 Partner
           </h2>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Name Firma</label>
+            <label className="text-[18px] font-semibold">Name Firma</label>
             <input
               name="company"
               value={form.company}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">
+            <label className="text-[18px] font-semibold">
               Firmenhauptsitz and Standort
             </label>
             <input
               name="location"
               value={form.location}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Industrie</label>
+            <label className="text-[18px] font-semibold">Industrie</label>
             <input
               name="location"
               value={form.industry}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           {/* <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Industry</label>
+            <label className="text-[18px] font-semibold">Industry</label>
             <Select value={form.industry} onValueChange={handleIndustryChange}>
-              <SelectTrigger className="h-9 px-2 text-sm border border-black">
+              <SelectTrigger className="h-12 px-2 text-lg outline-none border-2 border-black">
                 <SelectValue placeholder="Select industry" />
               </SelectTrigger>
               <SelectContent>
@@ -154,83 +147,85 @@ const Popup = ({
             </Select>
           </div> */}
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Name Kontaktperson</label>
+            <label className="text-[18px] font-semibold">Name Kontaktperson</label>
             <input
               name="contactName"
               value={form.contactName}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">
+            <label className="text-[18px] font-semibold">
               Rolle der Kontaktperson
             </label>
             <input
               name="contactRole"
               value={form.contactRole}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">E-Mail Adresse</label>
+            <label className="text-[18px] font-semibold">E-Mail Adresse</label>
             <input
               name="email"
               type="email"
               value={form.email}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Telefonnummer</label>
+            <label className="text-[18px] font-semibold">Telefonnummer</label>
             <input
               name="phone"
               value={form.phone}
               onChange={handleChange}
-              className="border border-black h-9 px-2 text-sm"
+              className="border-2 border-black h-12 px-2 text-lg outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium">Ihre Nachricht</label>
+            <label className="text-[18px] font-semibold">Ihre Nachricht</label>
             <textarea
               name="message"
               value={form.message}
               onChange={handleChange}
-              className="border border-black min-h-[80px] max-h-[120px] px-2 text-sm resize-none"
+              className="border-2 border-black h-[180px] p-2 text-lg outline-none resize-none"
               maxLength={500}
             />
-            <div className="text-right text-xs text-gray-400">
+            <div className="text-right text-[12px] text-gray-400">
               max. 500 Zeichen
             </div>
           </div>
           <div className="flex items-start gap-2 mt-2">
-            <input
-              type="checkbox"
-              name="consent"
-              checked={form.consent}
-              onChange={handleChange}
-              className="w-4 h-4 border-2 border-black mt-1"
-            />
-            <span className="text-xs text-gray-700">
-              Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
-              ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.Aenean
-              imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
-              ultricies nisi. Nam eget dui. Etiam rhoncus.
-            </span>
+            <label className="flex items-start cursor-pointer select-none">
+              <input
+                type="checkbox"
+                name="consent"
+                checked={form.consent}
+                onChange={handleChange}
+                className="w-4 h-4 border-2 border-black mt-1 mr-2"
+              />
+              <span className="text-[16px] leading-5 text-gray-700">
+                Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
+                ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.Aenean
+                imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                ultricies nisi. Nam eget dui. Etiam rhoncus.
+              </span>
+            </label>
           </div>
-          {error && <div className="text-xs text-red-500 mt-1">{error}</div>}
+          {error && <div className="text-[18px] text-red-500 mt-1">{error}</div>}
           <div className="flex justify-between gap-2 mt-4">
             <Button
               type="button"
               variant="outline"
-              className="w-1/3 rounded-none"
+              className="w-1/3 rounded-none uppercase font-bold font-montserrat border-black"
               onClick={() => onOpenChange(false)}
             >
               Abbrechen
             </Button>
-            <Button type="submit" className="w-2/3 rounded-none">
+            <Button type="submit" className="w-2/3 rounded-none uppercase font-bold font-montserrat">
               ABSENDEN
             </Button>
           </div>

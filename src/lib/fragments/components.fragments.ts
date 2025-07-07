@@ -507,3 +507,22 @@ export const specialHotelsComponentFragment = `
     link
   }
 `;
+
+
+//events page Fragments
+
+
+export const eventsHeroComponentFragment = `
+  _id,
+  _type,
+  title,
+  language,
+`;
+
+
+export const eventCollectionComponentFragment = `
+  _id,
+  _type,
+  title,
+  language,
+`;

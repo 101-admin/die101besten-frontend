@@ -15,7 +15,7 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
           {partners?.slice(0, 3).map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"
@@ -33,7 +33,7 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
           {partners?.slice(3, 5).map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
-                <Link href={`${partner?.link}`} className="w-full">
+                <Link target="_blank" href={`${partner?.link}`} className="w-full">
                   {partner?.image && (
                     <img
                       className="w-full"

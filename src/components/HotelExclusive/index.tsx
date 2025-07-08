@@ -6,7 +6,7 @@ import RoomsSection from "../RoomsSection";
 import Gallery from "../Gallery";
 import Premium from "../Premium";
 import Form from "../Form";
-import LocationTwo from "../LocationTwo";
+import LocationMap from "../LocationMap";
 import HotelHighlights from "../HotelHighlights";
 import HotelDescription from "../HotelDescription";
 import Testimonial2 from "../Testimonial2";
@@ -65,7 +65,8 @@ const HotelExclusive = ({ hotel }: { hotel: Hotel }) => {
 
       {/* mapSection */}
       {hotel?.mapSection && (
-        <LocationTwo
+        <LocationMap
+          hotelId={hotel?.ranking?.position}
           name={hotel?.name}
           address={hotel?.address}
           ctaButton={hotel?.ctaButton}

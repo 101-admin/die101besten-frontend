@@ -4,7 +4,7 @@ import Gallery from "../Gallery";
 import Premium from "../Premium";
 // import Footer from "../Footer";
 import HotelHighlights from "../HotelHighlights";
-import LocationTwo from "../LocationTwo";
+import LocationMap from "../LocationMap";
 import HotelDescription from "../HotelDescription";
 import GastgeberSection from "../GastgeberSection";
 import Form from "../Form";
@@ -55,7 +55,8 @@ const HotelPremium = ({ hotel }: { hotel: Hotel }) => {
 
       {/* mapSection */}
       {hotel?.mapSection && (
-        <LocationTwo
+        <LocationMap
+          hotelId={hotel?.ranking?.position}
           name={hotel?.name}
           address={hotel?.address}
           ctaButton={hotel?.ctaButton}

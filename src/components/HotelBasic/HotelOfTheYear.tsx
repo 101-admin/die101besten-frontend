@@ -22,7 +22,7 @@ export default function HotelOfTheYear({
     <section className="max-w-1440 mx-auto px-4 py-12">
       <div className="flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
         {/* Left text */}
-        <div className="max-w-[352px] lg:max-w-[352px] gap-2 lg:gap-[8px] lg:mt-16 mx-auto lg:mx-0 text-center lg:text-left">
+        <div className="max-w-[352px] lg:min-w-[352px] gap-2 lg:gap-[8px] lg:mt-16 mx-auto lg:mx-0 text-center lg:text-left">
           {achievements && (
             <div className="flex flex-wrap justify-center lg:justify-start lg:flex-row gap-1 mb-4">
               {achievements?.map((item, index) => {

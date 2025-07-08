@@ -5,7 +5,7 @@ import Premium from "../Premium";
 // import Footer from "../Footer";
 // import ImageSection from "../ImageSection";
 import HotelHighlights from "../HotelHighlights";
-import LocationTwo from "../LocationTwo";
+import LocationMap from "../LocationMap";
 import HotelDescription from "../HotelDescription";
 import RoomsSection from "../RoomsSection";
 // import HotelDesciption2 from "../HotelDesciption2";
@@ -69,7 +69,8 @@ const HotelGrand = ({ hotel }: { hotel: Hotel }) => {
 
       {/* mapSection */}
       {hotel?.mapSection && (
-        <LocationTwo
+        <LocationMap
+          hotelId={hotel?.ranking?.position}
           name={hotel?.name}
           ctaButton={hotel?.ctaButton}
           address={hotel?.address}

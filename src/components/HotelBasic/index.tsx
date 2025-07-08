@@ -4,7 +4,7 @@ import HotelOfTheYear from "./HotelOfTheYear";
 import LuxuryHotelSection from "./LuxuryHotelSection";
 import HotelHighlights from "../HotelHighlights";
 // import Footer from "../Footer";
-import LocationTwo from "../LocationTwo";
+import LocationMap from "../LocationMap";
 import Form from "../Form";
 import type { Hotel } from "@/lib";
 import Adds from "../Adds";
@@ -34,7 +34,8 @@ const HotelBasic = ({ hotel }: { hotel: Hotel }) => {
 
       {/* mapSection */}
       {hotel?.mapSection && (
-        <LocationTwo
+        <LocationMap
+          hotelId={hotel?.ranking?.position}
           name={hotel?.name}
           address={hotel?.address}
           ctaButton={hotel?.ctaButton}

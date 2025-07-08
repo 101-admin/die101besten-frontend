@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 // import { FaPlus } from "react-icons/fa6";
 // import { FaMinus } from "react-icons/fa6";
 import type { HotelMapSection, HotelAddress, CTAButton } from "@/lib";
 import Link from "next/link";
+import HotelMap from "./hotelMap";
 
-const Location = ({
+const SimpleMapSection = ({
   mapSection,
   name,
   address,
@@ -26,8 +27,7 @@ const Location = ({
         )}
         {address && (
           <h2 className="mt-4 font-ogg font-normal text-[15px] sm:text-[18px] md:text-[21px] lg:text-[32px] leading-[40px]">
-            {name}, {address?.city?.label} –{" "}
-            {address?.country?.name}
+            {name}, {address?.city?.label} – {address?.country?.name}
           </h2>
         )}
       </div>
@@ -43,9 +43,7 @@ const Location = ({
                 Buchung und Kontakt
               </h2>
               <p className="text-[16px] font-gte font-[350]">
-                {address?.street}{" "}
-                {address?.streetNumber},{" "}
-                {address?.postalCode}{" "}
+                {address?.street} {address?.streetNumber}, {address?.postalCode}{" "}
                 {address?.city?.label}
               </p>
               <p className="text-[16px] font-gte font-[350]">
@@ -80,4 +78,35 @@ const Location = ({
   );
 };
 
-export default Location;
+const LocationMap = ({
+  hotelId,
+  mapSection,
+  name,
+  address,
+  ctaButton,
+}: {
+  hotelId?: number;
+  mapSection: HotelMapSection;
+  name?: string;
+  address?: HotelAddress;
+  ctaButton?: CTAButton;
+}) => {
+  return (
+    <>
+      {hotelId !== undefined ? (
+        // <Suspense fallback={<div>Loading...</div>}>
+        <HotelMap hotelId={hotelId} />
+      ) : (
+        // </Suspense>
+        <SimpleMapSection
+          mapSection={mapSection}
+          name={name}
+          address={address}
+          ctaButton={ctaButton}
+        />
+      )}
+    </>
+  );
+};
+
+export default LocationMap;

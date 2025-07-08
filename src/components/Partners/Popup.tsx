@@ -54,7 +54,7 @@ const Popup = ({
         {state.succeeded ? (
           <div className="bg-white p-6 flex justify-center items-center gap-3">
             <h3 className="font-ogg text-xl sm:text-3xl font-normal">
-              Form is Submit Successfully
+              Das Formular wurde erfolgreich versendet.
             </h3>
             <div className="sm:w-12 sm:h-12 w-8 h-8 flex items-center justify-center rounded-full bg-green-500 text-white">
               <FaCheck size={20} />

@@ -1,10 +1,20 @@
 // import { PrimaryHeroSection } from "@/lib";
-import type { SanityImage , Button } from "@/lib";
+import type { SanityImage, Button } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 import { HiPhoto } from "react-icons/hi2";
 
-export default function Gallery({name, city, image, ctaButton }: {name?: string, city?: string, image?:SanityImage , ctaButton?: Button}) {
+export default function Gallery({
+  name,
+  city,
+  image,
+  ctaButton,
+}: {
+  name?: string;
+  city?: string;
+  image?: SanityImage;
+  ctaButton?: Button;
+}) {
   return (
     <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col">
       {/* Background Image */}
@@ -20,8 +30,6 @@ export default function Gallery({name, city, image, ctaButton }: {name?: string,
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent from-35.1% via-black/39 via-60.43% to-black/90 z-10"></div>
-
-        
       </div>
 
       {/* Top-right Button */}
@@ -49,13 +57,13 @@ export default function Gallery({name, city, image, ctaButton }: {name?: string,
           )}
         </div>
         {ctaButton && (
-<div className="w-full flex justify-center items-center h-20">
-<Link target="_blank" href={`${ctaButton?.url}`}>
-            <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
-            {ctaButton?.text}
-          </button>
-          </Link>
-</div>
+          <div className="w-full flex justify-center items-center h-20">
+            <Link target="_blank" href={`${ctaButton?.url}`}>
+              <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
+                {ctaButton?.text}
+              </button>
+            </Link>
+          </div>
         )}
       </div>
     </section>

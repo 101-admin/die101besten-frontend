@@ -70,7 +70,7 @@ const EventSlider = ({ events }: { events: allEvent }) => {
                             )}
                             {startDate && startDate > new Date().toISOString() && (
                               <div className="absolute top-8 left-3 md:left-8 lg:left-5 xl:left-8 bg-[#FFFFFF8C] backdrop-blur-[30px] p-6 max-w-[244px] xl:max-w-[270px] max-h-[88px] w-full h-full flex justify-center items-center">
-                                <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px xl:text-[32px]">Comming soon</h1>
+                                <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px xl:text-[32px]">Coming soon</h1>
                               </div>
                             )}
                           </div>

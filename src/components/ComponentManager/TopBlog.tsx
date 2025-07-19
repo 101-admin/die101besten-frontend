@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import type { BlogPage } from "@/lib";
+import type { BlogPage, SanityImage } from "@/lib";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
   const blog = blogData?.[0];
@@ -18,12 +19,20 @@ const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
                 {/* Image */}
                 {blog?.mainImage && (
                   <div className="w-full lg:w-1/2  overflow-hidden">
-                    <Image
+                    {/* <Image
                       src={blog.mainImage.url || ""}
                       alt={blog.mainImage.alt || "blog image"}
                       width={632}
                       height={552}
                       className="w-full h-[552px] object-cover"
+                      priority
+                    /> */}
+
+                    <OptimizedImage
+                      image={blog.mainImage as SanityImage}
+                      className="w-full h-[552px] object-cover"
+                      width={632}
+                      height={552}
                       priority
                     />
                   </div>

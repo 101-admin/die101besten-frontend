@@ -3,18 +3,6 @@
  */
 
 // For inline use in projections (fields only, not wrapped in {})
-export const globalImageFields = `
-  "url": asset->url,
-  "alt": alt,
-  "metadata": asset->metadata
-`;
-
-export const globalImageWithCaptionFields = `
-  "url": asset->url,
-  "alt": alt,
-  "caption": caption,
-  "metadata": asset->metadata
-`;
 
 /**
  * Standard image projection with url and alt text
@@ -22,7 +10,12 @@ export const globalImageWithCaptionFields = `
 export const globalImageFragment = `
   "url": asset->url,
   "alt": alt,
-  "metadata": asset->metadata
+  "metadata": asset->metadata,
+  "imageWithHotspot": {
+    "asset": asset->,
+    "hotspot": hotspot,
+    "crop": crop
+  }
 `;
 
 /**
@@ -32,7 +25,12 @@ export const globalImageWithCaptionFragment = `
   "url": asset->url,
   "alt": alt,
   "caption": caption,
-  "metadata": asset->metadata
+  "metadata": asset->metadata,
+  "imageWithHotspot": {
+    "asset": asset->,
+    "hotspot": hotspot,
+    "crop": crop
+  }
 `;
 
 /**

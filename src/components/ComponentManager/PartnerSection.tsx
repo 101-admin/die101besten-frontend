@@ -1,7 +1,8 @@
 import React from "react";
 
 import Link from "next/link";
-import type { PartnerComponent } from "@/lib";
+import type { PartnerComponent, SanityImage } from "@/lib";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const PartnerSection = ({
   title,
   otherPartners,
@@ -22,12 +23,20 @@ const PartnerSection = ({
           {partners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link target="_blank" href={`${partner?.link}`} className="w-full">
+                <Link
+                  target="_blank"
+                  href={`${partner?.link}`}
+                  className="w-full"
+                >
                   {partner?.image && (
-                    <img
+                    // <img
+                    //   className="w-full"
+                    //   src={`${partner?.image?.url}`}
+                    //   alt={`${partner?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={partner?.image as SanityImage}
                       className="w-full"
-                      src={`${partner?.image?.url}`}
-                      alt={`${partner?.image?.alt}`}
                     />
                   )}
                 </Link>
@@ -39,12 +48,20 @@ const PartnerSection = ({
           {premiumPartners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[213px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link target="_blank" href={`${partner?.link}`} className="w-full">
+                <Link
+                  target="_blank"
+                  href={`${partner?.link}`}
+                  className="w-full"
+                >
                   {partner?.image && (
-                    <img
+                    // <img
+                    //   className="w-full"
+                    //   src={`${partner?.image?.url}`}
+                    //   alt={`${partner?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={partner?.image as SanityImage}
                       className="w-full"
-                      src={`${partner?.image?.url}`}
-                      alt={`${partner?.image?.alt}`}
                     />
                   )}
                 </Link>
@@ -57,12 +74,20 @@ const PartnerSection = ({
           {otherPartners?.map((partner, index) => (
             <div key={index} className="flex justify-center items-center ">
               <div className="w-full max-w-[145px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link target="_blank" href={`${partner?.link}`} className="w-full">
+                <Link
+                  target="_blank"
+                  href={`${partner?.link}`}
+                  className="w-full"
+                >
                   {partner?.image && (
-                    <img
+                    // <img
+                    //   className="w-full"
+                    //   src={`${partner?.image?.url}`}
+                    //   alt={`${partner?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={partner?.image as SanityImage}
                       className="w-full"
-                      src={`${partner?.image?.url}`}
-                      alt={`${partner?.image?.alt}`}
                     />
                   )}
                 </Link>

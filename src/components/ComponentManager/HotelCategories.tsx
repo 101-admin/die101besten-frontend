@@ -7,9 +7,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import SpEdition from "@/Data/SpEdition";
-import type { SpecialHotels } from "@/lib";
+import type { SanityImage, SpecialHotels } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const HotelCategories = ({ title, hotels, id }: SpecialHotels) => {
   return (
     <section
@@ -40,10 +41,14 @@ const HotelCategories = ({ title, hotels, id }: SpecialHotels) => {
                     <Link href={`${data?.link}`}>
                       <div className="w-full ">
                         {data?.image && (
-                          <img
+                          // <img
+                          //   className="w-full max-h-[536px] h-[480px] object-cover"
+                          //   src={data?.image?.url || ""}
+                          //   alt={data?.image?.alt || ""}
+                          // />
+                          <OptimizedImage
+                            image={data?.image as SanityImage}
                             className="w-full max-h-[536px] h-[480px] object-cover"
-                            src={data?.image?.url || ""}
-                            alt={data?.image?.alt || ""}
                           />
                         )}
                       </div>

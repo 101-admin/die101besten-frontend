@@ -1,5 +1,6 @@
 import React from "react";
 import type { SanityImage } from "@/lib";
+import { OptimizedImage } from "./ui/OptimizedImage";
 const HotelDescription = ({
   fullwidthImage,
 }: {
@@ -11,10 +12,18 @@ const HotelDescription = ({
       <div className="w-full">
         <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] relative">
           {fullwidthImage && (
-            <img
+            // <img
+            //   className="w-full h-full object-cover"
+            //   src={fullwidthImage?.url || ""}
+            //   alt={fullwidthImage?.alt || ""}
+            // />
+
+            <OptimizedImage
+              image={fullwidthImage as SanityImage}
               className="w-full h-full object-cover"
-              src={fullwidthImage?.url || ""}
-              alt={fullwidthImage?.alt || ""}
+              // width={1920}
+              // height={300}
+              priority
             />
           )}
         </div>

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { ColoredText } from "../ui/ColoredText";
-import type { Event } from "@/lib";
+import type { Event, SanityImage } from "@/lib";
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const PastEvents = ({ events }: { events: Event[] }) => {
   const [showMore, setShowMore] = useState<number>(4);
   return (
@@ -20,44 +21,39 @@ const PastEvents = ({ events }: { events: Event[] }) => {
               })
               ?.slice(0, showMore)
               ?.map((event, index) => {
-                const { title, description, location, mainImage, slug } =
-                  event;
+                const { title, description, location, mainImage, slug } = event;
                 return (
                   <Link key={index} className="w-full" href={`/events/${slug}`}>
                     <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-10">
                       <div className="w-full h-[552px] flex">
-                        {
-                          mainImage && (
-                            <img
-                              className="w-full h-full object-cover object-top"
-                              src={`${mainImage?.url}`}
-                              alt={`${mainImage?.alt}`}
-                            />
-                          )
-                        }
+                        {mainImage && (
+                          // <img
+                          //   className="w-full h-full object-cover object-top"
+                          //   src={`${mainImage?.url}`}
+                          //   alt={`${mainImage?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={mainImage as SanityImage}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        )}
                       </div>
                       <div className="w-full flex flex-col justify-start items-baseline gap-4">
-                        {
-                          location && (
-                            <h6 className="font-[350] font-gte text-[20px] sm:text-[24px] leading-[32px]">
-                              {location}
-                            </h6>
-                          )
-                        }
-                        {
-                          title && (
-                            <h4 className="font-ogg font-normal text-[24px] sm:text-[32px] leading-[40px] line-clamp-2">
-                              {title}
-                            </h4>
-                          )
-                        }
-                        {
-                          description && (
-                            <p className="font-[350] font-gte text-[18px] sm:text-[24px] leading-[32px] line-clamp-3">
-                              {description}
-                            </p>
-                          )
-                        }
+                        {location && (
+                          <h6 className="font-[350] font-gte text-[20px] sm:text-[24px] leading-[32px]">
+                            {location}
+                          </h6>
+                        )}
+                        {title && (
+                          <h4 className="font-ogg font-normal text-[24px] sm:text-[32px] leading-[40px] line-clamp-2">
+                            {title}
+                          </h4>
+                        )}
+                        {description && (
+                          <p className="font-[350] font-gte text-[18px] sm:text-[24px] leading-[32px] line-clamp-3">
+                            {description}
+                          </p>
+                        )}
                       </div>
                       <div className="w-full flex flex-col justify-start items-baseline gap-4">
                         <button className="btn-secondary w-[300px] text-black border-black btn-secondary-hover-de">

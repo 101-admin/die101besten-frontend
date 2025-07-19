@@ -56,7 +56,7 @@ const HotelPremium = ({ hotel }: { hotel: Hotel }) => {
       {/* mapSection */}
       {hotel?.mapSection && (
         <LocationMap
-          hotelId={hotel?.ranking?.position}
+          hotelId={hotel?._id}
           name={hotel?.name}
           address={hotel?.address}
           ctaButton={hotel?.ctaButton}

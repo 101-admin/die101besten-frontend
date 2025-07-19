@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
-import type { HotelHighlights } from "@/lib";
+import type { HotelHighlights, SanityImage } from "@/lib";
 
 import { ColoredText } from "./ui/ColoredText";
 import { useState } from "react";
+import { OptimizedImage } from "./ui/OptimizedImage";
 export default function HotelHighlights({
   hotelHighlights,
 }: {
@@ -12,21 +13,26 @@ export default function HotelHighlights({
 }) {
   const [showPopUp, setShowPopUp] = useState(false);
   return (
-    <section
-      className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16"
-    >
+    <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16">
       <div className="flex flex-col lg:flex-row h-full gap-12">
         {/* Left Image */}
         <div className="w-full  h-full relative">
           <div className="relative w-full h-full overflow-hidden">
             {hotelHighlights?.image && (
-              <Image
+              // <Image
+              //   className="max-w-[630px] w-full h-[600px] object-cover"
+              //   src={hotelHighlights?.image?.url || ""}
+              //   alt={hotelHighlights?.image?.alt || ""}
+              //   width={629}
+              //   height={600}
+              //   objectFit="cover"
+              //   priority
+              // />
+              <OptimizedImage
+                image={hotelHighlights?.image as SanityImage}
                 className="max-w-[630px] w-full h-[600px] object-cover"
-                src={hotelHighlights?.image?.url || ""}
-                alt={hotelHighlights?.image?.alt || ""}
                 width={629}
                 height={600}
-                objectFit="cover"
                 priority
               />
             )}
@@ -47,12 +53,18 @@ export default function HotelHighlights({
                 <li key={index} className="flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
                     {amenity?.icon && (
-                      <Image
-                        src={amenity?.icon?.url || ""}
-                        alt={amenity?.icon?.alt || ""}
+                      // <Image
+                      //   src={amenity?.icon?.url || ""}
+                      //   alt={amenity?.icon?.alt || ""}
+                      //   width={64}
+                      //   height={64}
+                      //   className="object-contain"
+                      // />
+                      <OptimizedImage
+                        image={amenity?.icon as SanityImage}
+                        className="object-contain"
                         width={64}
                         height={64}
-                        className="object-contain"
                       />
                     )}
                   </div>
@@ -105,12 +117,18 @@ export default function HotelHighlights({
                 <li key={index} className="w-full flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
                     {amenity?.icon && (
-                      <Image
-                        src={`${amenity?.icon?.url}`}
-                        alt={`${amenity?.icon?.alt}`}
+                      // <Image
+                      //   src={`${amenity?.icon?.url}`}
+                      //   alt={`${amenity?.icon?.alt}`}
+                      //   width={64}
+                      //   height={64}
+                      //   className="object-contain"
+                      // />
+                      <OptimizedImage
+                        image={amenity?.icon as SanityImage}
+                        className="object-contain"
                         width={64}
                         height={64}
-                        className="object-contain"
                       />
                     )}
                   </div>

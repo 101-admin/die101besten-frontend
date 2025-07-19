@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import type { AboutHotel, BlockContent } from "@/lib";
+import type { AboutHotel, BlockContent, SanityImage } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 // import { PortableText } from "@/lib/components/PortableText";
 
 export default function LuxuryHotelSection({
@@ -32,12 +33,19 @@ export default function LuxuryHotelSection({
               >
                 <div className="md:max-w-[636] ">
                   {image && (
-                    <Image
-                      src={image?.url || ""}
-                      alt={image?.alt || ""}
+                    // <Image
+                    //   src={image?.url || ""}
+                    //   alt={image?.alt || ""}
+                    //   className="w-full object-cover h-[520px]"
+                    //   width={636}
+                    //   height={520}
+                    // />
+                    <OptimizedImage
+                      image={image as SanityImage}
                       className="w-full object-cover h-[520px]"
                       width={636}
                       height={520}
+                      priority
                     />
                   )}
                 </div>

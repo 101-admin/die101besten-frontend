@@ -7,9 +7,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import type { ArticleSection } from "@/lib";
+import type { ArticleSection, SanityImage } from "@/lib";
 import { ColoredText } from "./ui/ColoredText";
 import Link from "next/link";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const LatestArticles = ({ data }: { data?: ArticleSection }) => {
   console.log(data, "latest articles");
@@ -48,10 +49,14 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
                       <div className="w-full flex flex-col">
                         <div className="relative w-full h-64">
                           {mainImage && (
-                            <Image
-                              src={mainImage?.url || ""}
-                              alt={mainImage?.alt || ""}
-                              fill
+                            // <Image
+                            //   src={mainImage?.url || ""}
+                            //   alt={mainImage?.alt || ""}
+                            //   fill
+                            //   className="object-cover"
+                            // />
+                            <OptimizedImage
+                              image={mainImage as SanityImage}
                               className="object-cover"
                             />
                           )}

@@ -80,6 +80,12 @@ const epilogueFont = Epilogue({
   fallback: ["Helvetica", "sans-serif"],
 });
 
+export const metadata = {
+  icons: {
+    icon: "/Logos/favicon-de.ico",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

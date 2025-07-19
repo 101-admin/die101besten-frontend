@@ -1,17 +1,14 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
-import { HotelInfo } from "@/lib";
+import { HotelInfo, SanityImage } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "./ui/ColoredText";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
-const RoomsSection = ({
-  data,
-}: {
-  data?: HotelInfo;
-}) => {
-    const [showPopUp, setShowPopUp] = useState(false);
+const RoomsSection = ({ data }: { data?: HotelInfo }) => {
+  const [showPopUp, setShowPopUp] = useState(false);
   return (
     <section className="w-full max-w-[1440px] mx-auto bg-white py-16 px-4 sm:px-8 lg:py-[64px] lg:px-[64px] relative">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-[40px] ">
@@ -19,12 +16,19 @@ const RoomsSection = ({
         <div className="w-full lg:w-1/2 h-auto">
           <div className="relative w-full">
             {data?.image && (
-              <Image
-                src={data?.image?.url || ""}
-                alt={data?.image?.alt || ""}
+              // <Image
+              //   src={data?.image?.url || ""}
+              //   alt={data?.image?.alt || ""}
+              //   width={636}
+              //   height={605}
+              //   className="object-cover max-w-[636px] w-full h-[605px]"
+              // />
+              <OptimizedImage
+                image={data?.image as SanityImage}
+                className="object-cover max-w-[636px] w-full h-[605px]"
                 width={636}
                 height={605}
-                className="object-cover max-w-[636px] w-full h-[605px]"
+                priority
               />
             )}
           </div>
@@ -49,7 +53,6 @@ const RoomsSection = ({
           </button>
         </div>
       </div>
-
 
       <div
         onClick={() => setShowPopUp(false)}

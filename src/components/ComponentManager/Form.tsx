@@ -75,13 +75,16 @@ const Form = ({ id }: Newsletter) => {
                   className="min-w-8 min-h-8 border-2 border-black rounded-none"
                 />
                 <span className="bodycopy-4-lg text-black">
-                  Ich bin damit einverstanden, dass die &quot;Die 101
-                  Besten&quot; - Institute for Service- and Leadership
-                  Excellence AG mich regelmäßig per E-Mail-Newsletter über
-                  aktuelle Angebote und andere Neuigkeiten zu Werbezwecken
-                  informiert. Meine Einwilligung kann ich jederzeit mit Wirkung
-                  für die Zukunft widerrufen. Es gilt die Datenschutzerklärung (
-                  https://die-101- besten.de/datenschutz).
+                  Ich bin mit der Verarbeitung meiner Daten im Rahmen des
+                  Kontaktformulars einverstanden. Es gilt die
+                  Datenschutzerklärung{" "}
+                  <Link
+                    target="_blank"
+                    className="underline"
+                    href="https://die-101-besten.de/datenschutz"
+                  >
+                    (https://die-101-besten.de/datenschutz).
+                  </Link>
                 </span>
               </label>
 

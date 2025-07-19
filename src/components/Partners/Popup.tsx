@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { useForm } from "@formspree/react";
 import { FaCheck } from "react-icons/fa6";
+import Link from "next/link";
 const Popup = ({
   open,
   onOpenChange,
@@ -184,10 +185,16 @@ const Popup = ({
                   className="w-4 h-4 border-2 border-black mt-1 mr-2"
                 />
                 <span className="text-[16px] leading-5 text-gray-700">
-                  Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
-                  ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.Aenean
-                  imperdiet. Etiam ultricies nisi vel augue. Curabitur
-                  ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
+                  Ich bin mit der Verarbeitung meiner Daten im Rahmen des
+                  Kontaktformulars einverstanden. Es gilt die
+                  Datenschutzerklärung{" "}
+                  <Link
+                    target="_blank"
+                    className="underline"
+                    href="https://die-101-besten.de/datenschutz"
+                  >
+                    (https://die-101-besten.de/datenschutz).
+                  </Link>
                 </span>
               </label>
             </div>

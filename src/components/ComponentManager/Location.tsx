@@ -1,5 +1,6 @@
 import React from "react";
-import type { Location } from "@/lib";
+import type { Location, SanityImage } from "@/lib";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const Location = ({ title, image }: Location) => {
   return (
     <section className="w-full lg:max-w-[1920px] mx-auto flex flex-col justify-center items-center py-10 select-none ">
@@ -14,11 +15,12 @@ const Location = ({ title, image }: Location) => {
 
         <div className="flex w-full object-cover justify-center items-center mb-7 lg:mb-14">
           {image && (
-            <img
-              className="w-full"
-              src={`${image?.url}`}
-              alt={`${image?.alt}`}
-            />
+            // <img
+            //   className="w-full"
+            //   src={`${image?.url}`}
+            //   alt={`${image?.alt}`}
+            // />
+            <OptimizedImage image={image as SanityImage} className="w-full" />
           )}
         </div>
       </div>

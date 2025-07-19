@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import type { BlogPage } from "@/lib";
+import type { BlogPage, SanityImage } from "@/lib";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
   // console.log(blogData, "@blogData");
@@ -23,9 +24,13 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
                   {/* Image  */}
                   <div className="relative w-full mb-4 sm:mb-6  overflow-hidden">
                     {mainImage && (
-                      <img
-                        src={`${mainImage?.url}`}
-                        alt={`${mainImage?.alt}`}
+                      // <img
+                      //   src={`${mainImage?.url}`}
+                      //   alt={`${mainImage?.alt}`}
+                      //   className="object-cover w-full  max-w-[632px] h-[552px]"
+                      // />
+                      <OptimizedImage
+                        image={mainImage as SanityImage}
                         className="object-cover w-full  max-w-[632px] h-[552px]"
                       />
                     )}

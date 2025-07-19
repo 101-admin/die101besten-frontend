@@ -8,8 +8,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import type { allEvent } from "@/lib";
+import type { allEvent, SanityImage } from "@/lib";
 import Link from "next/link";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const formatDate = (dateString: string | undefined): string => {
   if (!dateString) return "Invalid date";
@@ -51,7 +52,7 @@ const EventSlider = ({ events }: { events: allEvent }) => {
                     description,
                     startDate,
                     slug,
-                    location
+                    location,
                   } = event;
                   return (
                     <CarouselItem
@@ -62,17 +63,25 @@ const EventSlider = ({ events }: { events: allEvent }) => {
                         <div className="w-full flex flex-col justify-start items-baseline gap-8">
                           <div className="w-full h-[394px] flex relative">
                             {mainImage && (
-                              <img
+                              // <img
+                              //   className="w-full h-full object-cover object-top"
+                              //   src={`${mainImage?.url}`}
+                              //   alt={`${mainImage?.alt}`}
+                              // />
+                              <OptimizedImage
+                                image={mainImage as SanityImage}
                                 className="w-full h-full object-cover object-top"
-                                src={`${mainImage?.url}`}
-                                alt={`${mainImage?.alt}`}
+                                priority
                               />
                             )}
-                            {startDate && startDate > new Date().toISOString() && (
-                              <div className="absolute top-8 left-3 md:left-8 lg:left-5 xl:left-8 bg-[#FFFFFF8C] backdrop-blur-[30px] p-6 max-w-[244px] xl:max-w-[270px] max-h-[88px] w-full h-full flex justify-center items-center">
-                                <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px xl:text-[32px]">Coming soon</h1>
-                              </div>
-                            )}
+                            {startDate &&
+                              startDate > new Date().toISOString() && (
+                                <div className="absolute top-8 left-3 md:left-8 lg:left-5 xl:left-8 bg-[#FFFFFF8C] backdrop-blur-[30px] p-6 max-w-[244px] xl:max-w-[270px] max-h-[88px] w-full h-full flex justify-center items-center">
+                                  <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px xl:text-[32px]">
+                                    Coming soon
+                                  </h1>
+                                </div>
+                              )}
                           </div>
                           <div className="w-full flex flex-col justify-start items-baseline gap-6">
                             {startDate && (

@@ -7,7 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { CTAButton, HotelAddress, HotelMapSection } from "@/lib";
 
 interface HotelMapProps {
-  hotelId: number;
+  hotelId: string;
   mapSection?: HotelMapSection;
   name?: string;
   address?: HotelAddress;
@@ -34,7 +34,7 @@ const HotelMap: React.FC<HotelMapProps> = ({
     mapboxgl.accessToken = accessToken;
 
     // Fetch the GeoJSON data
-    fetch("/de.geojson")
+    fetch("/all-hotels.geojson")
       .then((res) => res.json())
       .then((geojson: FeatureCollection<Point>) => {
         console.log("geojson ", geojson);
@@ -50,8 +50,7 @@ const HotelMap: React.FC<HotelMapProps> = ({
 
           // Filter for the specific hotel
           const hotelFeature = geojson.features.find(
-            (feature) =>
-              Number(feature.properties?.original_placement) == hotelId
+            (feature) => feature.properties?._id == hotelId
           );
 
           if (hotelFeature) {
@@ -132,8 +131,8 @@ const HotelMap: React.FC<HotelMapProps> = ({
           </h2>
         )}
       </div>
-      <div className="flex w-full relative items-center">
-        <div className="w-full flex px-6 md:px-16">
+      <div className="flex flex-col justify-center w-full relative items-center">
+        <div className="w-full flex">
           {mapError ? (
             <div className="w-full h-[440px] flex items-center justify-center bg-gray-100">
               <p className="text-red-500">{mapError}</p>
@@ -146,21 +145,21 @@ const HotelMap: React.FC<HotelMapProps> = ({
           )}
         </div>
 
-        <div className="absolute left-10 md:left-[130px] lg:left-[174px] sm:w-full w-[260px] sm:max-w-[376px] flex flex-col justify-start items-baseline p-6 sm:p-9 md:p-12 bg-white gap-2">
-          <h2 className="font-ogg font-normal text-[22px] bg-gradient-to-r from-[#B65033] from-50% to-[#F49E6E] bg-clip-text text-transparent">
+        <div className="lg:absolute lg:left-[174px] w-full max-w-[376px] flex flex-col justify-start items-baseline p-9 md:p-12 bg-[#F9F8FA] lg:bg-white gap-2">
+          <h2 className="font-ogg font-normal text-[22px] bg-gradient-to-r from-[#B65033] from-50% to-[#F49E6E] bg-clip-text text-transparent w-full text-wrap">
             Buchung und Kontakt
           </h2>
-          <p className="text-[16px] font-gte font-[350]">
+          <p className="text-[16px] font-gte font-[350] w-full">
             {address?.street} {address?.streetNumber}, {address?.postalCode}{" "}
             {address?.city?.label}
           </p>
-          <p className="text-[16px] font-gte font-[350]">
+          <p className="text-[16px] font-gte font-[350] w-full">
             {mapSection?.contactInfo?.phone}
           </p>
-          <p className="text-[16px] font-gte font-[350]">
+          <p className="text-[16px] font-gte font-[350] w-full">
             {mapSection?.contactInfo?.email}
           </p>
-          <p className="text-[16px] font-gte font-[350]">
+          <p className="text-[16px] font-gte font-[350] w-full">
             {mapSection?.contactInfo?.website}
           </p>
           {ctaButton?.url && (

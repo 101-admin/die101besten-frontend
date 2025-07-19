@@ -1,6 +1,12 @@
-import { HotelAchievement, CTAButton, SecondaryHeroSection } from "@/lib";
+import {
+  HotelAchievement,
+  CTAButton,
+  SecondaryHeroSection,
+  SanityImage,
+} from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 // import { CiHeart } from "react-icons/ci";
 // import { LuArrowUpFromLine } from "react-icons/lu";
 
@@ -51,7 +57,11 @@ export default function HotelOfTheYear({
 
           <div className="mb-8 flex flex-col items-center lg:items-start gap-4">
             {ctaButton && (
-              <Link target="_blank" href={`${ctaButton?.url}`} className="w-full max-w-[300px]">
+              <Link
+                target="_blank"
+                href={`${ctaButton?.url}`}
+                className="w-full max-w-[300px]"
+              >
                 <button className="w-full  h-[64px] gap-[8px] py-[16px] px-[24px] bg-black text-white uppercase font-montserrat font-bold text-[16px] leading-[24px] text-center tracking-normal">
                   {ctaButton?.text}
                 </button>
@@ -74,12 +84,19 @@ export default function HotelOfTheYear({
         {/* Right Image */}
         <div className="max-w-[960px] w-full lg:w-auto relative mx-auto lg:mx-0 px-4 lg:px-0">
           {image && (
-            <Image
-              src={image?.url || ""}
-              alt={image?.alt || ""}
+            // <Image
+            //   src={image?.url || ""}
+            //   alt={image?.alt || ""}
+            //   width={960}
+            //   height={600}
+            //   className="object-cover w-full h-[600px]"
+            // />
+            <OptimizedImage
+              image={image as SanityImage}
+              className="object-cover w-full h-[600px]"
               width={960}
               height={600}
-              className="object-cover w-full h-[600px]"
+              priority
             />
           )}
         </div>
@@ -95,12 +112,18 @@ export default function HotelOfTheYear({
                 className="relative w-[180px] lg:w-[243.83px] h-[60px] lg:h-[80px]"
               >
                 {item && (
-                  <Image
-                    src={item?.image?.url || ""}
-                    alt={item?.image?.alt || ""}
+                  // <Image
+                  //   src={item?.image?.url || ""}
+                  //   alt={item?.image?.alt || ""}
+                  //   width={180}
+                  //   height={60}
+                  //   className="w-full h-full"
+                  // />
+                  <OptimizedImage
+                    image={item?.image as SanityImage}
+                    className="w-full h-full"
                     width={180}
                     height={60}
-                    className="w-full h-full"
                   />
                 )}
               </div>

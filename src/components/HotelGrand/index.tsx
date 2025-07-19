@@ -70,7 +70,7 @@ const HotelGrand = ({ hotel }: { hotel: Hotel }) => {
       {/* mapSection */}
       {hotel?.mapSection && (
         <LocationMap
-          hotelId={hotel?.ranking?.position}
+          hotelId={hotel?._id}
           name={hotel?.name}
           ctaButton={hotel?.ctaButton}
           address={hotel?.address}

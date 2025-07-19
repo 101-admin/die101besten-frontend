@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 const SecondaryDropdownContent = () => {
   const router = useRouter();
@@ -61,14 +62,28 @@ const SecondaryDropdownContent = () => {
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Edition
             </h3>
-            <Select value={value} onValueChange={setValue}>
+            <Select
+              defaultValue=""
+              onValueChange={(url) => {
+                if (url) {
+                  window.location.href = url;
+                }
+              }}
+            >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="Deutschland" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="deutschland">Deutschland</SelectItem>
-                  <SelectItem value="sanana">Schweiz</SelectItem>
+                  <SelectItem value="https://die-new.vercel.app/special-editions">
+                    Deutschland
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/special-editions">
+                    DACH + Südtirol
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/special-editions">
+                    Schweiz
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

@@ -2,6 +2,7 @@ import type { SuccessStory } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 import React from "react";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const SuccessStory = ({
   title,
@@ -31,10 +32,14 @@ const SuccessStory = ({
         </div>
         <div className="z-10 flex flex-col gap-4 items-center md:items-start h-full md:self-stretch py-0 px-6 md:px-0 -mb-24 md:mb-0">
           {image && (
-            <img
+            // <img
+            //   className="w-full h-full aspect-[3/4] max-w-[300px] md:max-w-[330px] md:min-w-[300px]"
+            //   src={image.url}
+            //   alt={image.alt}
+            // />
+            <OptimizedImage
+              image={image}
               className="w-full h-full aspect-[3/4] max-w-[300px] md:max-w-[330px] md:min-w-[300px]"
-              src={image.url}
-              alt={image.alt}
             />
           )}
           <div className="flex flex-col gap-[6px] pl-0 md:pl-16">

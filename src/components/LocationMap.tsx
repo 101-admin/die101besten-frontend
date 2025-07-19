@@ -85,7 +85,7 @@ const LocationMap = ({
   address,
   ctaButton,
 }: {
-  hotelId?: number;
+  hotelId?: string;
   mapSection: HotelMapSection;
   name?: string;
   address?: HotelAddress;

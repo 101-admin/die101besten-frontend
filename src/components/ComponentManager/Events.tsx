@@ -1,7 +1,8 @@
 import React from "react";
-import type { Events101 } from "@/lib";
+import type { Events101, SanityImage } from "@/lib";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const Events = ({
   title,
@@ -64,10 +65,14 @@ const Events = ({
                         >
                           <div className="max-w-[240px] w-full flex">
                             {mainImage && (
-                              <img
+                              // <img
+                              //   className="w-[240px] h-[240px] object-cover"
+                              //   src={`${mainImage?.url}`}
+                              //   alt={`${mainImage?.alt}`}
+                              // />
+                              <OptimizedImage
+                                image={mainImage as SanityImage}
                                 className="w-[240px] h-[240px] object-cover"
-                                src={`${mainImage?.url}`}
-                                alt={`${mainImage?.alt}`}
                               />
                             )}
                           </div>
@@ -131,10 +136,14 @@ const Events = ({
                       >
                         <div className="max-w-[240px] w-full flex">
                           {mainImage && (
-                            <img
+                            // <img
+                            //   className="w-[240px] h-[240px] object-cover"
+                            //   src={`${mainImage?.url}`}
+                            //   alt={`${mainImage?.alt}`}
+                            // />
+                            <OptimizedImage
+                              image={mainImage as SanityImage}
                               className="w-[240px] h-[240px] object-cover"
-                              src={`${mainImage?.url}`}
-                              alt={`${mainImage?.alt}`}
                             />
                           )}
                         </div>

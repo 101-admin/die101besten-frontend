@@ -1,15 +1,12 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import type { HotelInfoPremium } from "@/lib";
+import type { HotelInfoPremium, SanityImage } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "./ui/ColoredText";
-const GastgeberSection = ({
-  hotelInfo,
-}: {
-  hotelInfo: HotelInfoPremium;
-}) => {
-    const [showPopUp, setShowPopUp] = useState(false);
+import { OptimizedImage } from "./ui/OptimizedImage";
+const GastgeberSection = ({ hotelInfo }: { hotelInfo: HotelInfoPremium }) => {
+  const [showPopUp, setShowPopUp] = useState(false);
   return (
     <section className="w-full max-w-[1440px] flex flex-col justify-center items-center mx-auto px-4 sm:px-8 md:px-16 py-16 md:py-20 relative">
       <div className="max-w-[1192px] w-full">
@@ -23,10 +20,17 @@ const GastgeberSection = ({
             )}
             <div className="w-full">
               {hotelInfo?.Person?.image && (
-                <img
+                // <img
+                //   className="max-w-[300px] w-full h-[376px] object-cover"
+                //   src={hotelInfo?.Person?.image?.url}
+                //   alt={hotelInfo?.Person?.image?.alt}
+                // />
+                <OptimizedImage
+                  image={hotelInfo?.Person?.image as SanityImage}
                   className="max-w-[300px] w-full h-[376px] object-cover"
-                  src={hotelInfo?.Person?.image?.url}
-                  alt={hotelInfo?.Person?.image?.alt}
+                  // width={300}
+                  // height={376}
+                  priority
                 />
               )}
             </div>

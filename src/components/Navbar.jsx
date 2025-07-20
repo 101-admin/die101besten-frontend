@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, Suspense } from "react";
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 // import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-import { IoClose } from "react-icons/io5";
+// import { IoClose } from "react-icons/io5";
 import Edition from "@/Data/Edition";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 
 import {
   Carousel,
@@ -17,34 +17,34 @@ import {
 const NavbarContent = ({ navbar }) => {
   const navbarData = navbar[0];
   // console.log(navbarData, "navbarData");
-  const [text, setText] = useState("");
-  const [displayText, setDisplayText] = useState("");
+  // const [text, setText] = useState("");
+  // const [displayText, setDisplayText] = useState("");
   const [barBtn, setBarBtn] = useState(true);
   const [search, setSearch] = useState(false);
-  const [displaySearch, setdisplaySearch] = useState(true);
+  // const [displaySearch, setdisplaySearch] = useState(true);
   const [menu, setMenu] = useState(false);
   const [editionIndex, setEditionIndex] = useState(0);
   const [showEdition, setShowEdition] = useState(false);
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSearch = () => {
-    if (search) {
-      setSearch(false);
-      setMenu(false);
-    } else {
-      setSearch(true);
-      setMenu(false);
-      if (barBtn === false) {
-        setBarBtn(true);
-      }
-    }
-  };
+  // const handleSearch = () => {
+  //   if (search) {
+  //     setSearch(false);
+  //     setMenu(false);
+  //   } else {
+  //     setSearch(true);
+  //     setMenu(false);
+  //     if (barBtn === false) {
+  //       setBarBtn(true);
+  //     }
+  //   }
+  // };
 
   const handleNav = () => {
     if (barBtn) {
@@ -58,25 +58,25 @@ const NavbarContent = ({ navbar }) => {
     }
   };
 
-  const updateSearchParams = (key, value) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (
-      value === "AlleKategorien" ||
-      value === "alleStädte" ||
-      value === "bittewählen" ||
-      !value
-    ) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    router.push(`/hotels?search=${value}#anchor-ranking`);
-  };
+  // const updateSearchParams = (key, value) => {
+  //   const params = new URLSearchParams(searchParams.toString());
+  //   if (
+  //     value === "AlleKategorien" ||
+  //     value === "alleStädte" ||
+  //     value === "bittewählen" ||
+  //     !value
+  //   ) {
+  //     params.delete(key);
+  //   } else {
+  //     params.set(key, value);
+  //   }
+  //   router.push(`/hotels?search=${value}#anchor-ranking`);
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateSearchParams("search", displayText);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   updateSearchParams("search", displayText);
+  // };
 
   return (
     <>
@@ -100,7 +100,8 @@ const NavbarContent = ({ navbar }) => {
                     key={idx}
                     className="flex flex-col justify-center items-center"
                   >
-                    <div
+                    <Link
+                      href={data.link}
                       onClick={() => setEditionIndex(idx)}
                       key={idx}
                       className="relative py-4 group flex flex-col justify-center items-center cursor-pointer"
@@ -118,7 +119,7 @@ const NavbarContent = ({ navbar }) => {
                       <h2 className="font-light font-gte text-[18px]">
                         {data.title}
                       </h2>
-                    </div>
+                    </Link>
                   </CarouselItem>
                 );
               })}
@@ -136,7 +137,8 @@ const NavbarContent = ({ navbar }) => {
           <div className="w-full h-full max-w-[616px] flex justify-between items-start pt-4">
             {Edition.map((data, idx) => {
               return (
-                <div
+                <Link
+                  href={data.link}
                   onMouseOver={() => setShowEdition(true)}
                   onMouseOut={() => setShowEdition(false)}
                   onClick={() => setEditionIndex(idx)}
@@ -164,7 +166,7 @@ const NavbarContent = ({ navbar }) => {
                   >
                     <img src={data.img} alt="" />
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -180,13 +182,13 @@ const NavbarContent = ({ navbar }) => {
             className="flex justify-between items-center w-full px-4 mb-5"
           >
             <div>
-              <button onClick={handleSearch}>
+              {/* <button onClick={handleSearch}>
                 <FiSearch
                   className={`text-[20px] ${
                     search ? "text-[#B64F32]" : "text-black"
                   }`}
                 />
-              </button>
+              </button> */}
             </div>
 
             <Link onClick={() => setBarBtn(true)} href="/">
@@ -231,7 +233,7 @@ const NavbarContent = ({ navbar }) => {
             </button>
           </div>
           <div className="w-full flex justify-center items-center">
-            <form
+            {/* <form
               className={`w-full  justify-center items-center ${
                 search ? "flex " : "hidden"
               }`}
@@ -247,7 +249,7 @@ const NavbarContent = ({ navbar }) => {
               <button className="w-[15%] h-[43px] p-5 bg-black text-white flex justify-center items-center">
                 <FiSearch className="text-[30px]" />
               </button>
-            </form>
+            </form> */}
           </div>
           <div
             className={`flex flex-col absolute right-0 py-3 top-[80px] justify-start items-center z-10 duration-100 bg-white overflow-y-auto max-h-[calc(100vh-80px)] ${
@@ -377,7 +379,7 @@ const NavbarContent = ({ navbar }) => {
             })}
           </div>
           <div className="flex items-center justify-end gap-4 w-1/6">
-            <div
+            {/* <div
               className={`flex h-10 items-center border-black  ${
                 displaySearch ? "border-none" : "border-2"
               }`}
@@ -421,7 +423,7 @@ const NavbarContent = ({ navbar }) => {
                   <IoClose className="text-[20px] font-bold" />
                 </button>
               </div>
-            </div>
+            </div> */}
             {/* <div className="gap-4 flex">
               <button className="font-montserrat font-bold text-[12px] uppercase py-2 px-3 max-h-7 leading-3 bg-black text-white cursor-pointer">
                 Login

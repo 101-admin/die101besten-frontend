@@ -3,7 +3,6 @@ import React, { useState, Suspense } from "react";
 // import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuSearch } from "react-icons/lu";
 import { useRouter, useSearchParams } from "next/navigation";
-import { DEFAULT_EDITION } from "@/lib/config/sanity";
 import {
   Select,
   SelectContent,
@@ -13,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { HotelCategory, HotelCity } from "@/lib";
+import Link from "next/link";
 
 const DropdownContent = ({
   totalHotels,
@@ -69,55 +69,34 @@ const DropdownContent = ({
           <span className="text-[#B65033]">Deutschland</span>
         </h1>
         <div
-          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 ${
-            DEFAULT_EDITION === "deutschland"
-              ? "xl:grid-cols-3"
-              : "xl:grid-cols-4"
-          }`}
+          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6`}
         >
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Ranking Edition
             </h3>
             <Select
-              defaultValue={searchParams.get("edition") || ""}
-              // onValueChange={(value) => updateSearchParams("edition", value)}
+              defaultValue=""
+              onValueChange={(url) => {
+                if (url) {
+                  window.location.href = url;
+                }
+              }}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Deutschland" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="deutschland">Deutschland</SelectItem>
-                  <SelectItem value=" dachSüdtirol">
-                    {" "}
+                  <SelectItem value="https://die-new.vercel.app/hotels">
+                    Deutschland
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/hotels">
                     DACH + Südtirol
                   </SelectItem>
-                  <SelectItem value="schweiz">Schweiz</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div
-            className={`w-full  flex-col justify-start items-baseline gap-1 ${
-              DEFAULT_EDITION === "deutschland" ? "hidden" : "flex"
-            }`}
-          >
-            <h3 className="text-[18px] font-montserrat font-semibold px-1">
-              Hotel Segment
-            </h3>
-            <Select
-              defaultValue={searchParams.get("segment") || ""}
-              onValueChange={(value) => updateSearchParams("segment", value)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Bitte wählen" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="bittewählen">Bitte wählen</SelectItem>
-                  <SelectItem value="leisure">Leisure</SelectItem>
-                  <SelectItem value="business">Business</SelectItem>
+                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/hotels">
+                    Schweiz
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

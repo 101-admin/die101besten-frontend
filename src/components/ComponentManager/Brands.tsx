@@ -13,9 +13,10 @@ import "swiper/css/autoplay";
 
 import { Autoplay, FreeMode } from "swiper/modules";
 
-import type { PartnerLogo } from "@/lib";
+import type { PartnerLogo, SanityImage } from "@/lib";
 
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const Brands = ({ logoSlider, id }: PartnerLogo) => {
   return (
@@ -65,10 +66,14 @@ const Brands = ({ logoSlider, id }: PartnerLogo) => {
                     <div key={index} className="">
                       <Link href={`${link}`}>
                         {image && (
-                          <img
+                          // <img
+                          //   className="max-w-[141px]"
+                          //   src={`${image?.url}`}
+                          //   alt={`${image?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={image as SanityImage}
                             className="max-w-[141px]"
-                            src={`${image?.url}`}
-                            alt={`${image?.alt}`}
                           />
                         )}
                       </Link>

@@ -1,7 +1,8 @@
 import React from "react";
-import type { ExclusiveEvents } from "@/lib";
+import type { ExclusiveEvents, SanityImage } from "@/lib";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const HotelsDetail = ({
   title,
@@ -43,10 +44,14 @@ const HotelsDetail = ({
               <div className="w-full flex flex-col justify-start items-start  gap-4 md:gap-8 sm:flex-row lg:flex-col">
                 <div className="max-w-[240px] lg:max-w-full w-full flex">
                   {latestEvent?.image && (
-                    <img
+                    // <img
+                    //   className="w-[240px] h-[240px] lg:h-[552px] lg:w-full object-cover"
+                    //   src={`${latestEvent?.image?.url}`}
+                    //   alt={`${latestEvent?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={latestEvent?.image as SanityImage}
                       className="w-[240px] h-[240px] lg:h-[552px] lg:w-full object-cover"
-                      src={`${latestEvent?.image?.url}`}
-                      alt={`${latestEvent?.image?.alt}`}
                     />
                   )}
                 </div>
@@ -79,10 +84,14 @@ const HotelsDetail = ({
                   <div className="w-full flex flex-col justify-start items-start  gap-4 md:gap-8 sm:flex-row lg:flex-col  xl:flex-row">
                     <div className="max-w-[240px] w-full flex">
                       {image && (
-                        <img
+                        // <img
+                        //   className="w-[240px] h-[240px] object-cover"
+                        //   src={`${image?.url}`}
+                        //   alt={`${image?.alt}`}
+                        // />
+                        <OptimizedImage
+                          image={image as SanityImage}
                           className="w-[240px] h-[240px] object-cover"
-                          src={`${image?.url}`}
-                          alt={`${image?.alt}`}
                         />
                       )}
                     </div>

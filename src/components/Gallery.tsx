@@ -3,6 +3,7 @@ import type { SanityImage, Button } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 import { HiPhoto } from "react-icons/hi2";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 export default function Gallery({
   name,
@@ -20,12 +21,19 @@ export default function Gallery({
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         {image && (
-          <Image
-            src={image?.url || ""}
-            alt={image?.alt || ""}
+          // <Image
+          //   src={image?.url || ""}
+          //   alt={image?.alt || ""}
+          //   width={1440}
+          //   height={600}
+          //   className="object-cover w-full h-full"
+          //   priority
+          // />
+          <OptimizedImage
+            image={image as SanityImage}
+            className="object-cover w-full h-full"
             width={1440}
             height={600}
-            className="object-cover w-full h-full"
             priority
           />
         )}

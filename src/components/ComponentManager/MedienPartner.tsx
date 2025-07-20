@@ -1,6 +1,7 @@
 import React from "react";
-import type { MedienPartner } from "@/lib";
+import type { MedienPartner, SanityImage } from "@/lib";
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const MedienPartner = ({ title, partners }: MedienPartner) => {
   return (
     <div className="w-full bg-white">
@@ -15,12 +16,20 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
           {partners?.slice(0, 3).map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
-                <Link target="_blank" href={`${partner?.link}`} className="w-full">
+                <Link
+                  target="_blank"
+                  href={`${partner?.link}`}
+                  className="w-full"
+                >
                   {partner?.image && (
-                    <img
+                    // <img
+                    //   className="w-full"
+                    //   src={`${partner?.image?.url}`}
+                    //   alt={`${partner?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={partner?.image as SanityImage}
                       className="w-full"
-                      src={`${partner?.image?.url}`}
-                      alt={`${partner?.image?.alt}`}
                     />
                   )}
                 </Link>
@@ -33,12 +42,20 @@ const MedienPartner = ({ title, partners }: MedienPartner) => {
           {partners?.slice(3, 5).map((partner, index) => (
             <div key={index} className="flex justify-center items-center">
               <div className="w-full max-w-[150px] md:max-w-[230px] relative cursor-pointer hover:scale-[1.10] duration-200">
-                <Link target="_blank" href={`${partner?.link}`} className="w-full">
+                <Link
+                  target="_blank"
+                  href={`${partner?.link}`}
+                  className="w-full"
+                >
                   {partner?.image && (
-                    <img
+                    // <img
+                    //   className="w-full"
+                    //   src={`${partner?.image?.url}`}
+                    //   alt={`${partner?.image?.alt}`}
+                    // />
+                    <OptimizedImage
+                      image={partner?.image as SanityImage}
                       className="w-full"
-                      src={`${partner?.image?.url}`}
-                      alt={`${partner?.image?.alt}`}
                     />
                   )}
                 </Link>

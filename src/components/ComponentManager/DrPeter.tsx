@@ -1,7 +1,8 @@
 import React from "react";
 // import { RiDoubleQuotesL } from "react-icons/ri";
 // import { RiDoubleQuotesR } from "react-icons/ri";
-import type { ImageQuote } from "@/lib";
+import type { ImageQuote, SanityImage } from "@/lib";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const DrPeter = ({ image, name, post, description, id }: ImageQuote) => {
   return (
@@ -12,10 +13,14 @@ const DrPeter = ({ image, name, post, description, id }: ImageQuote) => {
       <div className="w-auto flex flex-col md:flex-row md:items-end">
         <div className="z-10 flex flex-col items-center md:items-start h-full md:self-stretch py-0 px-6 md:px-0 -mb-10 md:mb-6 lg:max-xl:mb-0 lg:max-xl:-mt-6">
           {image && (
-            <img
+            // <img
+            //   className="w-full h-full aspect-[3/4] max-w-[300px] md:max-w-[400px] md:min-w-[300px]"
+            //   src={`${image?.url}`}
+            //   alt={`${image?.alt}`}
+            // />
+            <OptimizedImage
+              image={image as SanityImage}
               className="w-full h-full aspect-[3/4] max-w-[300px] md:max-w-[400px] md:min-w-[300px]"
-              src={`${image?.url}`}
-              alt={`${image?.alt}`}
             />
           )}
         </div>

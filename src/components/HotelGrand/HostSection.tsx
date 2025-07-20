@@ -1,5 +1,6 @@
-import { HotelInterviewSection } from "@/lib";
+import { HotelInterviewSection, SanityImage } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 export default function HostSection({
   grandQuestions,
   manager,
@@ -11,10 +12,14 @@ export default function HostSection({
         {/*  Image */}
         <div className=" w-full">
           {manager?.image && (
-            <img
+            // <img
+            //   className="w-full max-w-[500px] h-[580px] object-cover"
+            //   src={manager?.image?.url || ""}
+            //   alt={manager?.image?.alt || ""}
+            // />
+            <OptimizedImage
+              image={manager?.image as SanityImage}
               className="w-full max-w-[500px] h-[580px] object-cover"
-              src={manager?.image?.url || ""}
-              alt={manager?.image?.alt || ""}
             />
           )}
         </div>

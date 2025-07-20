@@ -8,17 +8,17 @@ import {
 import styles from "./SpecialEditionsNew.module.css";
 
 // import specialEdition from "@/Data/specialData";
-import type { SpecialEdition } from "@/lib";
+import type { SpecialEdition, SanityImage } from "@/lib";
 // import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
 import Link from "next/link";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const SpecialEdition = ({
   title,
   description,
   specialEditionHotels,
 }: SpecialEdition) => {
-
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const box = e.currentTarget;
     box.style.zIndex = "2"; // Bring to front
@@ -67,10 +67,14 @@ const SpecialEdition = ({
                       </h4>
                     )}
                     {item?.image && (
-                      <img
-                        src={`${item.image?.url}`}
+                      // <img
+                      //   src={`${item.image?.url}`}
+                      //   className="aspect-square md:aspect-auto object-cover"
+                      //   alt=""
+                      // />
+                      <OptimizedImage
+                        image={item?.image as SanityImage}
                         className="aspect-square md:aspect-auto object-cover"
-                        alt=""
                       />
                     )}
                   </div>
@@ -99,17 +103,21 @@ const SpecialEdition = ({
               </h4>
             )}
             <div className={styles.innerBox}>
-              {item?.image && <img src={`${item?.image?.url}`} alt="" />}
+              {item?.image && (
+                // <img src={`${item?.image?.url}`} alt="" />
+                <OptimizedImage
+                  image={item?.image as SanityImage}
+                  className="w-full h-full object-cover"
+                />
+              )}
               <img className={styles.overlay} />
-                <div
-                  className={`${styles.button}`}
+              <div className={`${styles.button}`}>
+                <button
+                  className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
                 >
-                  <button
-                    className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
-                  >
-                    Special Editions Ansehen
-                  </button>
-                </div>
+                  Special Editions Ansehen
+                </button>
+              </div>
             </div>
           </Link>
         ))}

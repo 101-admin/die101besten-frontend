@@ -1,9 +1,10 @@
 "use client";
 
-import { HotelInterviewSection } from "@/lib";
+import { HotelInterviewSection, SanityImage } from "@/lib";
 import Image from "next/image";
 import React from "react";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const FragenAnGastgeber = ({
   exclusiveQuestions,
@@ -38,12 +39,19 @@ const FragenAnGastgeber = ({
         {/* Image and Name */}
         <div className="flex flex-col items-center text-center">
           {manager?.image && (
-            <Image
-              src={manager?.image?.url || ""}
-              alt={manager?.image?.alt || ""}
+            // <Image
+            //   src={manager?.image?.url || ""}
+            //   alt={manager?.image?.alt || ""}
+            //   width={300}
+            //   height={348}
+            //   className="mb-4 object-cover w-[300px] h-[348px]"
+            // />
+            <OptimizedImage
+              image={manager?.image as SanityImage}
+              className="mb-4 object-cover w-[300px] h-[348px]"
               width={300}
               height={348}
-              className="mb-4 object-cover w-[300px] h-[348px]"
+              priority
             />
           )}
           {manager?.role && (

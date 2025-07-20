@@ -1,7 +1,8 @@
 "use client";
-import type { Werde101 } from "@/lib";
+import type { SanityImage, Werde101 } from "@/lib";
 import Popup from "../Partners/Popup";
 import { useState } from "react";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 export default function WerdePartner({
   title,
@@ -27,10 +28,14 @@ export default function WerdePartner({
             {/* Image */}
             {image && (
               <div className="max-w-[330px] w-full flex justify-center items-center">
-                <img
+                {/* <img
                   className="w-full max-w-[200px] md:max-w-[330px]"
                   src={image.url}
                   alt={image.alt}
+                /> */}
+                <OptimizedImage
+                  image={image as SanityImage}
+                  className="w-full max-w-[200px] md:max-w-[330px]"
                 />
               </div>
             )}

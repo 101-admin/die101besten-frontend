@@ -5,6 +5,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const SingleMember = ({
   image,
@@ -38,10 +39,15 @@ const SingleMember = ({
       >
         <div className="flex w-full relative">
           {image && (
-            <img
+            // <img
+            //   className="object-top object-cover grayscale group-hover:grayscale-0 h-[230px] w-[230px]"
+            //   src={`${image?.url}`}
+            //   alt={`${image?.alt}`}
+            // />
+
+            <OptimizedImage
+              image={image as SanityImage}
               className="object-top object-cover grayscale group-hover:grayscale-0 h-[230px] w-[230px]"
-              src={`${image?.url}`}
-              alt={`${image?.alt}`}
             />
           )}
           <div
@@ -102,10 +108,14 @@ const SingleMember = ({
         <div className="w-full flex flex-col gap-5 md:gap-10 lg:gap-12 sm:flex-row justify-start items-baseline sm:items-center">
           <div className="flex w-full max-w-[276px]">
             {image && (
-              <img
+              // <img
+              //   className="w-[276px] h-[360px]"
+              //   src={`${image?.url}`}
+              //   alt={`${image?.alt}`}
+              // />
+              <OptimizedImage
+                image={image as SanityImage}
                 className="w-[276px] h-[360px]"
-                src={`${image?.url}`}
-                alt={`${image?.alt}`}
               />
             )}
           </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 // import { RiDoubleQuotesL } from "react-icons/ri";
 // import { RiDoubleQuotesR } from "react-icons/ri";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const Quote = ({ ctaButtons, heading, author, image, id }: TextQuote) => {
   console.log(ctaButtons);
@@ -15,10 +16,14 @@ const Quote = ({ ctaButtons, heading, author, image, id }: TextQuote) => {
       <div className="relative w-full max-w-[1178px] flex flex-col justify-center items-center px-5 sm:px-7 lg:px-0 ">
         <div className="flex static lg:absolute lg:right-[-40px] top-[-20px]">
           {image && (
-            <img
+            // <img
+            //   className="w-[330px] h-[440px] object-cover"
+            //   src={`${image.url}`}
+            //   alt={`${image.alt}`}
+            // />
+            <OptimizedImage
+              image={image}
               className="w-[330px] h-[440px] object-cover"
-              src={`${image.url}`}
-              alt={`${image.alt}`}
             />
           )}
         </div>

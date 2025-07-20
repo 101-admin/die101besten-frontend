@@ -1,8 +1,9 @@
 import React from "react";
-import { type DasBuch } from "@/lib";
+import { SanityImage, type DasBuch } from "@/lib";
 import Link from "next/link";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const HotelInfo = ({
   title,
@@ -28,10 +29,14 @@ const HotelInfo = ({
         >
           <div className="w-[70%] flex justify-center">
             {image && (
-              <img
+              // <img
+              //   className="sm:max-w-[428px] sm:max-h-[508px]"
+              //   src={`${image?.url}`}
+              //   alt={`${image?.alt}`}
+              // />
+              <OptimizedImage
+                image={image as SanityImage}
                 className="sm:max-w-[428px] sm:max-h-[508px]"
-                src={`${image?.url}`}
-                alt={`${image?.alt}`}
               />
             )}
           </div>

@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/carousel";
 // import ArticleData from "@/Data/ArticleData";
 
-import type { Hotelmomente } from "@/lib";
+import type { Hotelmomente, SanityImage } from "@/lib";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const Articles = ({
   title,
   description,
@@ -53,10 +54,14 @@ const Articles = ({
                     <Link className="w-full" href={`/blogs/${slug}`}>
                       <div className="w-full h-full relative">
                         {mainImage && (
-                          <img
+                          // <img
+                          //   className="w-full h-[480px] object-cover"
+                          //   src={`${mainImage?.url}`}
+                          //   alt={`${mainImage?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={mainImage as SanityImage}
                             className="w-full h-[480px] object-cover"
-                            src={`${mainImage?.url}`}
-                            alt={`${mainImage?.alt}`}
                           />
                         )}
                         <div className="absolute top-0 left-0 w-full h-full hidden group-hover/show:flex flex-col justify-start items-baseline bg-[#000000B2]">

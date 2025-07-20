@@ -1,25 +1,34 @@
 import React from "react";
-import type { Testimonial } from "@/lib";
+import type { SanityImage, Testimonial } from "@/lib";
 import { ColoredText } from "@/components/ui/ColoredText";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 const TestimonialSec = ({ author, review, image }: Testimonial) => {
   return (
     <section className="w-full lg:h-[600px] max-w-[1056px] flex flex-col justify-center items-center relative">
       <div className="w-full flex justify-center items-center static lg:absolute lg:left-[-300px] top-[50px] xl:left-[-340px]">
         {image && (
-          <img
+          // <img
+          //   className="w-[260px] h-[346px] object-cover"
+          //   src={image?.url}
+          //   alt={image?.alt}
+          // />
+          <OptimizedImage
+            image={image as SanityImage}
             className="w-[260px] h-[346px] object-cover"
-            src={image?.url}
-            alt={image?.alt}
           />
         )}
       </div>
       <div className="w-full max-w-[700px] p-10 lg:p-16 bg-[#F9F8FA] lg:mr-[-230px]">
         <div className="w-full flex justify-start items-baseline">
-          <img
+          {/* <img
             className="max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
             src="/images/TestiIcon.svg"
             alt=""
+          /> */}
+          <OptimizedImage
+            image={image as SanityImage}
+            className="max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
           />
         </div>
         {review && (
@@ -28,10 +37,14 @@ const TestimonialSec = ({ author, review, image }: Testimonial) => {
           </h1>
         )}
         <div className="w-[90%] flex justify-end items-baseline lg:mt-[-30px]">
-          <img
+          {/* <img
             className="rotate-180 max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
             src="/images/TestiIcon.svg"
             alt=""
+          /> */}
+          <OptimizedImage
+            image={image as SanityImage}
+            className="rotate-180 max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
           />
         </div>
         <div className="w-full flex justify-center items-center">

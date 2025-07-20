@@ -10,6 +10,7 @@ import type { Hotels } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 // import { urlFor } from "@/sanity/lib/image";
 
 // import { HOTELS_QUERYResult } from "@/sanity/types";
@@ -60,12 +61,16 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                     >
                       <div className="flex">
                         {hotel?.image && (
-                          <Image
+                          // <Image
+                          //   className="w-[304px] h-[480px] object-cover"
+                          //   src={`${hotel.image?.url}`}
+                          //   width={304}
+                          //   height={480}
+                          //   alt={`${hotel.image?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={hotel.image}
                             className="w-[304px] h-[480px] object-cover"
-                            src={`${hotel.image?.url}`}
-                            width={304}
-                            height={480}
-                            alt={`${hotel.image?.alt}`}
                           />
                         )}
                       </div>

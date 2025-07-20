@@ -1,7 +1,8 @@
 import React from "react";
-import type { Utr } from "@/lib";
+import type { SanityImage, Utr } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const RelyUs = ({ title, description, subTitle, image, id }: Utr) => {
   return (
     <>
@@ -19,7 +20,13 @@ const RelyUs = ({ title, description, subTitle, image, id }: Utr) => {
         <div className=" w-full flex flex-col justify-center items-center px-5 lg:px-16">
           <div className="w-full flex flex-col justify-center items-center lg:flex-row-reverse gap-10 lg:gap-5">
             <div className="flex w-full">
-              {image && <img src={`${image?.url}`} alt={`${image?.url}`} />}
+              {image && (
+                // <img src={`${image?.url}`} alt={`${image?.url}`} />
+                <OptimizedImage
+                  image={image as SanityImage}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
             <div className="w-full flex flex-col justify-start items-baseline">
               {subTitle && (

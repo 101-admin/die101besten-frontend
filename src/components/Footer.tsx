@@ -2,6 +2,7 @@
 import { MdOutlineMailOutline } from "react-icons/md";
 import type { Footer } from "@/lib/types/navigation.types";
 import Link from "next/link";
+import NextLink from "./NextLink";
 const Footer = ({ footer }: { footer: Footer[] }) => {
   const footerData = footer[0];
 
@@ -11,13 +12,13 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
         <div className="w-full flex flex-col lg:flex-row justify-center items-center lg:items-start gap-10 relative mb-14">
           {/* Sec 1 */}
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-start lg:items-baseline">
-            <Link href={"/"}>
+            <NextLink href={"/"}>
               <img
                 className="max-w-[96px] max-h-[80.32px] w-full"
                 src={`${footerData?.logo}`}
                 alt=""
               />
-            </Link>
+            </NextLink>
           </div>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 relative">
             {/* Sec 2 */}
@@ -28,7 +29,7 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
               <p className="font-light font-gte text-[14px] text-start mb-10 text-black">
                 {footerData?.kontakt?.description}
               </p>
-              <Link
+              <NextLink
                 target="_blank"
                 href={`${footerData?.kontakt?.emailLink}`}
                 className="flex items-center gap-3 group text-black hover:bg-gradient-to-l from-[#F49E6E] to-[#B64F32] hover:text-transparent hover:bg-clip-text cursor-pointer"
@@ -37,7 +38,7 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                 <h2 className="font-Montserrat font-bold text-[14px]">
                   {footerData?.kontakt?.emailText}
                 </h2>
-              </Link>
+              </NextLink>
             </div>
             {/* Sec 3 */}
             <div className="w-full flex flex-col justify-start items-baseline text-black">
@@ -49,17 +50,17 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                   return (
                     <div key={index}>
                       {item?.newTab ? (
-                        <Link key={index} target="_blank" href={`${item?.url}`}>
+                        <NextLink key={index} target="_blank" href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       ) : (
-                        <Link key={index} href={`${item?.url}`}>
+                        <NextLink key={index} href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       )}
                     </div>
                   );
@@ -76,17 +77,17 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                   return (
                     <div key={index}>
                       {item?.newTab ? (
-                        <Link key={index} target="_blank" href={`${item?.url}`}>
+                        <NextLink key={index} target="_blank" href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       ) : (
-                        <Link key={index} href={`${item?.url}`}>
+                        <NextLink key={index} href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte  hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       )}
                     </div>
                   );
@@ -103,17 +104,17 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                   return (
                     <div key={index}>
                       {item?.newTab ? (
-                        <Link key={index} target="_blank" href={`${item?.url}`}>
+                        <NextLink key={index} target="_blank" href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       ) : (
-                        <Link key={index} href={`${item?.url}`}>
+                        <NextLink key={index} href={`${item?.url}`}>
                           <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </li>
-                        </Link>
+                        </NextLink>
                       )}
                     </div>
                   );
@@ -141,19 +142,19 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                   ) : (
                     <div>
                       {item?.newTab && (
-                        <Link target="_blank" href={`${item?.url}`}>
+                        <NextLink target="_blank" href={`${item?.url}`}>
                           <div className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </div>
-                        </Link>
+                        </NextLink>
                       )}
 
                       {!item?.newTab && (
-                        <Link key={index} href={`${item?.url}`}>
+                        <NextLink key={index} href={`${item?.url}`}>
                           <div className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
                             {item?.label}
                           </div>
-                        </Link>
+                        </NextLink>
                       )}
                     </div>
                   )}

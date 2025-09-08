@@ -9,16 +9,18 @@ import styles from "./SpecialEditionsNew.module.css";
 
 // import specialEdition from "@/Data/specialData";
 import type { SpecialEdition, SanityImage } from "@/lib";
-// import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { useParams } from "next/navigation";
 
 const SpecialEdition = ({
   title,
   description,
   specialEditionHotels,
 }: SpecialEdition) => {
+  const params = useParams();
+  const locale = params.locale;
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const box = e.currentTarget;
     box.style.zIndex = "2"; // Bring to front
@@ -58,7 +60,7 @@ const SpecialEdition = ({
         >
           <CarouselContent className="flex items-end">
             {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-              <Link key={index} href={`${item?.link}`}>
+              <NextLink key={index} href={`${item?.link}`}>
                 <CarouselItem className="flex min-w-[250px] max-[600px]:max-w-[67vw] w-full max-w-[400px] md:max-w-[368px]">
                   <div className="w-full flex flex-col justify-center items-center gap-4">
                     {item.title && (
@@ -79,7 +81,7 @@ const SpecialEdition = ({
                     )}
                   </div>
                 </CarouselItem>
-              </Link>
+              </NextLink>
             ))}
           </CarouselContent>
         </Carousel>
@@ -88,9 +90,8 @@ const SpecialEdition = ({
       {/* Desktop Section */}
       <div className="w-full hidden lg:flex justify-between items-end">
         {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-          <Link
+          <section
             key={index}
-            href={`${item?.link}`}
             className={styles.box}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -102,7 +103,7 @@ const SpecialEdition = ({
                 {item.title}
               </h4>
             )}
-            <div className={styles.innerBox}>
+            <NextLink href={`${item?.link}`}  className={styles.innerBox}>
               {item?.image && (
                 // <img src={`${item?.image?.url}`} alt="" />
                 <OptimizedImage
@@ -115,11 +116,11 @@ const SpecialEdition = ({
                 <button
                   className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
                 >
-                  Special Editions Ansehen
+                  {locale === "de" ? "Special Editions Ansehen" : "View Special Editions"}
                 </button>
               </div>
-            </div>
-          </Link>
+            </NextLink>
+          </section>
         ))}
       </div>
     </section>

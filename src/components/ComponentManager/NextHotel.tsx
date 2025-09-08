@@ -1,6 +1,6 @@
 import React from "react";
 import type { BusinessLeisure } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 
 const NextHotel = ({ title, image, ctaButtons }: BusinessLeisure) => {
   return (
@@ -18,11 +18,11 @@ const NextHotel = ({ title, image, ctaButtons }: BusinessLeisure) => {
           <div className="flex flex-col justify-center items-center lg:flex-row gap-5">
             {ctaButtons?.map((button, index) => {
               return (
-                <Link href={`${button.link}`} key={index}>
+                <NextLink href={`${button.link}`} key={index}>
                   <button className="btn-secondary w-[310px] text-white border-white btn-secondary-hover-de">
                     {button.text}
                   </button>
-                </Link>
+                </NextLink>
               );
             })}
           </div>

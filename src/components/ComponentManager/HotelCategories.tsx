@@ -6,10 +6,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import SpEdition from "@/Data/SpEdition";
 import type { SanityImage, SpecialHotels } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { OptimizedImage } from "../ui/OptimizedImage";
 const HotelCategories = ({ title, hotels, id }: SpecialHotels) => {
   return (
@@ -38,7 +37,7 @@ const HotelCategories = ({ title, hotels, id }: SpecialHotels) => {
                     key={index}
                     className="max-w-[416px] cursor-pointer  w-full"
                   >
-                    <Link href={`${data?.link}`}>
+                    <NextLink href={`${data?.link}`}>
                       <div className="w-full ">
                         {data?.image && (
                           // <img
@@ -59,7 +58,7 @@ const HotelCategories = ({ title, hotels, id }: SpecialHotels) => {
                           </h1>
                         )}
                       </div>
-                    </Link>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}

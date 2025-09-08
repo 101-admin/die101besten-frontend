@@ -4,8 +4,7 @@ import {
   SecondaryHeroSection,
   SanityImage,
 } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { OptimizedImage } from "../ui/OptimizedImage";
 // import { CiHeart } from "react-icons/ci";
 // import { LuArrowUpFromLine } from "react-icons/lu";
@@ -57,7 +56,7 @@ export default function HotelOfTheYear({
 
           <div className="mb-8 flex flex-col items-center lg:items-start gap-4">
             {ctaButton && (
-              <Link
+              <NextLink
                 target="_blank"
                 href={`${ctaButton?.url}`}
                 className="w-full max-w-[300px]"
@@ -65,7 +64,7 @@ export default function HotelOfTheYear({
                 <button className="w-full  h-[64px] gap-[8px] py-[16px] px-[24px] bg-black text-white uppercase font-montserrat font-bold text-[16px] leading-[24px] text-center tracking-normal">
                   {ctaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             )}
 
             {/* <div className="flex gap-4">

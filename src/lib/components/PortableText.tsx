@@ -5,7 +5,7 @@ import {
   PortableTextReactComponents,
 } from "@portabletext/react";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "@/components/NextLink";
 import { urlFor } from "../config/sanity";
 import AnzeigeImage from "@/components/BlogArtical/AnzeigeImage";
 import ContentSection from "@/components/BlogArtical/ContentSection";
@@ -52,13 +52,13 @@ export const portableComponents: Partial<PortableTextReactComponents> = {
       if (!value?.href) return <>{children}</>;
       const target = value.href.startsWith("http") ? "_blank" : undefined;
       return (
-        <Link
+        <NextLink
           href={value.href}
           target={target}
           className="text-blue-600 hover:underline"
         >
           {children}
-        </Link>
+        </NextLink>
       );
     },
     strong: ({ children }) => (

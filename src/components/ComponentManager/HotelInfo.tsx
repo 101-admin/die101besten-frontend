@@ -1,6 +1,6 @@
 import React from "react";
 import { SanityImage, type DasBuch } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
@@ -52,11 +52,11 @@ const HotelInfo = ({
               </h4>
             )}
             {ctaButton && (
-              <Link target="_blank" href={`${ctaButton?.link}`}>
+              <NextLink target="_blank" href={`${ctaButton?.link}`}>
                 <button className="btn-primary btn-primary-hover-de ">
                   {ctaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
         </div>

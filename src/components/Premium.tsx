@@ -4,8 +4,7 @@ import {
   CTAButton,
   SanityImage,
 } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import NextLink from "./NextLink";
 import { OptimizedImage } from "./ui/OptimizedImage";
 // import { CiHeart } from "react-icons/ci";
 // import { LuArrowUpFromLine } from "react-icons/lu";
@@ -84,7 +83,7 @@ export default function Premium({
             <div className="flex flex-col gap-4 mt-auto">
               {ctaButton && (
                 <div className="w-full flex justify-start items-center h-20">
-                  <Link
+                  <NextLink
                     target="_blank"
                     className="max-w-[300px] w-full"
                     href={`${ctaButton?.url}`}
@@ -92,7 +91,7 @@ export default function Premium({
                     <button className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
                       {ctaButton?.text}
                     </button>
-                  </Link>
+                  </NextLink>
                 </div>
               )}
 

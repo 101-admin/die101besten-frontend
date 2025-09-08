@@ -6,9 +6,12 @@ import { HiPhoto } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { OptimizedImage } from "../ui/OptimizedImage";
 import { SanityImage } from "@/lib";
+import { useParams } from "next/navigation";
 
 const EventsDetails = ({ events }: { events: Event }) => {
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
+  const params = useParams();
+  const locale = params.locale;
   console.log(events.gallery, "gallery");
   const formatDate = (dateString: string | undefined): string => {
     if (!dateString) return "Invalid date";
@@ -69,7 +72,7 @@ const EventsDetails = ({ events }: { events: Event }) => {
               {events?.startDate && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Datum
+                    {locale === "de" ? "Datum" : "Date"}
                   </p>
                   <p className="font-gte font-[350] text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {formatDate(events?.startDate)}
@@ -79,7 +82,7 @@ const EventsDetails = ({ events }: { events: Event }) => {
               {events?.location && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Location
+                    {locale === "de" ? "Standort" : "Location"}
                   </p>
                   <p className="font-gte font-[350] text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {events?.location}

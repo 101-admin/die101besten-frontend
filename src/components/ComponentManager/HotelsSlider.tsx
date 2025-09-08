@@ -7,8 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import type { Hotels } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
 // import { urlFor } from "@/sanity/lib/image";
@@ -55,7 +54,7 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                       even ? "lg:items-end" : "lg:items-start"
                     }`}
                   >
-                    <Link
+                    <NextLink
                       href={`${hotel?.link}`}
                       className="flex flex-col gap-3"
                     >
@@ -79,7 +78,7 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                           {hotel.name}
                         </p>
                       )}
-                    </Link>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}

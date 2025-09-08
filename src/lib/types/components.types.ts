@@ -522,6 +522,8 @@ export interface StrategischePartner extends BaseDocument {
   language: string;
   partners?: Array<{
     image?: SanityImage;
+    title?: string;
+    description?: string;
     link?: string;
   }>;
 }
@@ -532,6 +534,8 @@ export interface MedienPartner extends BaseDocument {
   language: string;
   partners?: Array<{
     image?: SanityImage;
+    title?: string;
+    description?: string;
     link?: string;
   }>;
 }
@@ -542,16 +546,29 @@ export interface PartnerComponent extends BaseDocument {
   language: string;
   partners?: Array<{
     image?: SanityImage;
+    title?: string;
+    description?: string;
     link?: string;
   }>;
   premiumPartners?: Array<{
     image?: SanityImage;
+    title?: string;
+    description?: string;
     link?: string;
   }>;
   otherPartners?: Array<{
     image?: SanityImage;
+    title?: string;
+    description?: string;
     link?: string;
   }>;
+}
+
+export interface SinglePartner {
+  image?: SanityImage ;
+  title?: string;
+  description?: string;
+  link?: string;
 }
 
 export interface Werde101 extends BaseDocument {
@@ -591,7 +608,6 @@ export interface SpecialHotels extends BaseDocument {
     link?: string;
   }>;
 }
-
 
 // Events page components
 

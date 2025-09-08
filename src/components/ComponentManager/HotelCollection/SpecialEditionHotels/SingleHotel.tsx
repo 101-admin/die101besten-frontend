@@ -1,10 +1,14 @@
 import React from "react";
-import Link from "next/link";
+import NextLink from "@/components/NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
 import { Hotel } from "@/lib/types";
 
 const SingleHotel = ({ data }: { data: Hotel }) => {
   return (
-    <Link className="w-full" href={`/hotels/${data?.slug}`}>
+    <NextLink
+      className="w-full"
+      href={`/hotels/${stripLocaleFromSlug(data?.slug)}`}
+    >
       <div className="w-full flex flex-col justify-center items-center lg:flex-row lg:items-start cursor-pointer hover:scale-[1.03] duration-200">
         <div className="w-full lg:w-auto flex flex-col justify-start items-baseline">
           <div className="w-10 h-10 sm:w-16 sm:h-16 bg-[linear-gradient(90deg,#B65033_0.21%,#F49E6E_100%)] flex justify-center items-center font-gte font-bold text-[20px] sm:text-[24px] text-white rounded-t-lg lg:rounded-l-xl lg:rounded-r-none uppercase">
@@ -57,7 +61,7 @@ const SingleHotel = ({ data }: { data: Hotel }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </NextLink>
   );
 };
 

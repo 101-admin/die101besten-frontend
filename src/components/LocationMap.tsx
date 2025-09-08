@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 // import { FaPlus } from "react-icons/fa6";
 // import { FaMinus } from "react-icons/fa6";
 import type { HotelMapSection, HotelAddress, CTAButton } from "@/lib";
-import Link from "next/link";
+import NextLink from "./NextLink";
 import HotelMap from "./hotelMap";
 
 const SimpleMapSection = ({
@@ -56,13 +56,13 @@ const SimpleMapSection = ({
                 {mapSection.contactInfo?.website}
               </p>
               {ctaButton && (
-                <Link
+                <NextLink
                   href={`${ctaButton?.url}`}
                   target="_blank"
                   className="max-w-[280px] btn-primary-hover-de w-full h-16 flex justify-center items-center bg-black cursor-pointer font-montserrat font-bold text-[16px] text-white mt-2 uppercase"
                 >
                   {ctaButton?.text}
-                </Link>
+                </NextLink>
               )}
             </div>
           )}

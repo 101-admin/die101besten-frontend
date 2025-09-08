@@ -116,6 +116,7 @@ const BlockManager = ({
   data,
   wrapperClass,
   searchParams,
+  locale,
 }: {
   data?:
     | HomeComponent[]
@@ -127,6 +128,7 @@ const BlockManager = ({
     | EventsComponent[];
   wrapperClass?: string;
   searchParams?: any;
+  locale?: string;
 }) => {
   return (
     <div className={cn(`flex flex-col w-full`, wrapperClass)}>
@@ -155,6 +157,7 @@ const BlockManager = ({
                 key={index}
                 spacing={!isFirst && !isLast}
                 searchParams={searchParams}
+                locale={locale}
                 {...item}
                 {...additionalProps}
               />

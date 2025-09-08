@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Carousel,
@@ -9,9 +10,12 @@ import {
 // import ArticleData from "@/Data/ArticleData";
 
 import type { Hotelmomente, SanityImage } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import { useParams } from "next/navigation";
+
 const Articles = ({
   title,
   description,
@@ -19,6 +23,8 @@ const Articles = ({
   ctaButton,
   id,
 }: Hotelmomente) => {
+  const params = useParams();
+  const locale = params.locale;
   return (
     <section
       id={id}
@@ -51,7 +57,10 @@ const Articles = ({
                     key={index}
                     className="sm:basis-1/2 xl:basis-1/3  cursor-pointer group/show flex flex-col justify-center items-center w-full"
                   >
-                    <Link className="w-full" href={`/blogs/${slug}`}>
+                    <NextLink
+                      className="w-full"
+                      href={`/blogs/${stripLocaleFromSlug(slug as string)}`}
+                    >
                       <div className="w-full h-full relative">
                         {mainImage && (
                           // <img
@@ -77,7 +86,7 @@ const Articles = ({
                               </p>
                             )}
                             <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#F49E6E] to-[#B64F32] leading-[24px] text-center  uppercase">
-                              Weiterlesen
+                              {locale === "de" ? "WEITERLESEN" : "READ MORE"}
                             </button>
                           </div>
                         </div>
@@ -87,7 +96,7 @@ const Articles = ({
                           <ColoredText text={title} />
                         </h1>
                       )}
-                    </Link>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}
@@ -102,11 +111,11 @@ const Articles = ({
         </div>
         <div className="w-full flex justify-center items-center">
           {ctaButton && (
-            <Link href={`${ctaButton?.link}`}>
+            <NextLink href={`${ctaButton?.link}`}>
               <button className="btn-secondary w-[250px] text-black border-black btn-secondary-hover-de">
                 {ctaButton?.text}
               </button>
-            </Link>
+            </NextLink>
           )}
         </div>
       </div>

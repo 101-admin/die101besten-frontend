@@ -2,10 +2,15 @@
 import React, { useState } from "react";
 import { ColoredText } from "../ui/ColoredText";
 import type { Event, SanityImage } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { useParams } from "next/navigation";
+
 const PastEvents = ({ events }: { events: Event[] }) => {
   const [showMore, setShowMore] = useState<number>(4);
+  const params = useParams();
+  const locale = params.locale;
   return (
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center py-10 lg:py-20 px-5 lg:px-16 gap-16 lg:gap-24">
       <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-12">
@@ -23,7 +28,11 @@ const PastEvents = ({ events }: { events: Event[] }) => {
               ?.map((event, index) => {
                 const { title, description, location, mainImage, slug } = event;
                 return (
-                  <Link key={index} className="w-full" href={`/events/${slug}`}>
+                  <NextLink
+                    key={index}
+                    className="w-full"
+                    href={`/events/${stripLocaleFromSlug(slug as string)}`}
+                  >
                     <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-10">
                       <div className="w-full h-[552px] flex">
                         {mainImage && (
@@ -57,11 +66,11 @@ const PastEvents = ({ events }: { events: Event[] }) => {
                       </div>
                       <div className="w-full flex flex-col justify-start items-baseline gap-4">
                         <button className="btn-secondary w-[300px] text-black border-black btn-secondary-hover-de">
-                          WEITERLESEN
+                          {locale === "de" ? "WEITERLESEN" : "READ MORE"}
                         </button>
                       </div>
                     </div>
-                  </Link>
+                  </NextLink>
                 );
               })}
           </div>
@@ -75,7 +84,7 @@ const PastEvents = ({ events }: { events: Event[] }) => {
               showMore < events?.length ? "flex" : "hidden"
             }`}
           >
-            mehr anzeigen
+            {locale === "de" ? "mehr anzeigen" : "show more"}
           </button>
         )}
       </div>

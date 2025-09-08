@@ -25,7 +25,7 @@ const GlobalImage = ({
   ...props
 }: GlobalImageProps) => {
   const isSrc = src && src != "undefined" && src !== "";
-  console.log({ src, width, height }, "@src");
+  // console.log({ src, width, height }, "@src");
   return (
     <div className={cn(`flex`, wrapperClassName)}>
       <Image

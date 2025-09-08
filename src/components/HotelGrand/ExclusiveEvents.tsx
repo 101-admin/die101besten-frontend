@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import type { HotelEvents, SanityImage } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { OptimizedImage } from "../ui/OptimizedImage";
 
 const ExclusiveEvents = ({ events, title }: HotelEvents) => {
@@ -103,11 +103,11 @@ const ExclusiveEvents = ({ events, title }: HotelEvents) => {
                           </h3>
                         )}
                         {ctaButton && (
-                          <Link href={`${ctaButton?.url}`}>
+                          <NextLink href={`${ctaButton?.url}`}>
                             <button className="mt-4 w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
                               {ctaButton?.text}
                             </button>
-                          </Link>
+                          </NextLink>
                         )}
                       </div>
                     </div>

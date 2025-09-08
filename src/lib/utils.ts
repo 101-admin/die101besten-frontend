@@ -25,3 +25,23 @@ export const getOptimizedImageUrl = (
 
   return urlBuilder.fit("crop").format("webp").quality(90).url();
 };
+
+// Slug locale helpers
+export function stripLocaleFromSlug(slug?: string | null): string {
+  if (!slug) return "";
+  return slug.replace(/-(de|en)$/i, "");
+}
+
+export function ensureSlugHasLocaleSuffix(
+  slug: string,
+  locale: string
+): string {
+  if (!slug) return slug;
+  const lowerLocale = (locale || "").toLowerCase();
+  const hasSuffix = /-(de|en)$/i.test(slug);
+  if (hasSuffix) {
+    // Replace existing suffix if different
+    return slug.replace(/-(de|en)$/i, `-${lowerLocale}`);
+  }
+  return `${slug}-${lowerLocale}`;
+}

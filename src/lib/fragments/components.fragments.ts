@@ -428,6 +428,8 @@ export const strategischePartnerComponentFragment = `
   language,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link,
   }
 `;
@@ -439,6 +441,8 @@ export const medienPartnerComponentFragment = `
   language,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link,
   }
 `;
@@ -450,14 +454,20 @@ export const partnerComponentFragment = `
   title,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   },
   premiumPartners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   },
   otherPartners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   }
 `;

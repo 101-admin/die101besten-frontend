@@ -1,6 +1,6 @@
 import React from "react";
 import type { RankingMitRelevanz } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 const PIctureSection2 = ({
   title,
@@ -28,7 +28,7 @@ const PIctureSection2 = ({
         {ctaButtons && (
           <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8 mt-10">
             {ctaButtons?.map((ctaButton, index) => (
-              <Link href={`${ctaButton?.link}`} key={index}>
+              <NextLink href={`${ctaButton?.link}`} key={index}>
                 <button
                   className={` w-[300px]  ${
                     ctaButton?.btnStyle == "primary"
@@ -38,7 +38,7 @@ const PIctureSection2 = ({
                 >
                   {ctaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             ))}
           </div>
         )}

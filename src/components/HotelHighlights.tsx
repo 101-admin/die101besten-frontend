@@ -13,6 +13,7 @@ export default function HotelHighlights({
 }) {
   const [showPopUp, setShowPopUp] = useState(false);
   return (
+    <>
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16">
       <div className="flex flex-col lg:flex-row h-full gap-12">
         {/* Left Image */}
@@ -48,11 +49,11 @@ export default function HotelHighlights({
             </h1>
           )}
           <ul className="space-y-6 mb-12">
-            {hotelHighlights?.amenities?.slice(0, 4).map((amenity, index) => {
+            {hotelHighlights?.highlights?.slice(0, 4).map((highlight, index) => {
               return (
                 <li key={index} className="flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
-                    {amenity?.icon && (
+                    {highlight?.icon && (
                       // <Image
                       //   src={amenity?.icon?.url || ""}
                       //   alt={amenity?.icon?.alt || ""}
@@ -61,16 +62,16 @@ export default function HotelHighlights({
                       //   className="object-contain"
                       // />
                       <OptimizedImage
-                        image={amenity?.icon as SanityImage}
+                        image={highlight?.icon as SanityImage}
                         className="object-contain"
                         width={64}
                         height={64}
                       />
                     )}
                   </div>
-                  {amenity?.amenityText && (
+                  {highlight?.description && (
                     <span className="font-gte font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] leading-[32px]">
-                      {amenity?.amenityText}
+                      {highlight?.description}
                     </span>
                   )}
                 </li>
@@ -78,7 +79,7 @@ export default function HotelHighlights({
             })}
           </ul>
 
-          {hotelHighlights?.ctaButton && (
+          {hotelHighlights?.ctaButton && (hotelHighlights?.highlights || []).length > 4 && (
             <button
               onClick={() => setShowPopUp(true)}
               className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de"
@@ -112,11 +113,11 @@ export default function HotelHighlights({
         </div>
         <div className="w-full flex flex-col justify-start items-baseline lg:flex-row lg:justify-center lg:items-start lg:gap-16 ">
           <ul className="w-full space-y-6 mb-7 grid grid-cols-1 lg:grid-cols-2">
-            {hotelHighlights?.amenities?.map((amenity, index) => {
+            {hotelHighlights?.highlights?.map((highlight, index) => {
               return (
                 <li key={index} className="w-full flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
-                    {amenity?.icon && (
+                    {highlight?.icon && (
                       // <Image
                       //   src={`${amenity?.icon?.url}`}
                       //   alt={`${amenity?.icon?.alt}`}
@@ -125,16 +126,16 @@ export default function HotelHighlights({
                       //   className="object-contain"
                       // />
                       <OptimizedImage
-                        image={amenity?.icon as SanityImage}
+                        image={highlight?.icon as SanityImage}
                         className="object-contain"
                         width={64}
                         height={64}
                       />
                     )}
                   </div>
-                  {amenity?.amenityText && (
+                  {highlight?.description && (
                     <span className="font-gte font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] leading-[32px]">
-                      {amenity?.amenityText}
+                      {highlight?.description}
                     </span>
                   )}
                 </li>
@@ -144,5 +145,6 @@ export default function HotelHighlights({
         </div>
       </div>
     </section>
+    </>
   );
 }

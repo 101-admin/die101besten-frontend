@@ -39,6 +39,7 @@ export interface SaveOrSplitButtons {
  */
 export interface PrimaryHeroSection {
   image?: SanityImage;
+  gallery?: Array<{image?: SanityImage}>;
 }
 
 export interface SecondaryHeroSection {
@@ -149,13 +150,13 @@ export interface HotelInterviewSection {
 }
 
 export interface HotelAmenity {
-  amenityText?: string;
   icon?: SanityImage;
+  description?: string;
 }
 
 export interface HotelHighlights {
   headline?: string;
-  amenities?: HotelAmenity[];
+  highlights?: HotelAmenity[];
   image?: SanityImage;
   isDraggable?: boolean;
   showNavigationArrows?: boolean;

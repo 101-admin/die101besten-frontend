@@ -16,4 +16,13 @@ export const PartnersApi = {
     ["partners"],
     { tags: ["partners"], revalidate: 25 }
   ),
+  getPartnersPagePreview: async (language = DEFAULT_LANGUAGE) => {
+    return client
+      .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+      .fetch(partnersQuery, { language, edition: DEFAULT_EDITION }, {
+        perspective: "drafts",
+        useCdn: false,
+        stega: true,
+      } as any);
+  },
 };

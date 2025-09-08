@@ -1,274 +1,150 @@
-import React from "react";
-
-import Link from "next/link";
-import type { PartnerComponent, SanityImage } from "@/lib";
+"use client";
+import React, { useState } from "react";
+import NextLink from "../NextLink";
+import type { PartnerComponent, SanityImage, SinglePartner } from "@/lib";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { IoCloseOutline } from "react-icons/io5";
+import { useParams } from "next/navigation";
 const PartnerSection = ({
   title,
   otherPartners,
   partners,
   premiumPartners,
 }: PartnerComponent) => {
-  console.log(otherPartners, "@otherPartners");
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
+  const [newPart, setNewPart] = useState<SinglePartner | undefined>({});
+
+  const params = useParams();
+  const locale = params.locale;
+
+  const handlePartnerClick = (index: number, name: string) => {
+    setShowPopUp(true);
+    if (name === "partner") {
+      const newPartner = partners && partners[index];
+      setNewPart(newPartner);
+    } else if (name === "premiumPartner") {
+      const newPartner = premiumPartners && premiumPartners[index];
+      setNewPart(newPartner);
+    } else if (name === "otherPartner") {
+      const newPartner = otherPartners && otherPartners[index];
+      setNewPart(newPartner);
+    }
+  };
+
   return (
-    <div className="w-full bg-white ">
-      <div className="w-full max-w-[1150px] mx-auto font-ogg px-4">
-        {/* Heading */}
-        <h2 className="font-ogg font-normal text-[15px] sm:text-[21px] md:text-[27px] lg:text-[38px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[1.2] tracking-normal text-center my-16">
-          {title}
-        </h2>
+    <>
+      <div className="w-full">
+        <div className="w-full max-w-[1150px] mx-auto font-ogg px-4">
+          {/* Heading */}
+          <h2 className="font-ogg font-normal leading-[35px] text-[30px] md:leading-[38px] md:text-[35px] lg:leading-[42px] lg:text-[38px]  text-center mb-8 lg:mb-16">
+            {title}
+          </h2>
 
-        {/* Partner Logos */}
-        <div className="w-full grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-16 mb-8 lg:mb-16">
-          {partners?.map((partner, index) => (
-            <div key={index} className="flex justify-center items-center">
-              <div className="w-full max-w-[150px] md:max-w-[230px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link
-                  target="_blank"
-                  href={`${partner?.link}`}
-                  className="w-full"
-                >
+          {/* Partner Logos */}
+          <div className="w-full grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-16 mb-8 lg:mb-16">
+            {partners?.map((partner, index) => (
+              <div key={index} className="flex justify-center items-center">
+                <div className="w-full max-w-[150px] md:max-w-[230px] cursor-pointer hover:scale-[1.10] duration-200">
                   {partner?.image && (
-                    // <img
-                    //   className="w-full"
-                    //   src={`${partner?.image?.url}`}
-                    //   alt={`${partner?.image?.alt}`}
-                    // />
-                    <OptimizedImage
-                      image={partner?.image as SanityImage}
-                      className="w-full"
-                    />
+                    <div onClick={() => handlePartnerClick(index, "partner")}>
+                      <OptimizedImage
+                        image={partner?.image as SanityImage}
+                        className="w-full"
+                      />
+                    </div>
                   )}
-                </Link>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="w-full flex flex-wrap justify-center items-center  gap-8 lg:gap-16 mb-8 lg:mb-16">
-          {premiumPartners?.map((partner, index) => (
-            <div key={index} className="flex justify-center items-center">
-              <div className="w-full max-w-[150px] md:max-w-[213px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link
-                  target="_blank"
-                  href={`${partner?.link}`}
-                  className="w-full"
-                >
+            ))}
+          </div>
+          <div className="w-full flex flex-wrap justify-center items-center  gap-8 lg:gap-16 mb-8 lg:mb-16">
+            {premiumPartners?.map((partner, index) => (
+              <div key={index} className="flex justify-center items-center">
+                <div className="w-full max-w-[150px] md:max-w-[213px] cursor-pointer hover:scale-[1.10] duration-200">
                   {partner?.image && (
-                    // <img
-                    //   className="w-full"
-                    //   src={`${partner?.image?.url}`}
-                    //   alt={`${partner?.image?.alt}`}
-                    // />
-                    <OptimizedImage
-                      image={partner?.image as SanityImage}
-                      className="w-full"
-                    />
+                    <div
+                      onClick={() =>
+                        handlePartnerClick(index, "premiumPartner")
+                      }
+                    >
+                      <OptimizedImage
+                        image={partner?.image as SanityImage}
+                        className="w-full"
+                      />
+                    </div>
                   )}
-                </Link>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="w-full grid sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-6 lg:gap-12 mb-10 lg:mb-20">
-          {otherPartners?.map((partner, index) => (
-            <div key={index} className="flex justify-center items-center ">
-              <div className="w-full max-w-[145px] cursor-pointer hover:scale-[1.10] duration-200">
-                <Link
-                  target="_blank"
-                  href={`${partner?.link}`}
-                  className="w-full"
-                >
+          <div className="w-full grid sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-6 lg:gap-12 mb-10 lg:mb-20">
+            {otherPartners?.map((partner, index) => (
+              <div key={index} className="flex justify-center items-center ">
+                <div className="w-full max-w-[145px] cursor-pointer hover:scale-[1.10] duration-200">
                   {partner?.image && (
-                    // <img
-                    //   className="w-full"
-                    //   src={`${partner?.image?.url}`}
-                    //   alt={`${partner?.image?.alt}`}
-                    // />
-                    <OptimizedImage
-                      image={partner?.image as SanityImage}
-                      className="w-full"
-                    />
+                    <div
+                      onClick={() => handlePartnerClick(index, "otherPartner")}
+                    >
+                      <OptimizedImage
+                        image={partner?.image as SanityImage}
+                        className="w-full"
+                      />
+                    </div>
                   )}
-                </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <div
+        onClick={() => setShowPopUp(false)}
+        className={`w-screen h-screen z-50 bg-[black] bg-opacity-25 backdrop-blur-[8px] fixed top-0 left-0 px-5 ${
+          showPopUp ? "block" : "hidden"
+        }`}
+      ></div>
+      <div
+        className={`fixed w-full top-1/2 max-w-[1312px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-8 md:p-12 lg:p-16 bg-white flex-col justify-start items-baseline gap-8 md:gap-12 lg:gap-16 max-h-[90vh] overflow-y-auto ${
+          showPopUp ? "flex" : "hidden"
+        } `}
+      >
+        <div className="w-full flex justify-between items-start gap-5">
+          <div className="w-full">
+            {newPart?.image && (
+              <OptimizedImage
+                image={newPart?.image as SanityImage}
+                className="w-full max-w-[260px] md:max-w-[342px]"
+              />
+            )}
+          </div>
+          <div
+            onClick={() => setShowPopUp(false)}
+            className="w-16 h-16 flex justify-center items-center cursor-pointer"
+          >
+            <IoCloseOutline className="text-[24px]" />
+          </div>
+        </div>
+        <div className="flex flex-col justify-start items-baseline gap-5 md:gap-10 lg:gap-12">
+          {newPart?.title && (
+            <h2 className="font-ogg font-normal text-[30px] sm:text-[36px] md:text-[40px] lg:text-[48px] leading-[36px] sm:leading-[40px] md:leading-[48px] lg:leading-[52px]">
+              {newPart?.title}
+            </h2>
+          )}
+          {newPart?.description && (
+            <p className="font-[350] font-gte text-[18px] md:text-[20px] lg:text-[24px] leading-[24px] md:leading-[28px] lg:leading-[32px]">
+              {newPart?.description}
+            </p>
+          )}
+          <NextLink target="_blank" href={newPart?.link || "#"}>
+            <button className="font-bold font-gte text-[24px] md:text-[28px] lg:text-[32px] underline hover:text-[#B65033]">
+              {locale === "de" ? "Mehr erfahren" : "Learn more"}
+            </button>
+          </NextLink>
+        </div>
+      </div>
+    </>
   );
 };
-
-// const partners = [
-//   {
-//     id: 1,
-//     src: "/partners/partnersection/cunard.svg",
-//     alt: "CUNARD",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 2,
-//     src: "/partners/partnersection/klafs_logo.svg.svg",
-//     alt: "KLAFS",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 3,
-//     src: "/partners/partnersection/Technogym.svg",
-//     alt: "TECHNOGYM",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 4,
-//     src: "/partners/partnersection/Chefs Culinar.svg",
-//     alt: "CHEFSCULINAR",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 5,
-//     src: "/partners/partnersection/Laurent Perrier.svg",
-//     alt: "Laurent-Perrier",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 6,
-//     src: "/partners/partnersection/Ruegenwalder.svg",
-//     alt: "Ruegenwalder",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 7,
-//     src: "/partners/partnersection/Table-Roc.svg",
-//     alt: "TABLE ROC*",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 8,
-//     src: "/partners/partnersection/JAB.svg",
-//     alt: "JAB",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 9,
-//     src: "/partners/partnersection/Konen & Lorenzen.svg",
-//     alt: "Konen & Lorenzen",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 10,
-//     src: "/partners/partnersection/Fly & Help.svg",
-//     alt: "Fly & Help",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 11,
-//     src: "/partners/partnersection/Kaldewei.svg",
-//     alt: "KALDEWEI",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 12,
-//     src: "/partners/partnersection/Kampmann.svg",
-//     alt: "Kampmann",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 13,
-//     src: "/partners/partnersection/La Biosthetique.svg",
-//     alt: "LA BIOSTHETIQUE",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 14,
-//     src: "/partners/partnersection/Duravit.svg",
-//     alt: "DURAVIT",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 15,
-//     src: "/partners/partnersection/LALIQUE.svg",
-//     alt: "LALIQUE",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 16,
-//     src: "/partners/partnersection/Voglauer.svg",
-//     alt: "VOGLAUER",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 17,
-//     src: "/partners/partnersection/Geberit.svg",
-//     alt: "GEBERIT",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 18,
-//     src: "/partners/partnersection/Shiji.svg",
-//     alt: "Shiji*",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 19,
-//     src: "/partners/partnersection/RATIONAL.svg",
-//     alt: "RATIONAL",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 20,
-//     src: "/partners/partnersection/progros.svg",
-//     alt: "PROGROS",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 21,
-//     src: "/partners/partnersection/Futurelog.svg",
-//     alt: "FUTURELOG",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 22,
-//     src: "/partners/partnersection/Kernenergie.svg",
-//     alt: "KERN energie*",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 23,
-//     src: "/partners/partnersection/China Club Berlin.svg",
-//     alt: "China Club Berlin",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 24,
-//     src: "/partners/partnersection/Wirelane.svg",
-//     alt: "Wirelane",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 25,
-//     src: "/partners/partnersection/Radeberger.svg",
-//     alt: "Radeberger",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 26,
-//     src: "/partners/partnersection/Baulmann.svg",
-//     alt: "BAULMANN",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 27,
-//     src: "/partners/partnersection/Molton Brown.svg",
-//     alt: "MOZTON BROWN",
-//     url: "/special-edition",
-//   },
-//   {
-//     id: 28,
-//     src: "/partners/partnersection/Eichinger Wintergarten.svg",
-//     alt: "Eichinger Wintergarten",
-//     url: "/special-edition",
-//   },
-// ];
 
 export default PartnerSection;

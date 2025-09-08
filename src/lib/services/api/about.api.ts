@@ -16,4 +16,13 @@ export const AboutApi = {
     ["about-page"],
     { tags: ["about"], revalidate: 25 }
   ),
+  getAboutPagePreview: async (language = DEFAULT_LANGUAGE) => {
+    return client
+      .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+      .fetch(getAboutPageQuery, { language, edition: DEFAULT_EDITION }, {
+        perspective: "drafts",
+        useCdn: false,
+        stega: true,
+      } as any);
+  },
 };

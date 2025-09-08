@@ -1,21 +1,25 @@
-// import { PrimaryHeroSection } from "@/lib";
+"use client";
 import type { SanityImage, Button } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import NextLink from "./NextLink";
 import { HiPhoto } from "react-icons/hi2";
 import { OptimizedImage } from "./ui/OptimizedImage";
+import { useState } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 export default function Gallery({
   name,
   city,
   image,
+  gallery,
   ctaButton,
 }: {
   name?: string;
   city?: string;
   image?: SanityImage;
+  gallery?: Array<{ image?: SanityImage }>;
   ctaButton?: Button;
 }) {
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
   return (
     <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col">
       {/* Background Image */}
@@ -41,12 +45,17 @@ export default function Gallery({
       </div>
 
       {/* Top-right Button */}
-      {/* <div className="w-full flex justify-end">
-        <button className="w-[240px] flex items-center justify-center gap-2 text-white uppercase font-montserrat font-bold text-xs sm:text-sm bg-black bg-opacity-70 hover:bg-opacity-90 transition px-4 py-4">
-          <HiPhoto className="w-[22px] h-[18px]" />
-          <span>{"ALLE FOTOS ANZEIGEN"}</span>
-        </button>
-      </div> */}
+      {gallery && gallery?.length !== 0 && (
+        <div className="w-full flex justify-end">
+          <button
+            onClick={() => setShowPopUp(true)}
+            className="w-[240px] flex items-center justify-center gap-2 text-white uppercase font-montserrat font-bold text-xs sm:text-sm bg-black bg-opacity-70 hover:bg-opacity-90 transition px-4 py-4"
+          >
+            <HiPhoto className="w-[22px] h-[18px]" />
+            <span>{"ALLE FOTOS ANZEIGEN"}</span>
+          </button>
+        </div>
+      )}
 
       <div className="flex-grow" />
 
@@ -66,13 +75,43 @@ export default function Gallery({
         </div>
         {ctaButton && (
           <div className="w-full flex justify-center items-center h-20">
-            <Link target="_blank" href={`${ctaButton?.url}`}>
+            <NextLink target="_blank" href={`${ctaButton?.url}`}>
               <button className="btn-secondary w-[300px] text-white border-white btn-secondary-hover-de">
                 {ctaButton?.text}
               </button>
-            </Link>
+            </NextLink>
           </div>
         )}
+      </div>
+
+      {/*image Gallery  Popup  */}
+      <div
+        onClick={() => setShowPopUp(false)}
+        className={`w-screen h-screen z-50 bg-[black] bg-opacity-25 backdrop-blur-[8px] fixed top-0 left-0 px-5 ${
+          showPopUp ? "block" : "hidden"
+        }`}
+      ></div>
+      <div
+        className={`absolute w-full lg:top-[50%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-2 bg-white flex-col justify-center items-center ${
+          showPopUp ? "flex" : "hidden"
+        }`}
+      >
+        <div className="w-full flex justify-end items-center py-4 pr-4">
+          <IoCloseOutline
+            onClick={() => setShowPopUp(false)}
+            className="text-[22px] cursor-pointer"
+          />
+        </div>
+        <div className="w-full " style={{ columnCount: 3, columnGap: "8px" }}>
+          {gallery?.map((image, i) => (
+            <OptimizedImage
+              key={i}
+              image={image?.image as SanityImage}
+              className="w-full mb-2 break-inside-avoid block"
+              priority
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

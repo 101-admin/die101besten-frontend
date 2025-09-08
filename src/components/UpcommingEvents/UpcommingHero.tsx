@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
 import type { Event, SanityImage } from "@/lib";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { useParams } from "next/navigation";
 
 const UpcommingHero = ({ event }: { event: Event }) => {
+  const params = useParams();
+  const locale = params.locale;
   const formatDate = (dateString: string | undefined): string => {
     if (!dateString) return "Invalid date";
 
@@ -56,7 +60,7 @@ const UpcommingHero = ({ event }: { event: Event }) => {
               {event?.startDate && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Datum
+                    {locale === "de" ? "Datum" : "Date"}
                   </p>
                   <p className="font-gte font-bold text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {formatDate(event?.startDate)}
@@ -66,7 +70,7 @@ const UpcommingHero = ({ event }: { event: Event }) => {
               {event?.location && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Location
+                  {locale === "de" ? "Standort" : "Location"}
                   </p>
                   <p className="font-gte font-bold text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {event?.location}

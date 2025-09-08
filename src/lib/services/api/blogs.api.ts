@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { unstable_cache } from "next/cache";
 import { client, DEFAULT_EDITION, DEFAULT_LANGUAGE } from "@/lib/config/sanity";
+import { ensureSlugHasLocaleSuffix } from "@/lib/utils";
 
 import {
   getAllBlogQuery,
@@ -19,6 +21,17 @@ export const BlogApi = {
     { tags: ["blogs"], revalidate: 25 }
   ),
 
+  // Uncached preview fetches for draft mode
+  getBlogPagePreview: async (language = DEFAULT_LANGUAGE) => {
+    return client
+      .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+      .fetch(getBlogPageQuery, { language, edition: DEFAULT_EDITION }, {
+        perspective: "drafts",
+        useCdn: false,
+        stega: true,
+      } as any);
+  },
+
   getAllBlogQuery: unstable_cache(
     async (language = DEFAULT_LANGUAGE) => {
       return client.fetch(getAllBlogQuery, {
@@ -32,8 +45,9 @@ export const BlogApi = {
 
   getBlogBySlug: unstable_cache(
     async (slug: string, language = DEFAULT_LANGUAGE) => {
+      const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
       return await client.fetch(getBlogBySlugQuery, {
-        slug,
+        slug: slugWithLocale,
         edition: DEFAULT_EDITION,
         language,
       });
@@ -41,4 +55,15 @@ export const BlogApi = {
     ["blog-by-slug"],
     { tags: ["blogs"], revalidate: 25 }
   ),
+  getBlogBySlugPreview: async (slug: string, language = DEFAULT_LANGUAGE) => {
+    const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
+    return client
+      .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+      .fetch(getBlogBySlugQuery, { slug: slugWithLocale, language, edition: DEFAULT_EDITION }, {
+        perspective: "drafts",
+        useCdn: false,
+        stega: true,
+      } as any);
+
+  },
 };

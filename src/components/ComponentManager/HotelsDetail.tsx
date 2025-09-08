@@ -1,6 +1,6 @@
 import React from "react";
 import type { ExclusiveEvents, SanityImage } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
 
@@ -39,7 +39,7 @@ const HotelsDetail = ({
         )}
         <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-6 lg:gap-12 mb-10 lg:mb-12">
           {/* Section 1 */}
-          <Link className="w-full group" href={`${latestEvent?.link}`}>
+          <NextLink className="w-full group" href={`${latestEvent?.link}`}>
             <div className="flex flex-col justify-start items-baseline w-full gap-10">
               <div className="w-full flex flex-col justify-start items-start  gap-4 md:gap-8 sm:flex-row lg:flex-col">
                 <div className="max-w-[240px] lg:max-w-full w-full flex">
@@ -74,13 +74,13 @@ const HotelsDetail = ({
                 </div>
               </div>
             </div>
-          </Link>
+          </NextLink>
           {/* Section 2 */}
           <div className="flex flex-col justify-start items-baseline w-full gap-6 lg:gap-12">
             {events?.slice(1, 4)?.map((item, index) => {
               const { date, link, name, description, image } = item;
               return (
-                <Link key={index} className="w-full group" href={`${link}`}>
+                <NextLink key={index} className="w-full group" href={`${link}`}>
                   <div className="w-full flex flex-col justify-start items-start  gap-4 md:gap-8 sm:flex-row lg:flex-col  xl:flex-row">
                     <div className="max-w-[240px] w-full flex">
                       {image && (
@@ -113,17 +113,17 @@ const HotelsDetail = ({
                       )}
                     </div>
                   </div>
-                </Link>
+                </NextLink>
               );
             })}
           </div>
         </div>
         <div className="flex w-full justify-center">
-          <Link href={`${ctaButton?.link}`}>
+          <NextLink href={`${ctaButton?.link}`}>
             <button className="btn-primary w-[300px] btn-primary-hover-de">
               {ctaButton?.text}
             </button>
-          </Link>
+          </NextLink>
         </div>
       </div>
     </section>

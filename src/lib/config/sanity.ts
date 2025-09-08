@@ -1,4 +1,4 @@
-import { createClient } from "@sanity/client";
+import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
@@ -11,6 +11,9 @@ export const client = createClient({
   apiVersion: "2024-05-01", // Use current date as version
   useCdn: process.env.NODE_ENV === "production",
   token: process.env.SANITY_API_TOKEN,
+  stega: {
+    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL,
+  },
 });
 
 /**

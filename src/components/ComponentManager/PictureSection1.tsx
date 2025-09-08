@@ -1,6 +1,6 @@
 import React from "react";
 import type { Masbstab } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 
 const PictureSection1 = ({
@@ -30,11 +30,11 @@ const PictureSection1 = ({
           className="w-full h-[400px] md:h-full aspect-[144/60] md:min-h-[600px] md:max-h-[800px] md:bg-fixed bg-center bg-cover bg-no-repeat"
         ></div>
         {ctaButton && (
-          <Link href={`${ctaButton?.link}`} className="pt-10">
+          <NextLink href={`${ctaButton?.link}`} className="pt-10">
             <button className="btn-primary w-[300px] btn-primary-hover-de">
               {ctaButton?.text}
             </button>
-          </Link>
+          </NextLink>
         )}
       </div>
     </section>

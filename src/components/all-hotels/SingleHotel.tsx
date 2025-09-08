@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "next/link";
+import NextLink from "@/components/NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
 import { type Hotel } from "@/lib";
 
 interface SingleHotelProps {
@@ -9,10 +10,14 @@ interface SingleHotelProps {
 
 const SingleHotel = ({ data, srNo = "ranking" }: SingleHotelProps) => {
   return (
-    <Link
+    <NextLink
       className="w-full"
       scroll={data?.isPackageBooked ? true : false}
-      href={data?.isPackageBooked ? `/hotels/${data?.slug}` : `#`}
+      href={
+        data?.isPackageBooked
+          ? `/hotels/${stripLocaleFromSlug(data?.slug)}`
+          : `#`
+      }
     >
       <div className="w-full flex flex-col justify-center items-center lg:flex-row lg:items-start cursor-pointer hover:scale-[1.03] duration-200">
         <div className="w-full lg:w-auto flex flex-col justify-start items-baseline">
@@ -73,7 +78,7 @@ const SingleHotel = ({ data, srNo = "ranking" }: SingleHotelProps) => {
           </div>
         </div>
       </div>
-    </Link>
+    </NextLink>
   );
 };
 

@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { client, DEFAULT_EDITION, DEFAULT_LANGUAGE } from "@/lib/config/sanity";
+import { ensureSlugHasLocaleSuffix } from "@/lib/utils";
 import {
   getAllHotelsQuery,
   getHotelBySlugQuery,
@@ -7,6 +8,7 @@ import {
   getSpecialEditionHotelsQuery,
   getHotelCategoriesQuery,
   getCitiesQuery,
+  getAllSearchHotelsQuery
 } from "@/lib/queries/hotels.queries";
 
 export const HotelsApi = {
@@ -53,6 +55,31 @@ export const HotelsApi = {
     ["all-hotels"],
     { tags: ["hotels"], revalidate: 25 }
   ),
+  getAllSearchHotels: unstable_cache(
+    async ({
+      edition = DEFAULT_EDITION,
+      language = DEFAULT_LANGUAGE,
+      search,
+    }) => {
+      const params = Object.fromEntries(
+        Object.entries({
+          edition,
+          language,
+          search,
+        }).filter(([_, v]) => v !== undefined && v !== null)
+      );
+      return await client.fetch(
+        getAllSearchHotelsQuery({
+          edition,
+          language,
+          search,
+        }),
+        params
+      );
+    },
+    ["all-hotels"],
+    { tags: ["hotels"], revalidate: 25 }
+  ),
 
   /**
    * Get hotel by slug with all details
@@ -60,8 +87,10 @@ export const HotelsApi = {
   getHotelBySlug: unstable_cache(
     async (slug: string, language = DEFAULT_LANGUAGE) => {
       // console.log({ slug, language }, "@step 2: getHotelBySlug");
+
+      const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
       return await client.fetch(getHotelBySlugQuery, {
-        slug,
+        slug: slugWithLocale,
         edition: DEFAULT_EDITION,
         language,
       });
@@ -122,4 +151,34 @@ export const HotelsApi = {
     ["cities"],
     { tags: ["hotels", "cities"], revalidate: 25 }
   ),
+    getHotelPagePreview: async (language = DEFAULT_LANGUAGE) => {
+      return client
+        .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+        .fetch(getHotelPageQuery, { language, edition: DEFAULT_EDITION }, {
+          perspective: "drafts",
+          useCdn: false,
+          stega: true,
+        } as any);
+    },
+
+    getSpecialEditionHotelsPreview: async (language = DEFAULT_LANGUAGE) => {
+      return client
+        .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+        .fetch(getSpecialEditionHotelsQuery, { language, edition: DEFAULT_EDITION }, {
+          perspective: "drafts",
+          useCdn: false,
+          stega: true,
+        } as any);
+    },
+  
+    getHotelBySlugPreview: async (slug: string, language = DEFAULT_LANGUAGE) => {
+      const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
+      return client
+        .withConfig({ token: process.env.SANITY_VIEWER_TOKEN })
+        .fetch(getHotelBySlugQuery, { slug: slugWithLocale, language, edition: DEFAULT_EDITION }, {
+          perspective: "drafts",
+          useCdn: false,
+          stega: true,
+        } as any);
+    },
 };

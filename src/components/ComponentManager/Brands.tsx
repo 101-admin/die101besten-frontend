@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+// } from "@/components/ui/carousel";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -14,8 +14,7 @@ import "swiper/css/autoplay";
 import { Autoplay, FreeMode } from "swiper/modules";
 
 import type { PartnerLogo, SanityImage } from "@/lib";
-
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { OptimizedImage } from "../ui/OptimizedImage";
 
 const Brands = ({ logoSlider, id }: PartnerLogo) => {
@@ -64,7 +63,7 @@ const Brands = ({ logoSlider, id }: PartnerLogo) => {
                 return (
                   <SwiperSlide key={index}>
                     <div key={index} className="">
-                      <Link href={`${link}`}>
+                      <NextLink href={`${link}`} target="_blank">
                         {image && (
                           // <img
                           //   className="max-w-[141px]"
@@ -76,7 +75,7 @@ const Brands = ({ logoSlider, id }: PartnerLogo) => {
                             className="max-w-[141px]"
                           />
                         )}
-                      </Link>
+                      </NextLink>
                     </div>
                   </SwiperSlide>
                 );

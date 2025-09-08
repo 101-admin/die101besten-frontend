@@ -4,8 +4,13 @@ import BlogCards from "./BlogCards";
 import TopBlog from "./TopBlog";
 import { BlogApi } from "@/lib";
 import type { BlogCollection } from "@/lib";
-const BlogSection = async ({ id }: BlogCollection) => {
-  const blogData = await BlogApi.getAllBlogQuery();
+
+interface BlogSectionProps extends BlogCollection {
+  locale: string;
+}
+
+const BlogSection = async ({ id, locale }: BlogSectionProps) => {
+  const blogData = await BlogApi.getAllBlogQuery(locale);
 
   return (
     <section

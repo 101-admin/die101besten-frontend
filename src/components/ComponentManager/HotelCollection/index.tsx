@@ -15,7 +15,7 @@ const HotelCollection = async ({
   id,
   variant,
 }: HotelCollectionProps) => {
-  console.log(variant, "@variant");
+  // console.log(variant, "@variant");
   const data = await HotelsApi.getAllHotels({
     edition: DEFAULT_EDITION,
     language: DEFAULT_LANGUAGE,

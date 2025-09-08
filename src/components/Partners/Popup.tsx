@@ -5,7 +5,8 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { useForm } from "@formspree/react";
 import { FaCheck } from "react-icons/fa6";
-import Link from "next/link";
+import NextLink from "../NextLink";
+import { useParams } from "next/navigation";
 const Popup = ({
   open,
   onOpenChange,
@@ -13,6 +14,8 @@ const Popup = ({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) => {
+  const params = useParams();
+  const locale = params.locale;
   const [state, handleSubmit] = useForm("xqabobdr");
   const [form, setForm] = useState({
     company: "",
@@ -55,7 +58,9 @@ const Popup = ({
         {state.succeeded ? (
           <div className="bg-white p-6 flex justify-center items-center gap-3">
             <h3 className="font-ogg text-xl sm:text-3xl font-normal">
-              Das Formular wurde erfolgreich versendet.
+              {locale === "de"
+                ? "Das Formular wurde erfolgreich versendet."
+                : "The form was sent successfully."}
             </h3>
             <div className="sm:w-12 sm:h-12 w-8 h-8 flex items-center justify-center rounded-full bg-green-500 text-white">
               <FaCheck size={20} />
@@ -77,10 +82,12 @@ const Popup = ({
               </button>
             </DialogClose>
             <h2 className="font-ogg text-[32px] font-normal mb-2">
-              Werde 101 Partner
+              {locale === "de" ? "Werde 101 Partner" : "BECOME A 101 PARTNER"}
             </h2>
             <div className="flex flex-col gap-2">
-              <label className="text-[18px] font-semibold">Name Firma</label>
+              <label className="text-[18px] font-semibold">
+                {locale === "de" ? "Name Firma" : "Company Name"}
+              </label>
               <input
                 name="company"
                 value={form.company}
@@ -91,7 +98,9 @@ const Popup = ({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[18px] font-semibold">
-                Firmenhauptsitz and Standort
+                {locale === "de"
+                  ? "Firmenhauptsitz and Standort"
+                  : "Company Headquarters and Location"}
               </label>
               <input
                 name="location"
@@ -102,7 +111,9 @@ const Popup = ({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[18px] font-semibold">Industrie</label>
+              <label className="text-[18px] font-semibold">
+                {locale === "de" ? "Industrie" : "Industry"}
+              </label>
               <input
                 name="industry"
                 value={form.industry}
@@ -113,7 +124,7 @@ const Popup = ({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[18px] font-semibold">
-                Name Kontaktperson
+                {locale === "de" ? "Name Kontaktperson" : "Contact Person Name"}
               </label>
               <input
                 name="contactName"
@@ -125,7 +136,9 @@ const Popup = ({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[18px] font-semibold">
-                Rolle der Kontaktperson
+                {locale === "de"
+                  ? "Rolle der Kontaktperson"
+                  : "Contact Person Role"}
               </label>
               <input
                 name="contactRole"
@@ -137,7 +150,7 @@ const Popup = ({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[18px] font-semibold">
-                E-Mail Adresse
+                {locale === "de" ? "E-Mail Adresse" : "Email Address"}
               </label>
               <input
                 name="email"
@@ -149,7 +162,9 @@ const Popup = ({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[18px] font-semibold">Telefonnummer</label>
+              <label className="text-[18px] font-semibold">
+                {locale === "de" ? "Telefonnummer" : "Phone Number"}
+              </label>
               <input
                 name="phone"
                 value={form.phone}
@@ -160,7 +175,7 @@ const Popup = ({
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[18px] font-semibold">
-                Ihre Nachricht
+                {locale === "de" ? "Ihre Nachricht" : "Your Message"}
               </label>
               <textarea
                 name="message"
@@ -171,7 +186,7 @@ const Popup = ({
                 maxLength={500}
               />
               <div className="text-right text-[12px] text-gray-400">
-                max. 500 Zeichen
+                {locale === "de" ? "max. 500 Zeichen" : "max. 500 characters"}
               </div>
             </div>
             <div className="flex items-start gap-2 mt-2">
@@ -184,18 +199,32 @@ const Popup = ({
                   onChange={handleChange}
                   className="w-4 h-4 border-2 border-black mt-1 mr-2"
                 />
-                <span className="text-[16px] leading-5 text-gray-700">
-                  Ich bin mit der Verarbeitung meiner Daten im Rahmen des
-                  Kontaktformulars einverstanden. Es gilt die
-                  Datenschutzerklärung{" "}
-                  <Link
-                    target="_blank"
-                    className="underline"
-                    href="https://die-101-besten.de/datenschutz"
-                  >
-                    (https://die-101-besten.de/datenschutz).
-                  </Link>
-                </span>
+                {locale === "de" ? (
+                  <span className="text-[16px] leading-5 text-gray-700">
+                    Ich bin mit der Verarbeitung meiner Daten im Rahmen des
+                    Kontaktformulars einverstanden. Es gilt die
+                    Datenschutzerklärung{" "}
+                    <NextLink
+                      target="_blank"
+                      className="underline"
+                      href="https://die-101-besten.de/datenschutz"
+                    >
+                      (https://die-101-besten.de/datenschutz).
+                    </NextLink>
+                  </span>
+                ) : (
+                  <span className="text-[16px] leading-5 text-gray-700">
+                    I agree to the processing of my data in the contact form.
+                    This applies Privacy Policy
+                    <NextLink
+                      target="_blank"
+                      className="underline"
+                      href="https://die-101-besten.de/datenschutz"
+                    >
+                      (https://die-101-besten.de/datenschutz).
+                    </NextLink>
+                  </span>
+                )}
               </label>
             </div>
             <div className="flex justify-between gap-2 mt-4">
@@ -205,13 +234,13 @@ const Popup = ({
                 className="w-1/3 rounded-none uppercase font-bold font-montserrat border-black"
                 onClick={() => onOpenChange(false)}
               >
-                Abbrechen
+                {locale === "de" ? "ABBRECHEN" : "CANCEL"}
               </Button>
               <Button
                 type="submit"
                 className="w-2/3 rounded-none uppercase font-bold font-montserrat"
               >
-                ABSENDEN
+                {locale === "de" ? "ABSENDEN" : "SUBMIT"}
               </Button>
             </div>
           </form>

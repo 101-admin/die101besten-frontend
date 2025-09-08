@@ -172,6 +172,52 @@ export function getAllHotelsQuery(filters: {
     }
   `;
 }
+export function getAllSearchHotelsQuery(filters: {
+  edition: string;
+  language: string;
+  search?: string;
+}) {
+  console.log({ filters }, "@step 1: getAllHotelsQuery");
+
+  // Base filter string for the main query
+  let filterString = `
+    _type == "hotel" &&
+    edition == "${filters.edition}" &&
+    language == "${filters.language}"
+  `;
+
+  // Create search conditions
+  let orderBy = "order(ranking.position asc)";
+  if (!!filters?.search) {
+    const searchTerm = filters.search.toLowerCase();
+    filterString += ` && (
+      lower(name) match "*${searchTerm}*" ||
+      lower(description) match "*${searchTerm}*"
+    )`;
+
+    orderBy = `order(
+      select(
+        lower(name) match "*${searchTerm}*" => 2,
+        lower(description) match "*${searchTerm}*" => 1,
+        0
+      ) desc,
+      ranking.position asc
+    )`;
+  }
+
+  return `
+    {
+      "hotels": *[${filterString}] | ${orderBy} {
+        _id,
+        _type,
+        language,
+        edition,
+        name,
+        "slug": slug.current,
+      },
+    }
+  `;
+}
 
 /**
  * Query for getting a single hotel by slug with all details
@@ -224,6 +270,9 @@ export const getHotelBySlugQuery = `
     tags,
     "primaryHeroSection": primaryHeroSection {
       image {${globalImageFragment}},
+      gallery[] {
+        image {${globalImageFragment}},
+      }
     },
     "secondaryHeroSection": secondaryHeroSection {
       image {${globalImageFragment}},
@@ -318,13 +367,11 @@ export const getHotelBySlugQuery = `
     },
     "hotelHighlights": hotelHighlights {
       headline,
-      amenities[] {
-        amenityText,
-        icon {${globalImageFragment}}
+      highlights[]->{
+        icon {${globalImageFragment}},
+        description
       },
       image {${globalImageFragment}},
-      isDraggable,
-      showNavigationArrows,
       ctaButton {${globalButtonFragment}}
     },
     "fullwidthImage": fullwidthImage {${globalImageWithCaptionFragment}},

@@ -1,13 +1,13 @@
 import React from "react";
 import type { TextQuote } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
 // import { RiDoubleQuotesL } from "react-icons/ri";
 // import { RiDoubleQuotesR } from "react-icons/ri";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
 
 const Quote = ({ ctaButtons, heading, author, image, id }: TextQuote) => {
-  console.log(ctaButtons);
+  // console.log(ctaButtons);
   return (
     <section
       id={id}
@@ -49,11 +49,11 @@ const Quote = ({ ctaButtons, heading, author, image, id }: TextQuote) => {
       {ctaButtons && ctaButtons.length > 0 && (
         <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
           {ctaButtons.map((button, index) => (
-            <Link href={`${button.link}`} key={index}>
+            <NextLink href={`${button.link}`} key={index}>
               <button className="btn-primary w-[280px] btn-primary-hover-de">
                 {button.text}
               </button>
-            </Link>
+            </NextLink>
           ))}
         </div>
       )}

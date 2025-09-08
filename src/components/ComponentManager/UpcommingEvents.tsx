@@ -1,7 +1,8 @@
 import React from "react";
 import { ColoredText } from "../ui/ColoredText";
 import type { Event } from "@/lib";
-import Link from "next/link";
+import NextLink from "../NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
 
 const UpcommingEvents = ({ events }: { events: Event[] }) => {
   const formatDay = (dateString: string | undefined): string => {
@@ -50,15 +51,13 @@ const UpcommingEvents = ({ events }: { events: Event[] }) => {
               })
               ?.slice(0, 2)
               ?.map((event, index) => {
-                const {
-                  title,
-                  description,
-                  startDate,
-                  location,
-                  slug,
-                } = event;
+                const { title, description, startDate, location, slug } = event;
                 return (
-                  <Link className="w-full" href={`/events/${slug}`} key={index}>
+                  <NextLink
+                    className="w-full"
+                    href={`/events/${stripLocaleFromSlug(slug as string)}`}
+                    key={index}
+                  >
                     <div className="w-full flex flex-col justify-start items-baseline lg:flex-row lg:items-center lg:justify-center lg:border-2 lg:border-[#000000] lg:max-h-[200px]">
                       <div className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] bg-[#000000] flex flex-col justify-center items-center gap-6 sm:gap-8 text-white">
                         {startDate && (
@@ -93,7 +92,7 @@ const UpcommingEvents = ({ events }: { events: Event[] }) => {
                         )}
                       </div>
                     </div>
-                  </Link>
+                  </NextLink>
                 );
               })}
           </div>

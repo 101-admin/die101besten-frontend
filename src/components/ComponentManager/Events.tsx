@@ -1,8 +1,9 @@
 import React from "react";
 import type { Events101, SanityImage } from "@/lib";
-import Link from "next/link";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import NextLink from "../NextLink";
 
 const Events = ({
   title,
@@ -54,8 +55,8 @@ const Events = ({
                     const { title, description, startDate, mainImage, slug } =
                       event;
                     return (
-                      <Link
-                        href={`/events/${slug}`}
+                      <NextLink
+                        href={`/events/${stripLocaleFromSlug(slug as string)}`}
                         className="w-full group"
                         key={index}
                       >
@@ -94,18 +95,18 @@ const Events = ({
                             )}
                           </div>
                         </div>
-                      </Link>
+                      </NextLink>
                     );
                   })}
               </div>
             )}
 
             {upcomingCtaButton && (
-              <Link href={`${upcomingCtaButton?.link}`}>
+              <NextLink href={`${upcomingCtaButton?.link}`}>
                 <button className="btn-secondary w-[245px] text-black border-black btn-secondary-hover-de">
                   {upcomingCtaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
           {/* Section 2 */}
@@ -125,9 +126,9 @@ const Events = ({
                 ?.map((event, index) => {
                   const { title, description, mainImage, slug } = event;
                   return (
-                    <Link
+                    <NextLink
                       key={index}
-                      href={`/events/${slug}`}
+                      href={`/events/${stripLocaleFromSlug(slug as string)}`}
                       className="w-full group"
                     >
                       <div
@@ -160,16 +161,16 @@ const Events = ({
                           )}
                         </div>
                       </div>
-                    </Link>
+                    </NextLink>
                   );
                 })}
             </div>
             {pastCtaButton && (
-              <Link href={`${pastCtaButton?.link}`}>
+              <NextLink href={`${pastCtaButton?.link}`}>
                 <button className="btn-secondary w-[260px] text-black border-black btn-secondary-hover-de">
                   {pastCtaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
         </div>

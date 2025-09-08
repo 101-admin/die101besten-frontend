@@ -1,7 +1,7 @@
 import React from "react";
 import type { SanityImage, ShapingFuture } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
 import { OptimizedImage } from "../ui/OptimizedImage";
 const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
@@ -31,7 +31,7 @@ const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
               {body && <PortableText value={body} />}
             </div>
             {ctaButton && (
-              <Link
+              <NextLink
                 target="_blank"
                 className="mt-6 lg:mt-12"
                 href={`${ctaButton?.buttonLink}`}
@@ -39,7 +39,7 @@ const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
                 <button className="btn-secondary w-[234px] text-black border-black btn-secondary-hover-de">
                   {ctaButton?.buttonText}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
         </div>

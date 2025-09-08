@@ -1,18 +1,19 @@
 "use client";
 import React, { useState, Suspense } from "react";
-// import { FiSearch } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 // import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
-import Link from "next/link";
-// import { IoClose } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import Edition from "@/Data/Edition";
-// import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import NextLink from "./NextLink";
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import LocaleSwitcher from "./localeSwitcher";
 
 const NavbarContent = ({ navbar }) => {
   const navbarData = navbar[0];
@@ -21,30 +22,31 @@ const NavbarContent = ({ navbar }) => {
   // const [displayText, setDisplayText] = useState("");
   const [barBtn, setBarBtn] = useState(true);
   const [search, setSearch] = useState(false);
-  // const [displaySearch, setdisplaySearch] = useState(true);
+  const [displaySearch, setdisplaySearch] = useState(true);
   const [menu, setMenu] = useState(false);
   const [editionIndex, setEditionIndex] = useState(0);
   const [showEdition, setShowEdition] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
-  // const router = useRouter();
-  // const searchParams = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // const handleSearch = () => {
-  //   if (search) {
-  //     setSearch(false);
-  //     setMenu(false);
-  //   } else {
-  //     setSearch(true);
-  //     setMenu(false);
-  //     if (barBtn === false) {
-  //       setBarBtn(true);
-  //     }
-  //   }
-  // };
+  const handleSearch = () => {
+    if (search) {
+      setSearch(false);
+      setMenu(false);
+    } else {
+      setSearch(true);
+      setMenu(false);
+      if (barBtn === false) {
+        setBarBtn(true);
+      }
+    }
+  };
 
   const handleNav = () => {
     if (barBtn) {
@@ -58,25 +60,17 @@ const NavbarContent = ({ navbar }) => {
     }
   };
 
-  // const updateSearchParams = (key, value) => {
-  //   const params = new URLSearchParams(searchParams.toString());
-  //   if (
-  //     value === "AlleKategorien" ||
-  //     value === "alleStädte" ||
-  //     value === "bittewählen" ||
-  //     !value
-  //   ) {
-  //     params.delete(key);
-  //   } else {
-  //     params.set(key, value);
-  //   }
-  //   router.push(`/hotels?search=${value}#anchor-ranking`);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   updateSearchParams("search", displayText);
-  // };
+  const updateSearchParams = (key, value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(key, value);
+    router.push(`/search-result?search=${value}`);
+    setSearchValue("");
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateSearchParams("search", searchValue);
+  };
 
   return (
     <>
@@ -100,26 +94,21 @@ const NavbarContent = ({ navbar }) => {
                     key={idx}
                     className="flex flex-col justify-center items-center"
                   >
-                    <Link
-                      href={data.link}
-                      onClick={() => setEditionIndex(idx)}
-                      key={idx}
-                      className="relative py-4 group flex flex-col justify-center items-center cursor-pointer"
-                    >
-                      {/* <div
-                        className={`w-full h-1 [clip-path:polygon(0%_50%,45%_0%,55%_0%,100%_50%,55%_100%,45%_100%)] bg-white absolute top-[0px] rounded-full group-hover:block ${
-                          editionIndex === idx ? "block" : "hidden"
-                        }`}
-                      ></div> */}
+                    <NextLink href={data.link} key={idx}>
                       <div
-                        className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
-                          editionIndex === idx ? "block" : "hidden"
-                        }`}
-                      ></div>
-                      <h2 className="font-light font-gte text-[18px]">
-                        {data.title}
-                      </h2>
-                    </Link>
+                        onClick={() => setEditionIndex(idx)}
+                        className="relative py-4 group flex flex-col justify-center items-center cursor-pointer"
+                      >
+                        <div
+                          className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
+                            editionIndex === idx ? "block" : "hidden"
+                          }`}
+                        ></div>
+                        <h2 className="font-light font-gte text-[18px]">
+                          {data.title}
+                        </h2>
+                      </div>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}
@@ -137,36 +126,36 @@ const NavbarContent = ({ navbar }) => {
           <div className="w-full h-full max-w-[616px] flex justify-between items-start pt-4">
             {Edition.map((data, idx) => {
               return (
-                <Link
-                  href={data.link}
-                  onMouseOver={() => setShowEdition(true)}
-                  onMouseOut={() => setShowEdition(false)}
-                  onClick={() => setEditionIndex(idx)}
-                  key={idx}
-                  className="relative group flex flex-col justify-center items-center cursor-pointer w-full"
-                >
+                <NextLink href={data.link} key={idx} className="w-full">
                   <div
-                    className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
-                      editionIndex === idx ? "block" : "hidden"
-                    }`}
-                  ></div>
-                  <h2
-                    className={`font-light font-gte text-[18px] text-white ${
-                      editionIndex === idx
-                        ? "text-opacity-100"
-                        : "text-opacity-60"
-                    }`}
+                    onMouseOver={() => setShowEdition(true)}
+                    onMouseOut={() => setShowEdition(false)}
+                    onClick={() => setEditionIndex(idx)}
+                    className="relative group flex flex-col justify-center items-center cursor-pointer w-full"
                   >
-                    {data.title}
-                  </h2>
-                  <div
-                    className={`duration-500 group-hover:flex py-3  ${
-                      editionIndex === idx ? "flex" : "hidden"
-                    } `}
-                  >
-                    <img src={data.img} alt="" />
+                    <div
+                      className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[100px] border-l-transparent border-r-[100px] border-r-transparent border-t-[4px] border-t-white group-hover:block ${
+                        editionIndex === idx ? "block" : "hidden"
+                      }`}
+                    ></div>
+                    <h2
+                      className={`font-light font-gte text-[18px] text-white ${
+                        editionIndex === idx
+                          ? "text-opacity-100"
+                          : "text-opacity-60"
+                      }`}
+                    >
+                      {data.title}
+                    </h2>
+                    <div
+                      className={`duration-500 group-hover:flex py-3  ${
+                        editionIndex === idx ? "flex" : "hidden"
+                      } `}
+                    >
+                      <img src={data.img} alt="" />
+                    </div>
                   </div>
-                </Link>
+                </NextLink>
               );
             })}
           </div>
@@ -182,24 +171,24 @@ const NavbarContent = ({ navbar }) => {
             className="flex justify-between items-center w-full px-4 mb-5"
           >
             <div>
-              {/* <button onClick={handleSearch}>
+              <button onClick={handleSearch} className="flex justify-center items-center border-2 border-black px-[10px] py-[8px]">
                 <FiSearch
                   className={`text-[20px] ${
                     search ? "text-[#B64F32]" : "text-black"
                   }`}
                 />
-              </button> */}
+              </button>
             </div>
 
-            <Link onClick={() => setBarBtn(true)} href="/">
-              <div className="flex">
+            <NextLink href="/">
+              <div onClick={() => setBarBtn(true)} className="flex">
                 <img
                   className="max-w-[83.78px]"
                   src={`${navbarData?.logo}`}
                   alt="MAIN LOGO"
                 />
               </div>
-            </Link>
+            </NextLink>
 
             <button onClick={handleNav}>
               {barBtn ? (
@@ -233,7 +222,7 @@ const NavbarContent = ({ navbar }) => {
             </button>
           </div>
           <div className="w-full flex justify-center items-center">
-            {/* <form
+            <form
               className={`w-full  justify-center items-center ${
                 search ? "flex " : "hidden"
               }`}
@@ -241,15 +230,16 @@ const NavbarContent = ({ navbar }) => {
             >
               <input
                 type="text"
-                onChange={(e) => setDisplayText(e.target.value)}
-                value={displayText}
-                className="w-[60%] h-8  border-black border-2 placeholder:text-black pl-3 py-5 font-gte outline-none"
+                required
+                onChange={(e) => setSearchValue(e.target.value)}
+                value={searchValue}
+                className="w-full max-w-[300px] h-8  border-black border-2 placeholder:text-black pl-3 py-5 font-gte outline-none"
                 placeholder={navbarData?.utilities?.search?.placeholder}
               />
-              <button className="w-[15%] h-[43px] p-5 bg-black text-white flex justify-center items-center">
+              <button className="w-[60px] h-[43px] p-5 bg-black text-white flex justify-center items-center">
                 <FiSearch className="text-[30px]" />
               </button>
-            </form> */}
+            </form>
           </div>
           <div
             className={`flex flex-col absolute right-0 py-3 top-[80px] justify-start items-center z-10 duration-100 bg-white overflow-y-auto max-h-[calc(100vh-80px)] ${
@@ -274,15 +264,19 @@ const NavbarContent = ({ navbar }) => {
                         <div onClick={scrollToTop}>{label}</div>
                       </li>
                     ) : (
-                      <Link
+                      <NextLink
                         className="w-full flex justify-start items-baseline"
-                        onClick={() => setBarBtn(true)}
                         href={`${url}`}
                       >
-                        <li className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]">
-                          {label}
+                        <li
+                          onClick={() => setBarBtn(true)}
+                          className="w-full flex justify-start items-baseline"
+                        >
+                          <p className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]">
+                            {label}
+                          </p>
                         </li>
-                      </Link>
+                      </NextLink>
                     )}
                   </div>
                 );
@@ -317,14 +311,14 @@ const NavbarContent = ({ navbar }) => {
                             </span>
                             {links?.map((navitem, index) => {
                               return (
-                                <Link
-                                  href={`${navitem?.url}`}
-                                  onClick={() => setBarBtn(true)}
-                                  key={index}
-                                  className="text-[14px] font-gte font-light hover:text-[#B65033]"
-                                >
-                                  {navitem?.label}
-                                </Link>
+                                <NextLink href={`${navitem?.url}`} key={index}>
+                                  <p
+                                    onClick={() => setBarBtn(true)}
+                                    className="text-[14px] font-gte font-light hover:text-[#B65033]"
+                                  >
+                                    {navitem?.label}
+                                  </p>
+                                </NextLink>
                               );
                             })}
                           </div>
@@ -340,7 +334,7 @@ const NavbarContent = ({ navbar }) => {
         {/* Display Navbar */}
         <nav className="w-full hidden lg:flex justify-between items-center self-center justify-self-center h-[112px] px-6 duration-200 bg-white">
           <div className="flex items-center gap-10 w-1/6">
-            <Link href="/">
+            <NextLink href="/">
               <div className="flex">
                 <img
                   className="max-w-[83.78px]"
@@ -348,7 +342,7 @@ const NavbarContent = ({ navbar }) => {
                   alt="navbar logo"
                 />
               </div>
-            </Link>
+            </NextLink>
           </div>
           <div className="flex items-center justify-center w-4/6 h-full">
             {navbarData?.mainMenu?.map((navitem, index) => {
@@ -368,19 +362,19 @@ const NavbarContent = ({ navbar }) => {
                       {label}
                     </h1>
                   ) : (
-                    <Link href={`${url}`}>
+                    <NextLink href={`${url}`}>
                       <button className="text-[16px] h-full flex justify-center items-center font-bold font-montserrat uppercase leading-[24px] hover:text-[#B64F32] px-4 cursor-pointer">
                         {label}
                       </button>
-                    </Link>
+                    </NextLink>
                   )}
                 </div>
               );
             })}
           </div>
           <div className="flex items-center justify-end gap-4 w-1/6">
-            {/* <div
-              className={`flex h-10 items-center border-black  ${
+            <div
+              className={`flex h-10 items-center border-black bg-white  ${
                 displaySearch ? "border-none" : "border-2"
               }`}
             >
@@ -404,8 +398,9 @@ const NavbarContent = ({ navbar }) => {
                 <form className="h-full" onSubmit={handleSubmit}>
                   <input
                     type="text"
-                    onChange={(e) => setDisplayText(e.target.value)}
-                    value={displayText}
+                    required
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    value={searchValue}
                     placeholder={navbarData?.utilities?.search?.placeholder}
                     className="h-full placeholder:text-black text-[12px] font-bold font-montserrat outline-none  pl-[-20px] pr-10"
                   />
@@ -423,7 +418,7 @@ const NavbarContent = ({ navbar }) => {
                   <IoClose className="text-[20px] font-bold" />
                 </button>
               </div>
-            </div> */}
+            </div>
             {/* <div className="gap-4 flex">
               <button className="font-montserrat font-bold text-[12px] uppercase py-2 px-3 max-h-7 leading-3 bg-black text-white cursor-pointer">
                 Login
@@ -441,6 +436,8 @@ const NavbarContent = ({ navbar }) => {
                 )}
               </select>
             </div> */}
+
+            <LocaleSwitcher />
           </div>
         </nav>
         <div
@@ -470,13 +467,13 @@ const NavbarContent = ({ navbar }) => {
                         </span>
                         {links?.map((navitem, index) => {
                           return (
-                            <Link
+                            <NextLink
                               href={`${navitem?.url}#${navitem?.id}`}
                               key={index}
                               className="text-[14px] font-gte font-light hover:text-[#B65033]"
                             >
                               {navitem?.label}
-                            </Link>
+                            </NextLink>
                           );
                         })}
                       </div>

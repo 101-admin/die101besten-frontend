@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import type { ImageSection, SanityImage } from "@/lib";
-import Link from "next/link";
+import NextLink from "./NextLink";
 import { OptimizedImage } from "./ui/OptimizedImage";
 const Image1 = ({ title, images }: ImageSection) => {
   const randomImage = useMemo(() => {
@@ -19,7 +19,7 @@ const Image1 = ({ title, images }: ImageSection) => {
             </h6>
           )}
           {randomImage && (
-            <Link target="_blank" href={`${randomImage?.link}`}>
+            <NextLink target="_blank" href={`${randomImage?.link}`}>
               {/* <img
                   src={`${randomImage?.image?.url}`}
                   alt={`${randomImage?.image?.alt}`}
@@ -28,7 +28,7 @@ const Image1 = ({ title, images }: ImageSection) => {
                 image={randomImage?.image as SanityImage}
                 className="w-full h-full object-cover"
               />
-            </Link>
+            </NextLink>
           )}
         </div>
       </div>

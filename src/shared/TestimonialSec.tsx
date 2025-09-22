@@ -6,7 +6,7 @@ import { OptimizedImage } from "@/components/ui/OptimizedImage";
 const TestimonialSec = ({ author, review, image }: Testimonial) => {
   return (
     <section className="w-full lg:h-[600px] max-w-[1056px] flex flex-col justify-center items-center relative">
-      <div className="w-full flex justify-center items-center static lg:absolute lg:left-[-300px] top-[50px] xl:left-[-340px]">
+      <div className="w-full flex justify-center items-center static lg:absolute top-[50px] lg:left-0 xl:left-[50px]">
         {image && (
           // <img
           //   className="w-[260px] h-[346px] object-cover"

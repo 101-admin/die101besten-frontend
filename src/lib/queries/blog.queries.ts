@@ -60,6 +60,28 @@ export const getAllBlogQuery = `
 }
 `;
 
+export const getAllBlogForSiteMapQuery = `
+*[_type == "blog" && edition == $edition]{
+  _id,
+  _type,
+  title,
+  language,
+  description,
+  readMore,
+  edition,
+  "slug": slug.current,
+  author[]-> {
+    name,
+    image{${globalImageFragment}},
+    bio
+  },
+  mainImage{${globalImageWithCaptionFragment}},
+  category[]-> {
+    title
+  }
+}
+`;
+
 export const getBlogBySlugQuery = `
 *[_type == "blog" && slug.current == $slug && language == $language && edition == $edition][0]{
   _id,

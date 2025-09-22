@@ -8,7 +8,8 @@ import {
   getSpecialEditionHotelsQuery,
   getHotelCategoriesQuery,
   getCitiesQuery,
-  getAllSearchHotelsQuery
+  getAllSearchHotelsQuery,
+  getAllHotelsForSiteMap
 } from "@/lib/queries/hotels.queries";
 
 export const HotelsApi = {
@@ -76,6 +77,16 @@ export const HotelsApi = {
         }),
         params
       );
+    },
+    ["all-hotels"],
+    { tags: ["hotels"], revalidate: 25 }
+  ),
+
+  getAllHotelsForSiteMap: unstable_cache(
+    async () => {
+      return client.fetch(getAllHotelsForSiteMap, {
+        edition: DEFAULT_EDITION,
+      });
     },
     ["all-hotels"],
     { tags: ["hotels"], revalidate: 25 }

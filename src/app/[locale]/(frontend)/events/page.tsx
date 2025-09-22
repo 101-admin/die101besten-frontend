@@ -62,6 +62,7 @@ const Page = async ({
       <ComponentManager
         data={eventsPage?.components}
         searchParams={searchParams}
+        locale={locale}
       />
     </>
   );

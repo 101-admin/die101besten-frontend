@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Form from "@/components/Form";
+import "@/app/compliance_styling.css";
 
 const Page = ({params}: {params: any}) => {
   const {locale} = params;

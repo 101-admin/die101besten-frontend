@@ -39,11 +39,15 @@ export const OptimizedImage = ({
 
   if (fill) {
     return (
-      <div className={cn("relative w-full h-full", wrapperClassName)}>
-        <Image {...commonProps} fill />
+      <div className={cn("relative w-full object-cover", wrapperClassName)}>
+        <Image {...commonProps} />
       </div>
     );
   }
 
-  return <Image {...commonProps} width={width || 800} height={height || 600} />;
+  return (
+    <div className={cn("relative w-full", wrapperClassName)}>
+      <Image {...commonProps} width={width || 1920} height={height || 1080} />;
+    </div>
+  );
 };

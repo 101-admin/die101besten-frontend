@@ -6,6 +6,7 @@ import {
   getEventsPageQuery,
   getAllEventsQuery,
   getEventsBySlugQuery,
+  getAllEventsQueryForSiteMap
 } from "@/lib/queries/events.queries";
 
 export const EventsApi = {
@@ -24,6 +25,16 @@ export const EventsApi = {
     async (language = DEFAULT_LANGUAGE) => {
       return client.fetch(getAllEventsQuery, {
         language,
+        edition: DEFAULT_EDITION,
+      });
+    },
+    ["events"],
+    { tags: ["events"], revalidate: 25 }
+  ),
+
+  getAllEventsForSiteMap: unstable_cache(
+    async () => {
+      return client.fetch(getAllEventsQueryForSiteMap, {
         edition: DEFAULT_EDITION,
       });
     },

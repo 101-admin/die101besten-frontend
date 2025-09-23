@@ -219,6 +219,16 @@ export function getAllSearchHotelsQuery(filters: {
   `;
 }
 
+export const getAllHotelsForSiteMap = `
+  *[_type == "hotel" && edition == $edition] {
+    _id,
+    _type,
+    "slug": slug.current,
+    language,
+    edition,
+    }
+`;
+
 /**
  * Query for getting a single hotel by slug with all details
  */

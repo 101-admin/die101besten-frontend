@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState, Suspense } from "react";
 import Form from "@/components/Form";
+import "@/app/compliance_styling.css";
 
 const PageContent = ({locale}: {locale: string}) => {
   const [content, setContent] = useState<string>("");

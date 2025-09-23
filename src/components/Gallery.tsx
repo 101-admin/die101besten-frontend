@@ -92,7 +92,7 @@ export default function Gallery({
         }`}
       ></div>
       <div
-        className={`absolute w-full lg:top-[50%] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-2 bg-white flex-col justify-center items-center ${
+        className={`absolute w-full top-[60%] sm:top-[75%] md:top-[700px] lg:top-[900px] max-w-[1300px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-2 bg-white flex-col justify-center items-center ${
           showPopUp ? "flex" : "hidden"
         }`}
       >

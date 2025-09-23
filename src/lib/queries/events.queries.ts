@@ -46,6 +46,20 @@ export const getAllEventsQuery = `
     ${seoFragment}
   }
 }`;
+export const getAllEventsQueryForSiteMap = `
+*[_type == "event"  && edition == $edition]{
+  _id,
+  type,
+  title,
+  "slug": slug.current,
+  startDate,
+  description,
+  location,
+  mainImage {${globalImageFragment}},
+  seo {
+    ${seoFragment}
+  }
+}`;
 
 export const getEventsBySlugQuery = `
 *[_type == "event" && language == $language && edition == $edition && slug.current == $slug][0] {

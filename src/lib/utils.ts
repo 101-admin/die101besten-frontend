@@ -23,7 +23,7 @@ export const getOptimizedImageUrl = (
   if (width) urlBuilder = urlBuilder.width(width);
   if (height) urlBuilder = urlBuilder.height(height);
 
-  return urlBuilder.fit("crop").format("webp").quality(90).url();
+  return urlBuilder.fit("crop").format("webp").quality(100).url();
 };
 
 // Slug locale helpers

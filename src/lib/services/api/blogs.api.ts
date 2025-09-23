@@ -7,6 +7,7 @@ import {
   getAllBlogQuery,
   getBlogPageQuery,
   getBlogBySlugQuery,
+  getAllBlogForSiteMapQuery,
 } from "@/lib/queries/blog.queries";
 
 export const BlogApi = {
@@ -36,6 +37,16 @@ export const BlogApi = {
     async (language = DEFAULT_LANGUAGE) => {
       return client.fetch(getAllBlogQuery, {
         language,
+        edition: DEFAULT_EDITION,
+      });
+    },
+    ["blog"],
+    { tags: ["blogs"], revalidate: 25 }
+  ),
+
+  getAllBlogForSiteMapQuery: unstable_cache(
+    async () => {
+      return client.fetch(getAllBlogForSiteMapQuery, {
         edition: DEFAULT_EDITION,
       });
     },

@@ -30,9 +30,7 @@ const AllHotelSlider = ({ allHotelsSection }: AllHotelsSlider) => {
                       className="w-full h-full"
                     />
                   </div>
-                  <div
-                    className="w-full h-full pt-36 mb-5 z-1 absolute  top-0 left-0"
-                  >
+                  <div className="w-full h-full pt-36 mb-5 z-1 absolute  top-0 left-0">
                     <div className="container px-5 md:px-10 lg:px-14 xl:px-20">
                       {image?.caption && (
                         <div className="px-5 py-4 md:pl-10 md:py-7 lg:pl-14 lg:py-10 bg-[#FFFFFF66] backdrop-blur-md max-w-[800px] w-full">
@@ -63,12 +61,12 @@ const AllHotelSlider = ({ allHotelsSection }: AllHotelsSlider) => {
             )}
             {image?.link !== "" && (
               <section className="w-full h-full">
-                <div className="w-full h-full flex items-center justify-center bg-white">
-                  <OptimizedImage
-                    image={image as SanityImage}
-                    className="w-full h-full"
-                  />
-                </div>
+                <OptimizedImage
+                  image={image as SanityImage}
+                  width={(image.metadata?.dimensions.width as number) * 4}
+                  height={(image.metadata?.dimensions.height as number) * 4}
+                  className="w-full h-full object-cover bg-no-repeat"
+                />
                 <div className="w-full h-full pt-36 mb-5">
                   <div className="container px-5 md:px-10 lg:px-14 xl:px-20">
                     {image?.caption && (

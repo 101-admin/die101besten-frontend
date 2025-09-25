@@ -47,7 +47,7 @@ export const OptimizedImage = ({
 
   return (
     <div className={cn("relative w-full", wrapperClassName)}>
-      <Image {...commonProps} width={width || 1920} height={height || 1080} />;
+      <Image {...commonProps} width={width || 1920} height={height || 1080} />
     </div>
   );
 };

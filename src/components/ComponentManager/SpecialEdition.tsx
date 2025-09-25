@@ -105,11 +105,11 @@ const SpecialEdition = ({
             )}
             <NextLink href={`${item?.link}`}  className={styles.innerBox}>
               {item?.image && (
-                // <img src={`${item?.image?.url}`} alt="" />
-                <OptimizedImage
-                  image={item?.image as SanityImage}
-                  className="w-full h-full object-cover"
-                />
+                <img src={`${item?.image?.url}`} alt="" />
+                // <OptimizedImage
+                //   image={item?.image as SanityImage}
+                //   className="w-full h-full object-cover"
+                // />
               )}
               <img className={styles.overlay} />
               <div className={`${styles.button}`}>

@@ -137,7 +137,10 @@ export default async function RootLayout({
           <Footer footer={footer} />
           {(await draftMode()).isEnabled && (
             <>
-              <VisualEditing />
+              <VisualEditing 
+                zIndex={1000}
+                studioUrl={process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'http://localhost:3333/studio'}
+              />
               <DisableDraftMode />
             </>
           )}

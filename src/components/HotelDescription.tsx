@@ -20,7 +20,7 @@ const HotelDescription = ({
 
             <OptimizedImage
               image={fullwidthImage as SanityImage}
-              className="w-full h-full object-cover"
+              className="w-full h-[revert-layer] object-cover"
               // width={1920}
               // height={300}
               priority

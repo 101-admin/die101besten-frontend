@@ -21,7 +21,7 @@ export default function Gallery({
 }) {
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   return (
-    <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col">
+    <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col mt-20">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         {image && (
@@ -35,7 +35,7 @@ export default function Gallery({
           // />
           <OptimizedImage
             image={image as SanityImage}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-[revert-layer]"
             width={1440}
             height={600}
             priority

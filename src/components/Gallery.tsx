@@ -21,7 +21,7 @@ export default function Gallery({
 }) {
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   return (
-    <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col mt-20">
+    <section className="relative w-full max-w-[1920px] mx-auto h-[600px] px-6 sm:px-12 py-12 flex flex-col">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         {image && (

@@ -10,7 +10,7 @@ import { globalImageFragment, globalButtonFragment } from "../fragments";
 import { seoFragment } from "../fragments/global.fragments";
 
 export const getEventsPageQuery = `
-  *[_type == "allEvents" && language == $language && edition == $edition][0] {
+  *[_type == "allEvents" && !(_id in path("drafts.**")) && language == $language && edition == $edition][0] {
     _id,
     _type,
     title,
@@ -33,7 +33,7 @@ export const getEventsPageQuery = `
 `;
 
 export const getAllEventsQuery = `
-*[_type == "event" && language == $language && edition == $edition]{
+*[_type == "event" && !(_id in path("drafts.**")) && language == $language && edition == $edition]{
   _id,
   type,
   title,
@@ -47,7 +47,7 @@ export const getAllEventsQuery = `
   }
 }`;
 export const getAllEventsQueryForSiteMap = `
-*[_type == "event"  && edition == $edition]{
+*[_type == "event" && !(_id in path("drafts.**")) && edition == $edition]{
   _id,
   type,
   title,
@@ -62,7 +62,7 @@ export const getAllEventsQueryForSiteMap = `
 }`;
 
 export const getEventsBySlugQuery = `
-*[_type == "event" && language == $language && edition == $edition && slug.current == $slug][0] {
+*[_type == "event" && !(_id in path("drafts.**")) && language == $language && edition == $edition && slug.current == $slug][0] {
   _id,
   _type,
   title,

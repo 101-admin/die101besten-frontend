@@ -21,7 +21,7 @@ import {
 import { seoFragment } from "../fragments/global.fragments";
 
 export const getHomePageQuery = `
-  *[_type == "home" && language == $language && edition == $edition][0] {
+  *[_type == "home" && !(_id in path("drafts.**")) && language == $language && edition == $edition][0] {
     _id,
     _type,
     title,

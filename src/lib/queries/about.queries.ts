@@ -61,7 +61,7 @@ export const componentsFragment = `
  * Query to get about page by slug
  */
 export const getAboutPageQuery = `
-  *[_type == "aboutUs" && language == $language && edition == $edition] {
+  *[_type == "aboutUs" && !(_id in path("drafts.**")) && language == $language && edition == $edition] {
     ${aboutUsFields},
     ${componentsFragment}
   }[0]

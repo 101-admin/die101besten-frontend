@@ -17,7 +17,7 @@ import { seoFragment } from "../fragments/global.fragments";
  * Query for getting all blogs page with components
  */
 export const getBlogPageQuery = `
-  *[_type == "allBlogs" && language == $language && edition == $edition][0] {
+  *[_type == "allBlogs" && !(_id in path("drafts.**")) && language == $language && edition == $edition][0] {
     _id,
     _type,
     title,
@@ -39,7 +39,7 @@ export const getBlogPageQuery = `
 `;
 
 export const getAllBlogQuery = `
-*[_type == "blog" && language == $language && edition == $edition]{
+*[_type == "blog" && !(_id in path("drafts.**")) && language == $language && edition == $edition]{
   _id,
   _type,
   title,
@@ -61,7 +61,7 @@ export const getAllBlogQuery = `
 `;
 
 export const getAllBlogForSiteMapQuery = `
-*[_type == "blog" && edition == $edition]{
+*[_type == "blog" && !(_id in path("drafts.**")) && edition == $edition]{
   _id,
   _type,
   title,
@@ -83,7 +83,7 @@ export const getAllBlogForSiteMapQuery = `
 `;
 
 export const getBlogBySlugQuery = `
-*[_type == "blog" && slug.current == $slug && language == $language && edition == $edition][0]{
+*[_type == "blog" && !(_id in path("drafts.**")) && slug.current == $slug && language == $language && edition == $edition][0]{
   _id,
   _type,
   title,

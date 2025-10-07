@@ -1,4 +1,4 @@
-export const navbarQuery = `*[_type == "navbar" && language == $language && edition == $edition] {
+export const navbarQuery = `*[_type == "navbar" && !(_id in path("drafts.**")) && language == $language && edition == $edition] {
     _id,
     _type,
     language,
@@ -32,7 +32,7 @@ export const navbarQuery = `*[_type == "navbar" && language == $language && edit
     }
   }`;
 
-export const footerQuery = `*[_type == "footer" && language == $language && edition == $edition] {
+export const footerQuery = `*[_type == "footer" && !(_id in path("drafts.**")) && language == $language && edition == $edition] {
     _id,
       _type,
       language,

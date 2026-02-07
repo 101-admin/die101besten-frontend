@@ -49,6 +49,7 @@ const FragenAnGastgeber = ({
             <OptimizedImage
               image={manager?.image as SanityImage}
               className="mb-4 object-cover w-[300px] h-[348px]"
+              wrapperClassName="flex justify-center"
               width={300}
               height={348}
               priority

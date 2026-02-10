@@ -10,7 +10,6 @@ body {
   color: hsl(var(--foreground));
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -102,7 +101,9 @@ body {
     inset: 0;
     padding: 2px; /* border width */
     background: linear-gradient(90deg, #b64f32 0.21%, #f49e6e 100%);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
   }

@@ -72,6 +72,7 @@ const HotelGrand = ({ hotel }: { hotel: Hotel }) => {
         <LocationMap
           hotelId={hotel?._id}
           name={hotel?.name}
+          location={hotel?.location}
           ctaButton={hotel?.ctaButton}
           address={hotel?.address}
           mapSection={hotel.mapSection ?? {}}

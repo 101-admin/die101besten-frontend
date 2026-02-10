@@ -68,6 +68,7 @@ const HotelExclusive = ({ hotel }: { hotel: Hotel }) => {
         <LocationMap
           hotelId={hotel?._id}
           name={hotel?.name}
+          location={hotel?.location}
           address={hotel?.address}
           ctaButton={hotel?.ctaButton}
           mapSection={hotel?.mapSection ?? {}}

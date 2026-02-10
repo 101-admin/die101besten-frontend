@@ -39,7 +39,7 @@ export interface SaveOrSplitButtons {
  */
 export interface PrimaryHeroSection {
   image?: SanityImage;
-  gallery?: Array<{image?: SanityImage}>;
+  gallery?: Array<{ image?: SanityImage }>;
 }
 
 export interface SecondaryHeroSection {
@@ -265,7 +265,13 @@ export interface Hotel extends BaseDocument {
   interviewSection?: HotelInterviewSection;
   hotelHighlights?: HotelHighlights;
   mapSection?: HotelMapSection;
+  location?: HotelLocation;
   adds?: Adds;
+}
+
+export interface HotelLocation {
+  lat: number;
+  lng: number;
 }
 
 export interface Adds {

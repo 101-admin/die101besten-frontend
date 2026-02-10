@@ -396,6 +396,10 @@ export const getHotelBySlugQuery = `
         website
       },
     },
+    "location": location {
+      lat,
+      lng
+    },
     "adds": adds {
       add->{
       title,

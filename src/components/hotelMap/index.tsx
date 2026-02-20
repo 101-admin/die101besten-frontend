@@ -127,6 +127,8 @@ const HotelMap: React.FC<HotelMapProps> = ({
       return;
     }
 
+    const googleMapsUrl = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+
     mapboxgl.accessToken = accessToken;
 
     const newMap = new mapboxgl.Map({
@@ -135,6 +137,24 @@ const HotelMap: React.FC<HotelMapProps> = ({
       // style: 'mapbox://styles/101-admin/cma3kotho000e01s395d0hds0', // Switzerland style
       //   style: "mapbox://styles/101-admin/cma3kt1a5000i01sl2xgs9hvl", // DACH style
     });
+
+    const markerEl = document.createElement("div");
+    markerEl.className = "hotel-marker";
+    markerEl.innerHTML = `
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 24 24"
+    fill="white"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+  </svg>
+`;
+
+    const marker = new mapboxgl.Marker(markerEl)
+      .setLngLat([location.lng, location.lat])
+      .addTo(newMap);
 
     newMap.on("load", () => {
       try {
@@ -171,10 +191,15 @@ const HotelMap: React.FC<HotelMapProps> = ({
       }
     });
 
+    marker.getElement().addEventListener("click", () => {
+      window.open(googleMapsUrl, "_blank");
+    });
+
     map.current = newMap;
 
     return () => {
       map.current?.remove();
+      marker.remove();
     };
   }, [location, accessToken]);
 

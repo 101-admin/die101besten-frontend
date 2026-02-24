@@ -176,6 +176,10 @@ export const getHotelBySlugOptimizedQuery = `
         website
       },
     },
+    "location": location {
+      lat,
+      lng
+    },
     "adds": adds {
       add->{
         title,

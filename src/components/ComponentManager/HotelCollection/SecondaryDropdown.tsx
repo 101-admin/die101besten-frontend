@@ -22,7 +22,7 @@ const SecondaryDropdownContent = () => {
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("rankingCategory");
   const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || ""
+    searchParams.get("search") || "",
   );
   const [value, setValue] = useState("deutschland");
 
@@ -266,13 +266,13 @@ const SecondaryDropdownContent = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="https://die-new.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-de.vercel.app/special-editions">
                     {locale === "de" ? "Deutschland" : "Germany"}
                   </SelectItem>
-                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-dach.vercel.app/special-editions">
                     {locale === "de" ? "DACH + Südtirol" : "DACH-region"}
                   </SelectItem>
-                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-ch.vercel.app/special-editions">
                     {locale === "de" ? "Schweiz" : "Switzerland"}
                   </SelectItem>
                 </SelectGroup>

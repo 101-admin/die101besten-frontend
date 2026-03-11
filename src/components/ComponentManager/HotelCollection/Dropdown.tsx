@@ -29,7 +29,7 @@ const DropdownContent = ({
   const params = useParams();
   const locale = params.locale;
   const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || ""
+    searchParams.get("search") || "",
   );
 
   const updateSearchParams = (key: string, value: string) => {
@@ -98,13 +98,13 @@ const DropdownContent = ({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="https://die-new.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-de.vercel.app/hotels">
                     {locale === "de" ? "Deutschland" : "Germany"}
                   </SelectItem>
-                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-dach.vercel.app/hotels">
                     {locale === "de" ? "DACH + Südtirol" : "DACH-region"}
                   </SelectItem>
-                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/hotels">
+                  <SelectItem value="https://die101besten-frontend-ch.vercel.app/hotels">
                     {locale === "de" ? "Schweiz" : "Switzerland"}
                   </SelectItem>
                 </SelectGroup>

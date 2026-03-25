@@ -127,7 +127,16 @@ const HotelMap: React.FC<HotelMapProps> = ({
       return;
     }
 
-    const googleMapsUrl = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+    let mapQuery = `${location.lat},${location.lng}`;
+    if (name) {
+      const locationParts = [
+        name,
+        address?.city?.label,
+        address?.country?.name,
+      ].filter(Boolean);
+      mapQuery = locationParts.join(", ");
+    }
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
 
     mapboxgl.accessToken = accessToken;
 
@@ -201,7 +210,7 @@ const HotelMap: React.FC<HotelMapProps> = ({
       map.current?.remove();
       marker.remove();
     };
-  }, [location, accessToken]);
+  }, [location, accessToken, name, address]);
 
   return (
     <section className="w-full lg:max-w-[1920px] flex flex-col justify-center items-center gap-8 pt-20 pb-0 md:py-32">
